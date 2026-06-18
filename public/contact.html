@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - Nails By Sally</title>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================= Theme (matching HOME) ================= */
+    :root{
+      --pink:#ff7bbd; --pink2:#f14aa6; --violet:#7a5cff; --violet2:#5a38ff;
+      --ink:#0f172a; --muted:#778097; --muted2:#98a2b3;
+      --panel:#ffffff; --border:#ecebf2;
+      --radius:20px; --radius-xl:28px; --shadow:0 18px 50px rgba(15,23,42,.12);
+      --container:clamp(1040px, 86vw, 1280px);
+      --container-wide:clamp(1100px, 92vw, 1440px);
+      --grad:linear-gradient(90deg,var(--pink2),var(--violet));
+      --glass:rgba(255,255,255,.64);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
+      color:var(--ink);
+      background:#0f1020;
+      overflow-x:hidden;
+      min-height:100vh;
+    }
+    ::selection{background:#fbe1f2}
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+
+    /* Background */
+    .bg{position:fixed; inset:0; z-index:-2;
+      background:
+        radial-gradient(60vw 60vw at -10% -10%, #20123b 0%, transparent 60%),
+        radial-gradient(60vw 60vw at 110% 0%, #2a1043 0%, transparent 60%),
+        radial-gradient(70vw 70vw at 50% 120%, #1a1735 0%, #0f1020 70%);
+    }
+    .blob{position:absolute; border-radius:50%; opacity:.25; mix-blend-mode:screen}
+    .blob.b1{width:54vw;height:54vw;background:radial-gradient(circle at 30% 30%, #ff8ac7, transparent 60%);left:-6vw;top:-10vw}
+    .blob.b2{width:46vw;height:46vw;background:radial-gradient(circle at 40% 40%, #ffd6e8, transparent 55%);right:-10vw;top:-8vw}
+
+    /* Layout helper */
+    .container{max-width:var(--container);margin:0 auto;padding-inline:24px}
+
+    /* Header (same as home) */
+    .site-header{position:sticky; top:0; z-index:50; background:rgba(16,16,34,.85); backdrop-filter:blur(8px); border-bottom:1px solid rgba(255,255,255,.08)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 18px}
+    .brand{display:flex;align-items:center;gap:16px;color:#fff}
+    .brand-logo{position:relative;width:70px;height:70px;border-radius:20px;display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,0,0,.35);overflow:hidden;flex-shrink:0;background:linear-gradient(90deg,var(--pink2),var(--violet2));transition:transform .2s ease}
+    .brand-logo:hover{transform:translateY(-1px)}
+    .brand-logo img{width:52px;height:52px;object-fit:contain;position:relative;z-index:1}
+    .brand-sep{width:1px;height:46px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.5),rgba(255,255,255,.08));border-radius:2px}
+    .brand-text{display:flex;flex-direction:column;line-height:1.12}
+    .brand-text strong{font-size:22px;font-weight:900;letter-spacing:.3px;color:#fff;white-space:nowrap}
+    .brand-text small{font-size:12px;color:#cbd5e1;margin-top:6px;letter-spacing:.2em;text-transform:uppercase}
+    .nav{display:flex;gap:26px;align-items:center}
+    .nav-link{font-weight:600;opacity:.92;color:#e2e8f0;transition:opacity .2s ease, transform .2s ease}
+    .nav-link:hover{opacity:1;transform:translateY(-1px)}
+    .nav-link.active{color:var(--pink);opacity:1}
+    .menu-btn{display:none;padding:8px 10px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:transparent;color:#e2e8f0}
+
+    /* Buttons (from home) */
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.14);font-weight:800;font-size:14px;color:#0b0b10;background:#ffffff;box-shadow:0 12px 28px rgba(0,0,0,.18);transition:transform .2s ease, box-shadow .2s ease;cursor:pointer}
+    .btn-primary{border:none;color:#fff;background:linear-gradient(90deg,var(--pink2),var(--violet2));box-shadow:0 14px 32px rgba(90,56,255,.45)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(90,56,255,.55)}
+
+    /* Hero (contact page) */
+    .hero-section{padding:40px 0 30px}
+    .h1{font-size:clamp(32px,4vw,42px);line-height:1.1;margin:0 0 16px;font-weight:900;color:#fff;text-align:center}
+    .accent{display:inline-block;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{font-size:16px;color:#cbd5e1;text-align:center;max-width:600px;margin:0 auto 40px;line-height:1.6}
+
+    /* Main grid (keeps your original layout) */
+    .main-grid{display:grid;grid-template-columns:1fr 400px;gap:40px;margin-bottom:40px}
+
+    /* Contact form (left) */
+    .contact-form{
+      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:var(--radius);
+      padding:32px;
+      box-shadow:0 20px 60px rgba(0,0,0,.22);
+      transition:transform .3s ease, border-color .2s;
+      backdrop-filter:blur(10px);
+    }
+    .contact-form:hover{transform:translateY(-2px); border-color:rgba(255,255,255,.28)}
+    .form-title{font-size:24px;font-weight:900;color:#fff;margin-bottom:24px}
+    .form-group{margin-bottom:20px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    label{display:block;font-weight:600;color:#e2e8f0;margin-bottom:6px;font-size:14px}
+    input, textarea, select{
+      width:100%;padding:12px 16px;border:1px solid rgba(255,255,255,.14);border-radius:8px;font-size:14px;
+      transition:all .3s ease;background:rgba(255,255,255,.08);color:#e2e8f0;backdrop-filter:blur(5px)
+    }
+    input::placeholder, textarea::placeholder{color:#98a2b3}
+    input:focus, textarea:focus, select:focus{outline:none;border-color:var(--pink);background:rgba(255,255,255,.12);box-shadow:0 0 0 2px rgba(241, 74, 166, 0.1)}
+    textarea{resize:vertical;min-height:100px}
+    .submit-btn{
+      width:100%;padding:14px 24px;background:var(--grad);color:white;border:none;border-radius:8px;font-size:16px;
+      font-weight:800;cursor:pointer;transition:all .3s ease;box-shadow:0 8px 24px rgba(90,56,255,.35);margin-top:8px
+    }
+    .submit-btn:hover{transform:translateY(-1px);box-shadow:0 12px 32px rgba(90,56,255,.45)}
+
+    /* Sidebar (right) */
+    .contact-sidebar{display:grid;gap:16px}
+    .info-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow:0 8px 32px rgba(0,0,0,.15);
+      transition:all .3s ease;
+      backdrop-filter:blur(10px);
+    }
+    .info-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.28)}
+    .info-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+    .info-icon{width:40px;height:40px;background:var(--grad);border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:16px;box-shadow:0 4px 16px rgba(240,46,170,.25);flex-shrink:0}
+    .info-title{font-size:18px;font-weight:700;color:#fff;margin:0}
+    .info-content{color:#cbd5e1;line-height:1.5;font-size:14px}
+    .info-content strong{color:#e2e8f0;display:block;margin-bottom:4px}
+
+    /* Hours */
+    .hours-grid{display:grid;gap:8px;margin-top:8px}
+    .hours-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:14px}
+    .hours-row:last-child{border-bottom:none}
+
+    /* CTA section */
+    .cta-section{
+      background:var(--grad);color:white;padding:48px 32px;border-radius:24px;text-align:center;margin:40px 0;position:relative;overflow:hidden;box-shadow:var(--shadow)
+    }
+    .cta-title{font-size:32px;font-weight:900;margin-bottom:12px}
+    .cta-text{font-size:16px;margin-bottom:24px;opacity:.9;color:#f9eaff;max-width:500px;margin-inline:auto}
+    .cta-btn{background:white;color:var(--pink2);padding:14px 28px;border-radius:999px;text-decoration:none;font-weight:800;font-size:16px;transition:.3s;display:inline-block;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.3)}
+    .arr{margin-left:8px;transition:transform .2s ease}
+    .cta-btn:hover .arr{transform:translateX(4px)}
+
+    /* Footer (same as HOME) */
+    .site-footer{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;background:rgba(255,255,255,.04)}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px;padding:24px 0;max-width:var(--container-wide);margin:auto;color:#e2e8f0}
+    .brand-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+    .foot-title{font-weight:900;margin-bottom:8px;color:#fff}
+    .foot-list{list-style:none;margin:0;padding:0}
+    .foot-list li{margin:6px 0;color:#cbd5e1}
+    .copy-row{border-top:1px solid rgba(255,255,255,.12);padding:14px 0;color:#cbd5e1;font-size:14px;max-width:var(--container-wide);margin:auto}
+    .muted{color:#cbd5e1}
+
+    /* Social Media Links */
+    .social-links { display: flex; justify-content: center; gap: 18px; margin-top: 12px; }
+    .social-links a {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--grad); transition: transform .2s ease, box-shadow .2s ease;
+      text-decoration: none; overflow: hidden;
+    }
+    .social-links a:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+    .social-links img { width: 28px; height: 28px; object-fit: contain; filter: brightness(0) invert(1); }
+
+
+    /* Reveal animation (same pattern as HOME) */
+    .reveal{opacity:0; transform:translateY(20px); transition:opacity .4s ease, transform .4s ease; transition-delay:var(--d,0ms)}
+    .reveal.in{opacity:1;transform:none}
+
+    /* Mobile Menu (overlay style) */
+    .mobile-menu{
+      display:none;
+      position:fixed;
+      left:0;
+      right:0;
+      z-index:40;
+      flex-direction:column;
+      gap:8px;
+      padding:10px 24px;
+      border-bottom:1px solid rgba(255,255,255,.12);
+      background:rgba(16,16,34,.9);
+    }
+    .mobile-menu a{padding:10px;border-radius:12px;color:#e2e8f0;text-decoration:none}
+    .mobile-menu a.active{color:var(--pink)}
+    .mobile-menu .btn-primary{align-self:flex-start}
+    .mobile-menu.open{display:flex;}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .main-grid{grid-template-columns:1fr;gap:24px}
+      .contact-sidebar{grid-template-columns:1fr 1fr;gap:16px}
+    }
+    @media (max-width:780px){
+      .brand{gap:12px}
+      .brand-logo{width:60px;height:60px;border-radius:18px}
+      .brand-text strong{font-size:18px}
+      .brand-text small, .brand-sep{display:none}
+      .nav{display:none}
+      .menu-btn{display:block}
+      .form-row{grid-template-columns:1fr;gap:12px}
+      .contact-form{padding:24px}
+      .contact-sidebar{grid-template-columns:1fr}
+      .cta-title{font-size:28px}
+      .cta-section{padding:32px 24px}
+      
+      /* Footer mobile improvements */
+      .footer-grid{
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 28px 18px;
+      }
+      
+      .footer-brand{
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(255,255,255,.12);
+      }
+      
+      .brand-row .brand-logo{
+        width: 52px;
+        height: 52px;
+      }
+      
+      .brand-row .brand-logo img{
+        width: 38px;
+        height: 38px;
+      }
+      
+      .foot-title{
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+      
+      .foot-list li{
+        font-size: 14px;
+        margin: 8px 0;
+      }
+      
+      .copy-row{
+        padding: 16px 0;
+        font-size: 13px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header reveal" style="--d:40ms">
+    <div class="container header-inner">
+      <a href="home.html" class="brand" aria-label="Nails By Sally home">
+        <span class="brand-logo" aria-hidden="true">
+          <img src="sffsfs.png" alt="Nails By Sally logo" loading="eager" decoding="async"/>
+        </span>
+        <span class="brand-sep" aria-hidden="true"></span>
+        <div class="brand-text">
+          <strong>Nails By Sally</strong>
+          <small>Nail Studio</small>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a class="nav-link" href="home.html">Home</a>
+        <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link btn btn-primary" href="booking.html">Book Now</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link active" href="contact.html">Contact</a>
+      </nav>
+
+      <button id="menuBtn" class="menu-btn" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open Menu">☰</button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <nav id="mobileMenu" class="mobile-menu" hidden>
+    <a href="home.html">Home</a>
+    <a href="services.html">Services</a>
+    <a class="btn btn-primary" data-glow href="booking.html">Book Now</a>
+    <a href="about.html">About</a>
+    <a class="active" href="contact.html">Contact</a>
+  </nav>
+
+  <!-- MAIN -->
+  <div class="container">
+    <!-- Hero -->
+    <section class="hero-section">
+      <h1 class="h1 reveal" style="--d:80ms"><span class="accent">Get In Touch</span></h1>
+      <p class="lead reveal" style="--d:140ms">Ready to transform your nails? Have questions about our services? We'd love to hear from you. Contact us today to schedule your appointment or learn more about our nail services.</p>
+    </section>
+
+    <!-- Grid -->
+    <div class="main-grid">
+      <!-- Left: Form -->
+      <div class="contact-form reveal" style="--d:180ms">
+        <h2 class="form-title">Send Us a Message</h2>
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">Full Name</label>
+              <input type="text" id="firstName" name="firstName" placeholder="Your full name" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="(514) 546-0687">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us about your interests, questions, or how we can help you..." rows="5"></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+
+      <!-- Right: Info cards -->
+      <div class="contact-sidebar">
+        <div class="info-card reveal" style="--d:200ms">
+          <div class="info-header">
+            <div class="info-icon">📞</div>
+            <h3 class="info-title">Call Us</h3>
+          </div>
+          <div class="info-content">
+            <strong>(514) 546-0687</strong>
+            Mon - Sat: 9AM - 7PM
+          </div>
+        </div>
+
+        <div class="info-card reveal" style="--d:240ms">
+          <div class="info-header">
+            <div class="info-icon">✉️</div>
+            <h3 class="info-title">Email Us</h3>
+          </div>
+          <div class="info-content">
+            <strong><a href="/cdn-cgi/l/email-protection#8eece1e1e5e7e0e9cee0efe7e2fdecf7fdefe2e2f7a0ede1e3"><span class="__cf_email__" data-cfemail="79371810150a3b002a01151500391e14181015571a1614">[email&#160;protected]</span></a></strong>
+            We respond within 24 hours
+          </div>
+        </div>
+
+        <div class="info-card reveal" style="--d:280ms">
+          <div class="info-header">
+            <div class="info-icon">📱</div>
+            <h3 class="info-title">Follow Us</h3>
+          </div>
+          <div class="info-content">
+            <strong>@nailsbysally</strong>
+            See our latest nail art
+            <div class="social-links">
+              <a href="https://www.instagram.com/nails.by.sxlly" target="_blank" aria-label="Instagram">
+                <img src="Images/Socials/Instagram.png" alt="Instagram logo">
+              </a>
+              <a href="https://www.tiktok.com/@nails.by.sxlly?lang=en" target="_blank" aria-label="TikTok">
+                <img src="Images/Socials/Tiktok.png" alt="TikTok logo">
+              </a>
+              <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                <img src="Images/Socials/Facebook.png" alt="Facebook logo">
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card reveal" style="--d:320ms">
+          <div class="info-header">
+            <div class="info-icon">🕒</div>
+            <h3 class="info-title">Business Hours</h3>
+          </div>
+          <div class="info-content">
+            <div class="hours-grid">
+              <div class="hours-row">
+                <span><strong>Monday - Friday</strong></span>
+                <span>9:00 AM - 7:00 PM</span>
+              </div>
+              <div class="hours-row">
+                <span><strong>Saturday</strong></span>
+                <span>9:00 AM - 6:00 PM</span>
+              </div>
+              <div class="hours-row">
+                <span><strong>Sunday</strong></span>
+                <span>10:00 AM - 5:00 PM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <section class="cta-section reveal" style="--d:360ms">
+      <h2 class="cta-title">Ready to Book Your Nail Appointment?</h2>
+      <p class="cta-text">Skip the contact form and schedule your nail service directly. Our booking system makes it easy to find the perfect time for you.</p>
+      <a href="booking.html" class="cta-btn">Book Now <span class="arr">→</span></a>
+    </section>
+  </div>
+
+  <!-- FOOTER (exact style as home) -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="brand-row">
+          <span class="brand-logo" aria-hidden="true">
+            <img src="sffsfs.png" alt="Nails By Sally logo" loading="lazy" decoding="async"/>
+          </span>
+          <strong style="color:#fff">Nails By Sally</strong>
+        </div>
+        <p class="muted">Transform your nails with our premium services. Luxury, artistry, and exceptional results every visit.</p>
+      </div>
+
+      <div>
+        <div class="foot-title">Quick Links</div>
+        <ul class="foot-list">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="home.html#reels">Gallery</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="foot-title">Contact Info</div>
+        <ul class="foot-list">
+          <li>(514) 546-0687</li>
+          <li><a href="/cdn-cgi/l/email-protection#2d634c44415e6f547e554141546d4a404c4441034e4240"><span class="__cf_email__" data-cfemail="4a042b232639083319322626330a2d272b232664292527">[email&#160;protected]</span></a></li>
+          <li>@nailsbysally</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container copy-row">© <span id="year"></span> Nails By Sally. All rights reserved.</div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reveal-on-scroll (same as home)
+    function setupReveals(){
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '50px' });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }
+
+    // Contact form submission
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const button = this.querySelector('.submit-btn');
+      const originalText = button.textContent;
+      button.textContent = 'Sending...';
+      button.disabled = true;
+
+      try {
+        // Get form data
+        const formData = {
+          name: document.getElementById('firstName').value,
+          email: document.getElementById('email').value,
+          phone: document.getElementById('phone').value || '',
+          subject: '', // No subject field in this form
+          message: document.getElementById('message').value
+        };
+
+        // Send to server - uses the same domain (works with Cloudflare tunnel)
+        const serverURL = window.location.origin + '/api/contact';
+        // This will be: https://nailsbysally.cc/api/contact
+        
+        console.log('Sending to:', serverURL);
+        
+        const response = await fetch(serverURL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          button.textContent = 'Message Sent! ✨';
+          button.style.background = 'linear-gradient(90deg, #10b981, #059669)';
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+            button.style.background = '';
+            this.reset();
+          }, 2000);
+        } else {
+          throw new Error(result.error || 'Failed to send message');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        
+        // Show helpful error message
+        let errorMsg = 'Failed to Send ❌';
+        if (error.message.includes('Failed to fetch')) {
+          errorMsg = 'Server Not Running ❌';
+          console.error('Make sure your server is running on port 4000');
+        }
+        
+        button.textContent = errorMsg;
+        button.style.background = 'linear-gradient(90deg, #ef4444, #dc2626)';
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.disabled = false;
+          button.style.background = '';
+        }, 3000);
+      }
+    });
+
+    function setYear(){ 
+      const y = document.getElementById('year'); 
+      if(y) y.textContent = new Date().getFullYear(); 
+    }
+    setYear();
+    setupReveals();
+    setupMobileMenu();
+
+    function debounce(func, wait){ let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>func(...args), wait); }; }
+
+    /* ---------- Mobile menu (FIXED) ---------- */
+    function setupMobileMenu(){
+      const btn = document.getElementById('menuBtn');
+      const menu = document.getElementById('mobileMenu');
+      if (!btn || !menu) return;
+
+      // Ensure hidden at start
+      menu.classList.remove('open');
+      menu.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+
+      btn.addEventListener('click', () => {
+        const willOpen = !menu.classList.contains('open');
+        menu.classList.toggle('open', willOpen);
+        menu.hidden = !willOpen;
+        btn.setAttribute('aria-expanded', String(willOpen));
+      });
+
+      // Close on link click
+      menu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          menu.classList.remove('open');
+          menu.hidden = true;
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Auto-close when resizing to desktop
+      const onResize = () => {
+        if (window.innerWidth >= 780) {
+          menu.classList.remove('open');
+          menu.hidden = true;
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      };
+      window.addEventListener('resize', debounce(onResize, 120));
+      onResize();
+    }
+  </script>
+</body>
+</html>

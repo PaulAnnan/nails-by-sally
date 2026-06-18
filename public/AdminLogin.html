@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Nails By Sally — Admin Login</title>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --pink:#ff7bbd; --pink2:#f14aa6; --violet:#7a5cff; --violet2:#5a38ff;
+      --ink:#0f172a; --muted:#778097; --muted2:#98a2b3;
+      --panel:#ffffff; --border:#ecebf2;
+      --radius:20px; --radius-xl:28px; --shadow:0 18px 50px rgba(15,23,42,.12);
+      --grad:linear-gradient(90deg,var(--pink2),var(--violet2));
+      --glass:rgba(255,255,255,.64);
+      --container:clamp(1040px,86vw,1280px);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
+      color:#e2e8f0;
+      background:#0f1020;
+      min-height:100svh;
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit}
+
+    /* Background like home */
+    .bg{position:fixed; inset:0; z-index:-2;
+      background:
+        radial-gradient(60vw 60vw at -10% -10%, #20123b 0%, transparent 60%),
+        radial-gradient(60vw 60vw at 110% 0%, #2a1043 0%, transparent 60%),
+        radial-gradient(70vw 70vw at 50% 120%, #1a1735 0%, #0f1020 70%);
+    }
+    .blob{position:absolute; border-radius:50%; opacity:.25; mix-blend-mode:screen; will-change:transform;}
+    .b1{width:54vw;height:54vw; background:radial-gradient(circle at 30% 30%, #ff8ac7, transparent 60%); left:-6vw; top:-10vw; animation:float 12s ease-in-out infinite}
+    .b2{width:46vw;height:46vw; background:radial-gradient(circle at 40% 40%, #ffd6e8, transparent 55%); right:-10vw; top:-8vw; animation:float 14s ease-in-out -2s infinite}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(14px)}}
+
+    /* Header (simple compact) */
+    .site-header{position:sticky; top:0; z-index:50; background:rgba(16,16,34,.85); backdrop-filter:blur(8px); border-bottom:1px solid rgba(255,255,255,.08)}
+    .header-inner{max-width:var(--container);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px;color:#fff}
+    .brand-logo{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:var(--grad);box-shadow:0 12px 30px rgba(0,0,0,.35);overflow:hidden}
+    .brand-logo img{width:42px;height:42px;object-fit:contain}
+    .brand strong{font-weight:900;letter-spacing:.2px}
+
+    /* Login layout */
+    .wrap{min-height:calc(100svh - 76px); display:grid; place-items:center; padding:32px 16px}
+    .card{
+      width:min(520px,92vw);
+      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:26px;
+      box-shadow:0 20px 60px rgba(0,0,0,.32);
+      overflow:hidden;
+      transform:translateY(8px);
+      animation:rise .6s ease forwards;
+    }
+    @keyframes rise{to{transform:translateY(0)}}
+
+    .card-head{
+      padding:22px 22px 8px;
+      background:
+        radial-gradient(100% 120% at 0% 0%, rgba(255,123,189,.22) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(120% 140% at 100% 0%, rgba(122,92,255,.18) 0%, rgba(255,255,255,0) 60%);
+    }
+    .title{font-weight:900; font-size:28px; color:#fff; margin:0 0 6px}
+    .sub{color:#cbd5e1; margin:0}
+
+    .card-body{padding:18px 22px 22px; display:grid; gap:14px}
+
+    /* Form controls */
+    .field{position:relative; display:grid; gap:6px}
+    .control{
+      display:flex; align-items:center; gap:10px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:14px;
+      padding:12px 14px;
+      transition:border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .control:focus-within{
+      border-color:rgba(255,255,255,.34);
+      box-shadow:0 0 0 4px rgba(122,92,255,.18);
+      background:rgba(255,255,255,.12);
+    }
+    .control input{
+      background:transparent; border:none; outline:0; color:#fff; width:100%;
+      font:600 14px/1.2 Inter,system-ui; letter-spacing:.2px;
+    }
+    .label{font-size:13px; color:#e7e6ff; font-weight:700; letter-spacing:.02em}
+    .hint{font-size:12px; color:#98a2b3}
+    .icon{width:18px;height:18px; opacity:.9}
+
+    .toggle-pass{cursor:pointer; border:1px solid rgba(255,255,255,.18); padding:6px 9px; border-radius:999px; font-weight:800; font-size:12px; color:#fff; background:rgba(0,0,0,.25)}
+    .row{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
+    .remember{display:flex; align-items:center; gap:8px; font-size:13px; color:#cbd5e1}
+    .remember input{accent-color:#c084fc}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 16px; border-radius:999px; border:none; cursor:pointer;
+      font-weight:900; font-size:14px; color:#fff; background:var(--grad);
+      box-shadow:0 14px 32px rgba(90,56,255,.45);
+      transition:transform .15s ease, box-shadow .2s ease, opacity .2s ease;
+    }
+    .btn:hover{transform:translateY(-2px); box-shadow:0 18px 40px rgba(90,56,255,.55)}
+    .btn[disabled]{opacity:.6; cursor:not-allowed}
+
+    .foot{display:flex; justify-content:space-between; align-items:center; gap:12px; padding:12px 22px 22px}
+    .mini{font-size:12px; color:#98a2b3}
+    .link{color:#fff; font-weight:700; border-bottom:1px dashed rgba(255,255,255,.35)}
+    .err{color:#fecaca; font-weight:700; font-size:13px; display:none}
+
+    /* Toast */
+    .toast{
+      position:fixed; right:18px; bottom:18px; z-index:60;
+      display:none; align-items:center; gap:10px;
+      padding:12px 14px; border-radius:14px;
+      color:#0f172a; background:#fff; border:1px solid #e2e8f0;
+      box-shadow:0 16px 50px rgba(0,0,0,.28);
+      font-weight:800; letter-spacing:.2px;
+    }
+    .toast.show{display:flex; animation:pop .12s ease-out}
+    @keyframes pop{from{transform:scale(.96); opacity:0} to{transform:scale(1); opacity:1}}
+
+    /* Footer mini */
+    .copy{padding:16px; text-align:center; color:#94a3b8; font-size:12px}
+
+    /* Responsive */
+    @media (max-width:520px){
+      .title{font-size:24px}
+      .foot{flex-direction:column; align-items:stretch}
+    }
+  
+    /* ===== IMPROVED MOBILE LAYOUT ===== */
+    @media (max-width:980px){
+      .main-grid, .booking-grid{grid-template-columns:1fr;gap:24px}
+      .contact-sidebar, .services-grid, .gallery-grid, .stats-section{grid-template-columns:1fr 1fr;gap:16px}
+      .story-section{grid-template-columns:1fr;gap:32px}
+      .artist-profile{flex-direction:column;text-align:center}
+    }
+    
+    @media (max-width:780px){
+      /* Header */
+      .site-header{backdrop-filter:none}
+      .brand{gap:12px}
+      .brand-logo{width:60px;height:60px;border-radius:18px}
+      .brand-logo img{width:46px;height:46px}
+      .brand-text strong{font-size:18px}
+      .brand-text small, .brand-sep{display:none}
+      .nav{display:none}
+      .menu-btn{display:block}
+      
+      /* Layout */
+      .container{padding-inline:18px}
+      .section{padding:24px 0}
+      .hero-section, .page-header{padding:28px 0 20px}
+      
+      /* Typography */
+      .h1, .page-title{font-size:28px;margin-bottom:14px}
+      .h2, .form-title, .section-title{font-size:24px;margin-bottom:16px}
+      .h3{font-size:20px}
+      .lead, .page-subtitle{font-size:15px;line-height:1.5}
+      
+      /* Forms */
+      .form-row{grid-template-columns:1fr;gap:12px}
+      .contact-form, .booking-form{padding:24px;border-radius:18px}
+      input, textarea, select{padding:11px 14px;font-size:14px;border-radius:10px}
+      .submit-btn, .btn{padding:12px 20px;font-size:14px}
+      
+      /* Cards & Grids */
+      .contact-sidebar, .services-grid, .gallery-grid, .values-grid{grid-template-columns:1fr;gap:14px}
+      .info-card, .service-card, .gallery-item, .value-card, .stat-card{padding:20px;border-radius:18px}
+      .info-icon, .service-icon{width:36px;height:36px;font-size:14px}
+      .stat-icon{width:44px;height:44px;font-size:22px}
+      
+      /* Story & Images */
+      .story-image{border-radius:22px}
+      .story-image img, .gallery-item img{height:auto;max-height:320px}
+      .experience-badge{position:static;margin-top:16px;display:inline-block}
+      
+      /* Stats */
+      .stats-section{grid-template-columns:1fr 1fr;gap:14px}
+      .stat-card{padding:20px 16px}
+      .stat-number{font-size:26px}
+      .stat-label{font-size:13px}
+      
+      /* Artist section */
+      .artist-section{padding:32px 20px;border-radius:22px}
+      .artist-profile{padding:24px 20px;gap:20px}
+      .artist-photo{width:100px;height:100px}
+      
+      /* Booking */
+      .booking-content{padding:24px;border-radius:22px}
+      .calendar-grid{grid-template-columns:repeat(auto-fill, minmax(120px, 1fr))}
+      .blob{opacity:.15}
+    }
+
+  </style>
+</head>
+<body>
+  <!-- background -->
+  <div class="bg">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+  </div>
+
+  <!-- header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-logo"><img src="sffsfs.png" alt="Nails By Sally logo" /></span>
+        <strong>Nails By Sally</strong>
+      </div>
+      <div class="mini">Admin Access</div>
+    </div>
+  </header>
+
+  <!-- login card -->
+  <main class="wrap">
+    <section class="card" aria-label="Admin login panel">
+      <div class="card-head">
+        <h1 class="title">Welcome back, Sally ✨</h1>
+        <p class="sub">Sign in to access your admin panel and manage appointments, services, and gallery.</p>
+      </div>
+
+      <form id="loginForm" class="card-body" novalidate>
+        <div class="field">
+          <label class="label" for="email">Email</label>
+          <div class="control">
+            <!-- mail icon -->
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/>
+            </svg>
+            <input id="email" name="email" type="email" inputmode="email" autocomplete="username"
+              placeholder="you@domain.com" required />
+          </div>
+          <small class="hint">Use your admin email.</small>
+        </div>
+
+        <div class="field">
+          <label class="label" for="password">Password</label>
+          <div class="control">
+            <!-- lock icon -->
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <input id="password" name="password" type="password" autocomplete="current-password" minlength="6" required />
+            <button type="button" id="togglePass" class="toggle-pass" aria-label="Show password">Show</button>
+          </div>
+          <small class="hint">Minimum 6 characters.</small>
+        </div>
+
+        <div class="row">
+          <label class="remember">
+            <input id="remember" type="checkbox"/> Remember me
+          </label>
+          <a href="#" class="mini link" id="forgot">Forgot password?</a>
+        </div>
+
+        <button id="submitBtn" class="btn" type="submit">
+          <span class="btn-text">Sign In</span>
+          <span class="btn-spinner" aria-hidden="true" style="display:none">⏳</span>
+        </button>
+
+        <div id="errorBox" class="err" role="alert">Invalid credentials. Please try again.</div>
+      </form>
+
+      <div class="foot">
+        <span class="mini">Tip: For security, ensure you're on your own device.</span>
+        <a class="mini link" href="index.html">← Back to website</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Logged in!</div>
+  <div class="copy">© <span id="year"></span> Nails By Sally</div>
+
+  <script>
+    // ===== CONFIG =====
+    const API_BASE = '/api';
+    const AUTH_STORAGE_KEY = 'nbs_admin_session';
+    const EMAIL_STORAGE_KEY = 'nbs_admin_email';
+
+    // ===== UTIL =====
+    function $(s, root=document){ return root.querySelector(s); }
+    function show(el, yes=true){ if(!el) return; el.style.display = yes ? '' : 'none'; }
+
+    // ===== INIT =====
+    const form = $('#loginForm');
+    const email = $('#email');
+    const password = $('#password');
+    const remember = $('#remember');
+    const submitBtn = $('#submitBtn');
+    const btnText = submitBtn?.querySelector('.btn-text');
+    const btnSpin = submitBtn?.querySelector('.btn-spinner');
+    const errorBox = $('#errorBox');
+    const toast = $('#toast');
+
+    // Year
+    $('#year').textContent = new Date().getFullYear();
+
+    // ===== AUTH HELPERS =====
+    function saveSession(rememberMe) {
+      if (rememberMe) {
+        // Store in localStorage for persistent login
+        localStorage.setItem(AUTH_STORAGE_KEY, 'true');
+      } else {
+        // Store in sessionStorage for session-only login
+        sessionStorage.setItem(AUTH_STORAGE_KEY, 'true');
+      }
+    }
+
+    function clearSession() {
+      localStorage.removeItem(AUTH_STORAGE_KEY);
+      sessionStorage.removeItem(AUTH_STORAGE_KEY);
+    }
+
+    function isLoggedIn() {
+      return localStorage.getItem(AUTH_STORAGE_KEY) === 'true' || 
+             sessionStorage.getItem(AUTH_STORAGE_KEY) === 'true';
+    }
+
+    async function checkAuth() {
+      try {
+        const res = await fetch(`${API_BASE}/admin/me`, {
+          credentials: 'include'
+        });
+        return res.ok;
+      } catch {
+        return false;
+      }
+    }
+
+    // ===== CHECK IF ALREADY LOGGED IN =====
+    async function checkExistingSession() {
+      if (isLoggedIn()) {
+        // Check if server cookie is still valid
+        const isValid = await checkAuth();
+        if (isValid) {
+          console.log('[Auth] Already logged in, redirecting...');
+          window.location.href = '/appointments.html';
+          return true;
+        } else {
+          // Session expired, clear local storage
+          console.log('[Auth] Session expired, clearing...');
+          clearSession();
+        }
+      }
+      return false;
+    }
+
+    // ===== LOAD SAVED EMAIL =====
+    function loadSavedEmail() {
+      const saved = localStorage.getItem(EMAIL_STORAGE_KEY);
+      if (saved) {
+        email.value = saved;
+        remember.checked = true;
+      }
+    }
+
+    // ===== TOGGLE PASSWORD =====
+    $('#togglePass')?.addEventListener('click', () => {
+      const isPwd = password.type === 'password';
+      password.type = isPwd ? 'text' : 'password';
+      $('#togglePass').textContent = isPwd ? 'Hide' : 'Show';
+      password.focus();
+    });
+
+    // ===== FORGOT PASSWORD =====
+    $('#forgot')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Contact the site owner to reset your admin password.');
+    });
+
+    // ===== LOADING STATE =====
+    function setLoading(isLoading){
+      if (!submitBtn) return;
+      submitBtn.disabled = isLoading;
+      if (btnText && btnSpin){
+        btnText.style.display = isLoading ? 'none' : '';
+        btnSpin.style.display = isLoading ? '' : 'none';
+      }
+    }
+
+    // ===== LOGIN HANDLER =====
+    async function login({ email, password }) {
+      const res = await fetch(`${API_BASE}/admin/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ email: email.toLowerCase().trim(), password })
+      });
+
+      let body = {};
+      try { body = await res.json(); } catch {}
+
+      if (!res.ok) {
+        const msg = body?.error || `HTTP ${res.status} ${res.statusText}`;
+        throw new Error(msg);
+      }
+      return body;
+    }
+
+    // ===== FORM SUBMIT =====
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      errorBox.style.display = "none";
+      setLoading(true);
+      
+      try {
+        const resp = await login({ 
+          email: email.value, 
+          password: password.value 
+        });
+        
+        if (resp.ok) {
+          console.log('[Auth] Login successful');
+          
+          // Save email if remember me is checked
+          if (remember.checked) {
+            localStorage.setItem(EMAIL_STORAGE_KEY, email.value.toLowerCase().trim());
+          } else {
+            localStorage.removeItem(EMAIL_STORAGE_KEY);
+          }
+          
+          // Save session
+          saveSession(remember.checked);
+          
+          // Show success toast
+          toast.textContent = 'Logged in successfully! Redirecting...';
+          toast.style.display = 'block';
+          toast.style.animation = 'slideIn 0.3s ease';
+          
+          // Redirect to appointments page
+          setTimeout(() => {
+            window.location.href = '/appointments.html';
+          }, 500);
+          
+        } else {
+          errorBox.textContent = resp.error || "Login failed";
+          errorBox.style.display = "block";
+        }
+      } catch (err) {
+        console.error("[Auth] Login error:", err);
+        errorBox.textContent = err.message;
+        errorBox.style.display = "block";
+      } finally {
+        setLoading(false);
+      }
+    });
+
+    // ===== ACCESSIBILITY =====
+    email?.addEventListener('keydown', (e)=>{ 
+      if(e.key==='Enter'){ 
+        e.preventDefault(); 
+        password.focus(); 
+      } 
+    });
+
+    // ===== INITIALIZE ON LOAD =====
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Check if already logged in
+      const alreadyLoggedIn = await checkExistingSession();
+      
+      if (!alreadyLoggedIn) {
+        // Load saved email if exists
+        loadSavedEmail();
+      }
+    });
+  </script>
+
+  <!-- SECURITY NOTE:
+    This page only handles the UI. For real security, verify credentials on your server,
+    set an HttpOnly, Secure, SameSite cookie (session/JWT), and protect admin routes server-side.
+  -->
+</body>
+</html>

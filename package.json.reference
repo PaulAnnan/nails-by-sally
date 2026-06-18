@@ -1,0 +1,31 @@
+{
+  "name": "nails-by-sally-booking",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Appointment booking system with PWA and push notifications",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "generate-vapid": "npx web-push generate-vapid-keys",
+    "generate-icons": "node generate-icons.js ./public/sffsfs.png"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.x.x",
+    "@aws-sdk/lib-dynamodb": "^3.x.x",
+    "bcrypt": "^5.x.x",
+    "cookie-parser": "^1.x.x",
+    "cors": "^2.x.x",
+    "dotenv": "^16.x.x",
+    "express": "^4.x.x",
+    "jsonwebtoken": "^9.x.x",
+    "web-push": "^3.6.7",
+    "sharp": "^0.33.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.x.x"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

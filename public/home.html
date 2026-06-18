@@ -1,0 +1,1154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nails By Sally — Nail Studio</title>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================= Theme ================= */
+    :root{
+      --pink:#ff7bbd; --pink2:#f14aa6; --violet:#7a5cff; --violet2:#5a38ff;
+      --ink:#0f172a; --muted:#778097; --muted2:#98a2b3;
+      --panel:#ffffff; --border:#ecebf2;
+      --radius:20px; --radius-xl:28px; --shadow:0 18px 50px rgba(15,23,42,.12);
+      --container:clamp(1040px, 86vw, 1280px);
+      --container-wide:clamp(1100px, 92vw, 1440px);
+      --grad:linear-gradient(90deg,var(--pink2),var(--violet));
+      --glass:rgba(255,255,255,.64);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
+      color:var(--ink);
+      background:#0f1020;
+      overflow-x:hidden;
+    }
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    ::selection{background:#fbe1f2}
+
+    /* Background */
+    .bg{position:fixed; inset:0; z-index:-2;
+      background:
+        radial-gradient(60vw 60vw at -10% -10%, #20123b 0%, transparent 60%),
+        radial-gradient(60vw 60vw at 110% 0%, #2a1043 0%, transparent 60%),
+        radial-gradient(70vw 70vw at 50% 120%, #1a1735 0%, #0f1020 70%);
+    }
+    .blob{position:absolute; border-radius:50%; opacity:.25; mix-blend-mode:screen; will-change:transform;}
+    .blob.b1{width:54vw;height:54vw; background:radial-gradient(circle at 30% 30%, #ff8ac7, transparent 60%); left:-6vw; top:-10vw;}
+    .blob.b2{width:46vw;height:46vw; background:radial-gradient(circle at 40% 40%, #ffd6e8, transparent 55%); right:-10vw; top:-8vw;}
+
+    /* Layout helpers */
+    .container{max-width:var(--container);margin:0 auto;padding-inline:24px}
+    .container--wide{max-width:var(--container-wide)}
+    .center{text-align:center}
+    .max-640{max-width:640px;margin-inline:auto}
+    .section, .site-footer, #services, #reels, #about{
+      content-visibility:auto; 
+      contain-intrinsic-size: 0 300px;
+    }
+
+    /* Header */
+    .site-header{position:sticky; top:0; z-index:50; background:rgba(16,16,34,.85); backdrop-filter:blur(8px); border-bottom:1px solid rgba(255,255,255,.08)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:16px;color:#fff}
+    .brand-logo{position:relative;width:70px;height:70px;border-radius:20px;display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,0,0,.35);overflow:hidden;flex-shrink:0;background:linear-gradient(90deg,var(--pink2),var(--violet2));transition:transform .2s ease}
+    .brand-logo:hover{transform:translateY(-1px)}
+    .brand-logo img{width:52px;height:52px;object-fit:contain;position:relative;z-index:1}
+    .brand-sep{width:1px;height:46px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.5),rgba(255,255,255,.08));border-radius:2px}
+    .brand-text{display:flex;flex-direction:column;line-height:1.12}
+    .brand-text strong{font-size:22px;font-weight:900;letter-spacing:.3px;color:#fff;white-space:nowrap}
+    .brand-text small{font-size:12px;color:#cbd5e1;margin-top:6px;letter-spacing:.2em;text-transform:uppercase}
+    .nav{display:flex;gap:26px;align-items:center}
+    .nav-link.active{color:var(--pink);opacity:1}
+    .nav-link{font-weight:600;opacity:.92;color:#e2e8f0;transition:opacity .2s ease, transform .2s ease}
+    .nav-link:hover{opacity:1;transform:translateY(-1px)}
+    .menu-btn{display:none;padding:8px 10px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:transparent;color:#e2e8f0}
+
+    /* Buttons */
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.14);font-weight:800;font-size:14px;color:#0b0b10;background:#ffffff;box-shadow:0 12px 28px rgba(0,0,0,.18);transition:transform .2s ease, box-shadow .2s ease;cursor:pointer}
+    .btn-outline{background:transparent;color:#e2e8f0}
+    .btn-outline:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(0,0,0,.26)}
+    .btn-primary{border:none;color:#fff;background:linear-gradient(90deg,var(--pink2),var(--violet2));box-shadow:0 14px 32px rgba(90,56,255,.45)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(90,56,255,.55)}
+    .btn[data-glow]:hover{box-shadow:0 0 20px rgba(255,255,255,.2), 0 18px 40px rgba(90,56,255,.55)}
+    .arr{display:inline-block;transition:transform .2s ease}
+    .btn-wiggle:hover .arr{transform:translateX(5px)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center;padding:64px 0 36px;min-height:clamp(620px,72vh,800px)}
+    .h1{font-size:clamp(44px,5.2vw,62px);line-height:1.04;margin:0 0 10px;font-weight:900;color:#fff}
+    .h1 .accent{display:inline-block;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{font-size:clamp(16px,1.25vw,18px); color:#cbd5e1}
+    .badges{display:flex;gap:10px;margin-bottom:14px}
+    .badge{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#f0eaff}
+    .actions{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+    .hero__right{position:relative}
+
+    /* ===== Hero Card (Single Dynamic Card) ===== */
+    .hero-card{
+      position:relative;
+      height:clamp(460px,54vh,640px);
+      border-radius:26px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.18);
+      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      box-shadow:0 20px 60px rgba(0,0,0,.32);
+      transform-style:preserve-3d;
+      transition:transform .12s ease-out, box-shadow .2s ease, border-color .2s ease;
+      will-change:transform;
+    }
+    .hero-card:hover{border-color:rgba(255,255,255,.28); box-shadow:0 28px 90px rgba(0,0,0,.38)}
+    .hero-card .card-image, .hero-card img{position:absolute; inset:0; width:100%; height:100%}
+    .hero-card img{object-fit:cover; transition:transform .5s ease; will-change:transform}
+    .hero-card:hover img{transform:scale(1.05)}
+    .card-overlay{
+      position:absolute; inset:auto 16px 16px 16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.24);
+      backdrop-filter:blur(10px);
+      color:#fff;
+      transform:translateZ(45px);
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+    .overlay-content{padding:14px 16px}
+    .overlay-content h3{margin:0 0 6px; font-size:18px; font-weight:900}
+    .overlay-content p{margin:0;color:#e7e6ff;font-size:14px}
+
+    .rating-chip{
+      position:absolute; right:12px; bottom:-16px;
+      background:var(--glass);
+      border:1px solid rgba(255,255,255,.32);
+      border-radius:14px; padding:10px 12px;
+      box-shadow:var(--shadow);
+      width:220px; color:#0f172a; backdrop-filter:blur(8px);
+    }
+    .chip-stars{font-weight:900}
+    .chip-note{font-size:12px;color:#334155;margin-top:2px}
+
+    /* ===== New: Under-Hero Gallery CTA ===== */
+    .gallery-cta{
+      margin:12px auto 10px;
+      padding:16px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.14);
+      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      box-shadow:0 12px 40px rgba(0,0,0,.24);
+      display:flex; align-items:center; justify-content:space-between; gap:18px;
+    }
+    .gallery-cta .left{
+      display:flex; align-items:center; gap:14px; min-width:0;
+    }
+    .gallery-cta .title{
+      color:#fff; font-weight:900; font-size:18px; white-space:nowrap;
+    }
+    .thumbs{
+      display:flex; gap:8px; align-items:center; overflow:hidden;
+      mask-image:linear-gradient(90deg, rgba(0,0,0,1), rgba(0,0,0,1) 80%, rgba(0,0,0,0));
+    }
+    .thumb{
+      width:48px; height:60px; flex:0 0 auto; border-radius:10px; overflow:hidden;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+      box-shadow:0 6px 18px rgba(0,0,0,.25);
+      transform:translateZ(0);
+    }
+    .thumb img{width:100%; height:100%; object-fit:cover; display:block}
+    .gallery-cta .right .btn{
+      padding:12px 16px; font-weight:900;
+    }
+
+    /* Marquee */
+    .marquee{overflow:hidden;border-block:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+    .marquee-track{display:flex;gap:28px;white-space:nowrap;will-change:transform;animation:scroll 20s linear infinite}
+    .tick{color:#e9d8ff;opacity:.9;padding:12px 0;letter-spacing:.04em}
+    @keyframes scroll{to{transform:translateX(-50%)}}
+
+    /* Social Media */
+    .social-section { text-align: center; padding: 60px 20px; }
+    .social-section h2 { font-size: 28px; font-weight: 800; margin-bottom: 20px; color: #fff; }
+    .social-links { display: flex; justify-content: center; gap: 18px; }
+    .social-links a {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--grad); transition: transform .2s ease, box-shadow .2s ease;
+      text-decoration: none; overflow: hidden;
+    }
+    .social-links a:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+    .social-links img { width: 28px; height: 28px; object-fit: contain; filter: brightness(0) invert(1); }
+
+    /* Sections */
+    .section{padding:56px 0}
+    .h2{font-size:clamp(28px,3.2vw,36px);font-weight:900;margin:0 0 8px;color:#fff}
+    .h3{font-size:clamp(22px,2.6vw,28px);font-weight:900;margin:0 10px;color:#fff}
+    .muted{color:#cbd5e1}
+
+    /* Feature cards */
+    .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+    .feature{background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:22px;box-shadow:0 10px 40px rgba(0,0,0,.16);transition:transform .3s ease, border-color .2s}
+    .feature:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.28)}
+    .feature-icon{width:64px;height:64px;border-radius:999px;background:var(--grad);box-shadow:0 8px 26px rgba(240,46,170,.35);margin:0 auto 18px;display:flex;align-items:center;justify-content:center;transition:all .3s ease}
+    .feature:hover .feature-icon{box-shadow:0 12px 36px rgba(240,46,170,.5);transform:scale(1.05)}
+    .feature-icon svg{transition:transform .3s ease}
+    .feature:hover .feature-icon svg{transform:scale(1.1) rotate(5deg)}
+    .feature-title{font-weight:900;margin-bottom:6px;color:#fff}
+
+    /* Popular Services */
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;align-items:stretch;justify-content:center;max-width:1200px;margin:0 auto}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));border:1px solid rgba(255,255,255,.14);border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,.18);padding:0;display:flex;flex-direction:column;overflow:hidden;transition:transform .3s ease, border-color .2s}
+    .card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.28)}
+    .card .img-wrap{position:relative}
+    .card img{height:200px;width:100%;object-fit:cover;border-bottom:1px solid rgba(255,255,255,.18);transition:transform .4s ease}
+    .card:hover img{transform:scale(1.05)}
+    .popular-tag{position:absolute;right:10px;top:10px;font-size:12px;background:var(--grad);color:#fff;border-radius:999px;padding:4px 8px}
+    .card-body{display:flex;flex-direction:column;gap:10px;padding:14px;color:#e2e8f0}
+    .card .title{font-weight:900;color:#fff}
+    .card .desc{color:#cbd5e1}
+    .card .meta{display:flex;align-items:center;justify-content:space-between;color:#e2e8f0;font-size:14px;margin-top:2px}
+    .card .cta2{margin-top:auto;display:flex;justify-content:center}
+    .card .cta2 .btn{padding:10px 14px;font-size:14px}
+
+    /* ===== Reels (images only, shorter cards) ===== */
+    .reels{padding:56px 0; position:relative}
+    .reels .h3{margin-bottom:4px}
+    .reels-sub{color:#cbd5e1; margin:0 auto 16px; max-width:680px}
+    .reels-wrap{position:relative}
+    .reels-viewport{position:relative; overflow:hidden; border-radius:28px}
+    .reels-track{display:flex; gap:16px; padding:12px 6px 6px; will-change:transform; transition:transform .3s ease}
+    .reel{
+      position:relative;
+      flex:0 0 clamp(200px, 26vw, 280px);
+      aspect-ratio:4/5;
+      border-radius:20px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      box-shadow:0 10px 30px rgba(0,0,0,.24);
+      transition:transform .3s ease, border-color .2s;
+    }
+    .reel:hover{transform:translateY(-6px) scale(1.02); border-color:rgba(255,255,255,.28)}
+    .reel img{width:100%; height:100%; object-fit:cover; display:block}
+    .reel .badge-top{position:absolute; left:10px; top:10px; z-index:2; font-size:12px; background:var(--grad); color:#fff; border-radius:999px; padding:4px 8px}
+    .reels-nav{position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; z-index:20; pointer-events:none}
+    .nav-btn{pointer-events:auto; display:grid; place-items:center; width:46px; height:46px; border-radius:999px; border:1px solid rgba(255,255,255,.18); background:rgba(0,0,0,.35); color:#fff; backdrop-filter:blur(10px); box-shadow:0 8px 24px rgba(0,0,0,.25); transition:transform .2s ease, box-shadow .2s ease; cursor:pointer}
+    .nav-btn:hover{transform:translateY(-2px); box-shadow:0 12px 36px rgba(0,0,0,.32)}
+    .nav-btn[disabled]{opacity:.45; cursor:not-allowed}
+    .nav-btn svg{width:18px;height:18px}
+
+    /* CTA */
+    .cta{max-width:var(--container-wide);margin:52px auto;background:var(--grad);color:#fff;border-radius:26px;padding:38px 28px;text-align:center;box-shadow:var(--shadow)}
+    .cta .cta-sub{color:#f9eaff}
+
+    /* Footer */
+    .site-footer{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;background:rgba(255,255,255,.04)}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px;padding:24px 0;max-width:var(--container-wide);margin:auto;color:#e2e8f0}
+    .brand-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+    .foot-title{font-weight:900;margin-bottom:8px;color:#fff}
+    .foot-list{list-style:none;margin:0;padding:0}
+    .foot-list li{margin:6px 0;color:#cbd5e1}
+    .copy-row{border-top:1px solid rgba(255,255,255,.12);padding:14px 0;color:#cbd5e1;font-size:14px;max-width:var(--container-wide);margin:auto}
+
+    /* Reveal */
+    .reveal{opacity:0; transform:translateY(20px); transition:opacity .4s ease, transform .4s ease; transition-delay:var(--d,0ms)}
+    .reveal.in{opacity:1;transform:none}
+
+    /* ===== Mobile menu (fixed) ===== */
+    .mobile-menu{
+      display:none;
+      position:fixed;
+      left:0;
+      right:0;
+      z-index:40;
+      flex-direction:column;
+      gap:8px;
+      padding:10px 24px;
+      border-bottom:1px solid rgba(255,255,255,.12);
+      background:rgba(16,16,34,.9);
+    }
+    .mobile-menu a{padding:10px;border-radius:12px;color:#e2e8f0;text-decoration:none}
+    .mobile-menu a.active{color:var(--pink)}
+    .mobile-menu .btn-primary{align-self:flex-start}
+    .mobile-menu.open{display:flex;}
+
+    /* ===== IMPROVED MOBILE LAYOUT ===== */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;min-height:unset;padding-top:36px}
+      .grid-3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+      .gallery-cta{flex-direction:column; align-items:flex-start}
+      .gallery-cta .right{align-self:stretch}
+    }
+    
+    @media (max-width:780px){
+      /* Header improvements */
+      .site-header{backdrop-filter:none}
+      .brand{gap:12px}
+      .brand-logo{width:60px;height:60px;border-radius:18px}
+      .brand-text strong{font-size:18px}
+      .brand-text small{display:none}
+      .brand-sep{display:none}
+      .nav{display:none}
+      .menu-btn{display:block}
+      
+      /* Hero section mobile optimization */
+      .hero{
+        padding: 28px 0 24px;
+        gap: 24px;
+      }
+      
+      .hero__left{
+        order: 1;
+      }
+      
+      .hero__right{
+        order: 2;
+        margin-bottom: 20px;
+      }
+      
+      .h1{
+        font-size: 36px;
+        line-height: 1.1;
+        margin-bottom: 12px;
+      }
+      
+      .lead{
+        font-size: 15px;
+        line-height: 1.5;
+        margin-bottom: 8px;
+      }
+      
+      .badges{
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      
+      .badge{
+        font-size: 11px;
+        padding: 5px 9px;
+      }
+      
+      .actions{
+        gap: 10px;
+        margin-top: 18px;
+      }
+      
+      .btn{
+        padding: 11px 16px;
+        font-size: 13px;
+      }
+      
+      /* Hero card mobile sizing */
+      .hero-card{
+        height: 420px;
+        border-radius: 22px;
+      }
+      
+      .card-overlay{
+        inset: auto 12px 12px 12px;
+        border-radius: 16px;
+      }
+      
+      .overlay-content{
+        padding: 12px 14px;
+      }
+      
+      .overlay-content h3{
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+      
+      .overlay-content p{
+        font-size: 13px;
+      }
+      
+      .rating-chip{
+        position: static;
+        width: 100%;
+        margin-top: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 14px;
+      }
+      
+      .chip-note{
+        text-align: right;
+      }
+      
+      /* Gallery CTA mobile improvements */
+      .gallery-cta{
+        padding: 14px;
+        gap: 14px;
+        border-radius: 18px;
+        margin: 20px auto 16px;
+      }
+      
+      .gallery-cta .left{
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      
+      .gallery-cta .title{
+        font-size: 16px;
+      }
+      
+      .thumbs{
+        width: 100%;
+      }
+      
+      .gallery-cta .right{
+        width: 100%;
+      }
+      
+      .gallery-cta .right .btn{
+        width: 100%;
+        justify-content: center;
+        padding: 11px 14px;
+      }
+      
+      /* Social section mobile */
+      .social-section{
+        padding: 40px 20px;
+      }
+      
+      .social-section h2{
+        font-size: 24px;
+        margin-bottom: 16px;
+      }
+      
+      .social-links{
+        gap: 14px;
+      }
+      
+      .social-links a{
+        width: 52px;
+        height: 52px;
+      }
+      
+      .social-links img{
+        width: 26px;
+        height: 26px;
+      }
+      
+      /* Section spacing mobile */
+      .section{
+        padding: 40px 0;
+      }
+      
+      .h2{
+        font-size: 26px;
+        margin-bottom: 10px;
+      }
+      
+      .h3{
+        font-size: 22px;
+      }
+      
+      /* Feature cards mobile */
+      .feature{
+        padding: 18px;
+        border-radius: 18px;
+      }
+      
+      .feature-icon{
+        width: 46px;
+        height: 46px;
+        margin-bottom: 8px;
+      }
+      
+      /* Service cards mobile */
+      .cards{
+        gap: 18px;
+      }
+      
+      .card{
+        border-radius: 18px;
+      }
+      
+      .card img{
+        height: 180px;
+      }
+      
+      .card-body{
+        padding: 12px;
+      }
+      
+      /* Reels mobile optimization */
+      .reels{
+        padding: 40px 0;
+      }
+      
+      .reels-sub{
+        font-size: 14px;
+        margin-bottom: 14px;
+      }
+      
+      .reels-viewport{
+        border-radius: 22px;
+      }
+      
+      .reel{
+        border-radius: 18px;
+      }
+      
+      .nav-btn{
+        width: 40px;
+        height: 40px;
+      }
+      
+      .nav-btn svg{
+        width: 16px;
+        height: 16px;
+      }
+      
+      /* CTA mobile */
+      .cta{
+        margin: 0 18px 36px 18px;
+        padding: 28px 20px;
+        border-radius: 22px;
+      }
+      
+      .cta .h2{
+        font-size: 24px;
+      }
+      
+      .cta-sub{
+        font-size: 13px;
+      }
+      
+      /* Footer mobile improvements */
+      .footer-grid{
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 28px 0;
+      }
+      
+      .footer-brand{
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(255,255,255,.12);
+      }
+      
+      .brand-row .brand-logo{
+        width: 52px;
+        height: 52px;
+      }
+      
+      .brand-row .brand-logo img{
+        width: 38px;
+        height: 38px;
+      }
+      
+      .foot-title{
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+      
+      .foot-list li{
+        font-size: 14px;
+        margin: 8px 0;
+      }
+      
+      .copy-row{
+        padding: 16px 0;
+        font-size: 13px;
+        text-align: center;
+      }
+      
+      /* Marquee mobile */
+      .tick{
+        font-size: 13px;
+        padding: 10px 0;
+      }
+    }
+    
+    @media (max-width:640px){
+      /* Extra small mobile optimizations */
+      .container{
+        padding-inline: 18px;
+      }
+      
+      .grid-3{
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      
+      .h1{
+        font-size: 32px;
+      }
+      
+      .lead{
+        font-size: 14px;
+      }
+      
+      .hero-card{
+        height: 380px;
+      }
+      
+      .rating-chip{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      
+      .chip-note{
+        text-align: left;
+      }
+      
+      .reel{
+        flex-basis: 72vw;
+      }
+      
+      .blob{
+        opacity: .15;
+      }
+      
+      .thumb{
+        width: 42px;
+        height: 52px;
+      }
+      
+      .gallery-cta .title{
+        font-size: 15px;
+      }
+      
+      .actions{
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .actions .btn{
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .cards{
+        gap: 16px;
+      }
+      
+      .card img{
+        height: 160px;
+      }
+      
+      .social-section{
+        padding: 32px 18px;
+      }
+      
+      .social-section h2{
+        font-size: 22px;
+      }
+      
+      .social-links a{
+        width: 48px;
+        height: 48px;
+      }
+      
+      .social-links img{
+        width: 24px;
+        height: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg" id="bg">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header reveal">
+    <div class="container header-inner">
+      <a href="home.html" class="brand" aria-label="Nails By Sally home">
+        <span class="brand-logo" aria-hidden="true">
+          <img src="sffsfs.png" alt="Nails By Sally logo" loading="eager" decoding="async"/>
+        </span>
+        <span class="brand-sep" aria-hidden="true"></span>
+        <div class="brand-text">
+          <strong>Nails By Sally</strong>
+          <small>Nail Studio</small>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a class="nav-link active" href="home.html">Home</a>
+        <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link btn btn-primary" data-glow href="booking.html">Book Now</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </nav>
+
+      <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open Menu">☰</button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <nav id="mobileMenu" class="mobile-menu" hidden>
+    <a class="active" href="home.html">Home</a>
+    <a href="services.html">Services</a>
+    <a class="btn btn-primary" data-glow href="booking.html">Book Now</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero container container--wide">
+    <div class="hero__left">
+      <div class="badges reveal" style="--d:40ms">
+        <span class="badge">★★★★★</span>
+        <span class="badge">Nails By Sally</span>
+      </div>
+
+      <h1 class="h1">
+        <span class="reveal" style="--d:90ms">Perfect Nails,</span><br>
+        <span class="accent reveal" style="--d:150ms">Every Time</span>
+      </h1>
+
+      <p class="lead reveal" style="--d:210ms">
+        Transform your nails with our premium services — from classic manicures to head-turning nail art — in a luxe, relaxing vibe.
+      </p>
+
+      <div class="actions reveal" style="--d:270ms">
+        <a href="booking.html" class="btn btn-primary btn-wiggle" data-glow>
+          Book Appointment <span class="arr">→</span>
+        </a>
+        <a href="services.html" class="btn btn-outline">View Services</a>
+      </div>
+    </div>
+
+    <div class="hero__right reveal" style="--d:330ms">
+      <!-- SINGLE DYNAMIC HERO CARD (no loop) -->
+      <article id="heroCard" class="hero-card" aria-label="Featured nail design">
+        <div class="card-image">
+          <img src="./Images/Nails2.png" alt="Featured nail design" decoding="async">
+        </div>
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <h3>Chrome French Tips</h3>
+            <p>High-shine chrome with clean lines. Subtle, luxe, and durable.</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="rating-chip">
+        <div class="chip-stars">★ 4.9/5</div>
+        <div class="chip-note">300+ Happy Clients</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== UNDER-HERO: Dynamic View Gallery CTA ===== -->
+  <section class="container reveal" style="--d:80ms">
+    <div class="gallery-cta" aria-label="View Gallery CTA">
+      <div class="left">
+        <div class="title">Peek the latest sets</div>
+        <div class="thumbs" id="galleryThumbs" aria-hidden="false"></div>
+      </div>
+      <div class="right">
+        <a id="galleryBtn" href="gallery.html" class="btn btn-primary btn-wiggle" data-glow>
+          View Gallery  →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL MEDIA LINKS -->
+  <section class="social-section">
+    <h2>Follow Us</h2>
+    <div class="social-links">
+      <a href="https://www.instagram.com/nails.by.sxlly" target="_blank" aria-label="Instagram">
+        <img src="Images/Socials/Instagram.png" alt="Instagram logo">
+      </a>
+      <a href="https://www.tiktok.com/@nails.by.sxlly?lang=en" target="_blank" aria-label="TikTok">
+        <img src="Images/Socials/Tiktok.png" alt="TikTok logo">
+      </a>
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+        <img src="Images/Socials/Facebook.png" alt="Facebook logo">
+      </a>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-track" id="marqueeTrack">
+      <div aria-hidden="true" class="tick">Nails By Sally • Long-lasting Gel • Custom Nail Art • Cuticle Care • Hand Massage • Paraffin Treatment • Crystal Accents • Nail Health First •</div>
+      <div aria-hidden="true" class="tick">Nails By Sally • Long-lasting Gel • Custom Nail Art • Cuticle Care • Hand Massage • Paraffin Treatment • Crystal Accents • Nail Health First •</div>
+    </div>
+  </div>
+
+  <!-- WHY CHOOSE -->
+  <section class="container section" id="about">
+    <h2 class="h2 center reveal">Why Choose <span class="accent" style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">Nails By Sally</span></h2>
+    <p class="muted center max-640 reveal" style="--d:80ms">
+      Artistic creativity meets professional expertise to deliver stand-out nails in a luxe, cozy environment.
+    </p>
+
+    <div class="grid-3 features">
+      <div class="feature reveal" style="--d:0ms">
+        <div class="feature-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9L12 4l6 5v7a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9z"/>
+            <circle cx="12" cy="11" r="2" fill="white"/>
+          </svg>
+        </div>
+        <div class="feature-title">Expert Nail Artists</div>
+        <p class="muted">Certified technicians with years of experience.</p>
+      </div>
+      <div class="feature reveal" style="--d:80ms">
+        <div class="feature-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9.06 11.9l8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/>
+            <path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/>
+          </svg>
+        </div>
+        <div class="feature-title">Creative Designs</div>
+        <p class="muted">Custom art tailored to your style and mood.</p>
+      </div>
+      <div class="feature reveal" style="--d:160ms">
+        <div class="feature-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        <div class="feature-title">Premium Products</div>
+        <p class="muted">Top-quality gels & treatments for lasting results.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- POPULAR SERVICES -->
+  <section class="container section" id="services">
+    <h3 class="h3 center reveal">Popular Services</h3>
+    <p class="muted center max-640 reveal" style="--d:80ms">Our most-loved services for beautiful, long-lasting results.</p>
+    <div id="popularGrid" class="cards"></div>
+    <div class="center reveal" style="margin-top:32px;--d:240ms">
+      <a href="services.html" class="btn btn-outline">View All Services →</a>
+    </div>
+  </section>
+
+  <!-- NAIL REELS (images only) -->
+  <section class="container section reels" id="reels">
+    <h3 class="h3 center reveal">Nail Reels 
+      <span class="accent" style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">
+        (Finished Looks)
+      </span>
+    </h3>
+    <p class="reels-sub center reveal" style="--d:80ms">Our finished looks gallery — swipe through stunning nail sets.</p>
+
+    <div class="reels-wrap reveal" style="--d:140ms">
+      <div class="reels-nav" aria-hidden="false">
+        <button id="reelsPrev" class="nav-btn" aria-controls="reelsTrack" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button id="reelsNext" class="nav-btn" aria-controls="reelsTrack" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <div class="reels-viewport" id="reelsViewport">
+        <div class="reels-track" id="reelsTrack" aria-label="Nail image showcase strip">
+          <!-- Cards injected by JS from REELS[] -->
+        </div>
+      </div>
+    </div>
+
+    <div class="reels-cta reveal" style="--d:220ms">
+      <a href="https://www.instagram.com/nails.by.sxlly" class="btn btn-outline">See More On Instagram →</a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta container container--wide reveal" id="booking">
+    <h3 class="h2">Ready for Perfect Nails?</h3>
+    <p class="muted cta-sub">Book today and experience the artistry of beautiful nails.</p>
+    <a href="booking.html" class="btn btn-primary btn-wiggle" data-glow>Schedule Your Appointment <span class="arr">→</span></a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="brand-row">
+          <span class="brand-logo" aria-hidden="true">
+            <img src="sffsfs.png" alt="Nails By Sally logo" loading="lazy" decoding="async"/>
+          </span>
+          <strong style="color:#fff">Nails By Sally</strong>
+        </div>
+        <p class="muted">Transform your nails with our premium services. Luxury, artistry, and exceptional results every visit.</p>
+      </div>
+
+      <div>
+        <div class="foot-title">Quick Links</div>
+        <ul class="foot-list">
+          <li><a href="#">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#reels">Gallery</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="foot-title">Contact Info</div>
+        <ul class="foot-list">
+          <li>(514) 546-0687</li>
+          <li><a href="mailto:NailsBySxlly@gmail.com">NailsBySxlly@gmail.com</a></li>
+          <li>@nailsbysally</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container copy-row">© <span id="year"></span> Nails By Sally. All rights reserved.</div>
+  </footer>
+
+  <script>
+    /* ---------- Config ---------- */
+    const GALLERY_ROUTE = 'gallery.html'; // change if needed
+
+    /* ---------- Data ---------- */
+    const SERVICES = [
+      { id:"art", name:"Classic gel polish", desc:"A classic gel polish set with timeless style", duration:60, price:45, popular:true, img:"./Images/Design.png" },
+      { id:"pedi", name:"Acrylic Nails", desc:"Strong, flawless extensions with long-lasting style", duration:120, price:80, popular:true, img:"./Images/Acrylic.png" },
+      { id:"gel", name:"gel x", desc:"Clean, polished nails with a natural, elegant finish..", duration:80, price:60, popular:true, img:"./Images/Manicure.png" },
+    ];
+
+    /* Reels as IMAGES ONLY */
+    const REELS = [
+      {src:"./Images/Nails4.png", label:"3D nail art set"},
+      {src:"./Images/Nails2.png", label:"Cateye butterfly set"},
+      {src:"./Images/Nails5.png", label:"Blue french summer"},
+      {src:"./Images/Nails15.png", label:"Christam 3D set"},
+      {src:"./Images/Nails7.png", label:"Ombre summer set"},
+      {src:"./Images/Nails8.png", label:"tropicale flower set"}
+    ];
+
+    /* ---------- Helpers ---------- */
+    function debounce(func, wait){ let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>func(...args), wait); }; }
+
+    /* ---------- Popular cards ---------- */
+    let idx = 0;
+    function cardTemplate(s){
+      const el = document.createElement('div');
+      el.className = 'card reveal';
+      el.style.setProperty('--d', `${120 + (idx++)*80}ms`);
+      el.innerHTML = `
+        <div class="img-wrap">
+          <img src="${s.img}" alt="${s.name}" loading="lazy" decoding="async">
+          <span class="popular-tag">Popular</span>
+        </div>
+        <div class="card-body">
+          <div class="title">${s.name}</div>
+          <p class="desc">${s.desc}</p>
+          <div class="meta">
+            <span>⏱️ ${s.duration} min</span>
+            <strong>$${s.price}</strong>
+          </div>
+          <div class="cta2">
+            <a href="booking.html" class="btn btn-primary" data-glow>Book Now</a>
+          </div>
+        </div>
+      `;
+      return el;
+    }
+    function renderPopular(){
+      const grid = document.getElementById('popularGrid');
+      if (!grid) return;
+      grid.classList.add('cards');
+      SERVICES.filter(s=>s.popular).forEach(s => grid.appendChild(cardTemplate(s)));
+    }
+
+    /* ---------- Reels (image cards) ---------- */
+    function reelTemplate(r){
+      const wrap = document.createElement('article');
+      wrap.className = 'reel';
+      wrap.innerHTML = `
+        <span class="badge-top">${r.label}</span>
+        <img src="${r.src}" alt="${r.label}" loading="lazy" decoding="async"/>
+      `;
+      return wrap;
+    }
+    function renderReels(){
+      const t = document.getElementById('reelsTrack');
+      if (!t) return;
+      REELS.forEach(r => t.appendChild(reelTemplate(r)));
+    }
+
+    /* ---------- Reveal on view ---------- */
+    function setupReveals(){
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '50px' });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }
+
+    /* ---------- Mobile menu (FIXED) ---------- */
+    function setupMobileMenu(){
+      const btn = document.getElementById('menuBtn');
+      const menu = document.getElementById('mobileMenu');
+      if (!btn || !menu) return;
+
+      // Ensure hidden at start
+      menu.classList.remove('open');
+      menu.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+
+      btn.addEventListener('click', () => {
+        const willOpen = !menu.classList.contains('open');
+        menu.classList.toggle('open', willOpen);
+        menu.hidden = !willOpen;
+        btn.setAttribute('aria-expanded', String(willOpen));
+      });
+
+      // Close on link click
+      menu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          menu.classList.remove('open');
+          menu.hidden = true;
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Auto-close when resizing to desktop
+      const onResize = () => {
+        if (window.innerWidth >= 780) {
+          menu.classList.remove('open');
+          menu.hidden = true;
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      };
+      window.addEventListener('resize', debounce(onResize, 120));
+      onResize();
+    }
+
+    /* ---------- Footer year ---------- */
+    function setYear(){ const y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear(); }
+
+    /* ---------- SINGLE HERO CARD (no loop) ---------- */
+    function setupHeroCard(){
+      const card = document.getElementById('heroCard');
+      if (!card) return;
+
+      const img = card.querySelector('img');
+      if (img && img.complete === false) {
+        img.addEventListener('error', () => {
+          console.warn('Hero image failed to load:', img.src);
+          card.style.background = `#111 center/cover no-repeat url("${img.src}")`;
+        }, {once:true});
+      }
+
+      // 3D tilt
+      const maxTilt = 10; // degrees
+      const damp = 0.08;
+      let targetRX=0, targetRY=0, rX=0, rY=0;
+
+      function animate(){
+        rX += (targetRX - rX) * damp;
+        rY += (targetRY - rY) * damp;
+        card.style.transform = `perspective(900px) rotateX(${rX}deg) rotateY(${rY}deg)`;
+        requestAnimationFrame(animate);
+      }
+      animate();
+
+      card.addEventListener('mousemove', (e)=>{
+        const rect = card.getBoundingClientRect();
+        const cx = rect.left + rect.width/2;
+        const cy = rect.top + rect.height/2;
+        const dx = (e.clientX - cx) / (rect.width/2);
+        const dy = (e.clientY - cy) / (rect.height/2);
+        targetRY = dx * maxTilt;   // left/right
+        targetRX = -dy * maxTilt;  // up/down
+      });
+
+      card.addEventListener('mouseleave', ()=>{
+        targetRX = 0; targetRY = 0;
+      }, {passive:true});
+    }
+
+    /* ---------- Reels carousel controls ---------- */
+    function setupReels(){
+      const viewport = document.getElementById('reelsViewport');
+      const track = document.getElementById('reelsTrack');
+      const prev = document.getElementById('reelsPrev');
+      const next = document.getElementById('reelsNext');
+      if (!viewport || !track || !prev || !next) return;
+
+      let index = 0, maxIndex = 0, step = 0;
+
+      function measure(){
+        const cards = track.querySelectorAll('.reel');
+        if (!cards.length) return;
+        const cardRect = cards[0].getBoundingClientRect();
+        const vpRect = viewport.getBoundingClientRect();
+        const gap = 16;
+        step = cardRect.width + gap;
+        const visible = Math.floor(vpRect.width / step);
+        maxIndex = Math.max(0, cards.length - visible);
+        snap(index);
+      }
+
+      function snap(i){
+        index = Math.max(0, Math.min(i, maxIndex));
+        track.style.transform = `translateX(${-index * step}px)`;
+        prev.disabled = index === 0;
+        next.disabled = index >= maxIndex;
+      }
+
+      prev.addEventListener('click', () => snap(index - 1));
+      next.addEventListener('click', () => snap(index + 1));
+
+      // Swipe
+      let startX = 0, dragging = false;
+      viewport.addEventListener('pointerdown', (e)=>{ dragging=true; startX=e.clientX; track.style.transition='none'; });
+      viewport.addEventListener('pointermove', (e)=>{ if(!dragging) return; const dx=e.clientX-startX; track.style.transform=`translateX(${-index*step+dx}px)`; });
+      viewport.addEventListener('pointerup', (e)=>{ if(!dragging) return; dragging=false; track.style.transition=''; const dx=e.clientX-startX; if(Math.abs(dx)>50) snap(index+(dx<0?1:-1)); else snap(index); });
+
+      measure();
+      window.addEventListener('resize', debounce(measure, 150));
+    }
+
+    /* ---------- Under-Hero Gallery CTA (dynamic) ---------- */
+    function setupGalleryCTA(){
+      const btn = document.getElementById('galleryBtn');
+      const thumbs = document.getElementById('galleryThumbs');
+
+      if (btn) btn.href = GALLERY_ROUTE;
+
+      if (thumbs){
+        thumbs.innerHTML = '';
+        // Show up to 8 latest thumbs
+        REELS.slice(0,8).forEach(r=>{
+          const t = document.createElement('div');
+          t.className = 'thumb';
+          t.innerHTML = `<img src="${r.src}" alt="${r.label}" loading="lazy" decoding="async">`;
+          thumbs.appendChild(t);
+        });
+      }
+    }
+
+    /* ---------- Init ---------- */
+    document.addEventListener('DOMContentLoaded', () => {
+      setYear();
+      renderPopular();
+      renderReels();
+      setupMobileMenu();
+      setupHeroCard();
+      setupReels();
+      setupReveals();
+      setupGalleryCTA();
+    });
+  </script>
+</body>
+</html>

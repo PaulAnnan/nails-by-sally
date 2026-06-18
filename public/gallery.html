@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Nails By Sally — Gallery</title>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================= Theme (matches site) ================= */
+    :root{
+      --pink:#ff7bbd; --pink2:#f14aa6; --violet:#7a5cff; --violet2:#5a38ff;
+      --ink:#0f172a; --muted:#778097; --muted2:#98a2b3;
+      --panel:#ffffff; --border:#ecebf2;
+      --radius:20px; --radius-xl:28px; --shadow:0 18px 50px rgba(15,23,42,.12);
+      --container:clamp(1040px, 86vw, 1280px);
+      --grad:linear-gradient(90deg,var(--pink2),var(--violet));
+      --glass:rgba(255,255,255,.64);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
+      color:var(--ink);
+      background:#0f1020;
+      overflow-x:hidden;
+      min-height:100vh;
+    }
+    a{text-decoration:none;color:inherit}
+    ::selection{background:#fbe1f2}
+
+    /* Background */
+    .bg{position:fixed; inset:0; z-index:-2;
+      background:
+        radial-gradient(60vw 60vw at -10% -10%, #20123b 0%, transparent 60%),
+        radial-gradient(60vw 60vw at 110% 0%, #2a1043 0%, transparent 60%),
+        radial-gradient(70vw 70vw at 50% 120%, #1a1735 0%, #0f1020 70%);
+    }
+    .blob{position:absolute; border-radius:50%; opacity:.25; mix-blend-mode:screen}
+    .blob.b1{width:54vw;height:54vw; background:radial-gradient(circle at 30% 30%, #ff8ac7, transparent 60%); left:-6vw; top:-10vw;}
+    .blob.b2{width:46vw;height:46vw; background:radial-gradient(circle at 40% 40%, #ffd6e8, transparent 55%); right:-10vw; top:-8vw;}
+
+    /* Layout */
+    .container{max-width:var(--container); margin:0 auto; padding:24px}
+
+    /* Header (matches home) */
+    .site-header{position:sticky; top:0; z-index:50; background:rgba(16,16,34,.85); backdrop-filter:blur(8px); border-bottom:1px solid rgba(255,255,255,.08)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:16px;color:#fff}
+    .brand-logo{position:relative;width:70px;height:70px;border-radius:20px;display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,0,0,.35);overflow:hidden;flex-shrink:0;background:linear-gradient(90deg,var(--pink2),var(--violet2));transition:transform .2s ease}
+    .brand-logo:hover{transform:translateY(-1px)}
+    .brand-logo img{width:52px;height:52px;object-fit:contain;position:relative;z-index:1}
+    .brand-sep{width:1px;height:46px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.5),rgba(255,255,255,.08));border-radius:2px}
+    .brand-text{display:flex;flex-direction:column;line-height:1.12}
+    .brand-text strong{font-size:22px;font-weight:900;letter-spacing:.3px;color:#fff;white-space:nowrap}
+    .brand-text small{font-size:12px;color:#cbd5e1;margin-top:6px;letter-spacing:.2em;text-transform:uppercase}
+    .nav{display:flex;gap:26px;align-items:center}
+    .nav-link.active{color:var(--pink);opacity:1}
+    .nav-link{font-weight:600;opacity:.92;color:#e2e8f0;transition:opacity .2s ease, transform .2s ease}
+    .nav-link:hover{opacity:1;transform:translateY(-1px)}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.14);font-weight:800;font-size:14px;color:#0b0b10;background:#ffffff;box-shadow:0 12px 28px rgba(0,0,0,.18);cursor:pointer}
+    .btn-primary{border:none;color:#fff;background:var(--grad);box-shadow:0 14px 32px rgba(90,56,255,.45)}
+
+    /* Page Title */
+    .title-wrap{padding:28px 0 10px;text-align:center}
+    .h1{font-size:clamp(38px,4.6vw,54px);line-height:1.04;margin:0 0 10px;font-weight:900;color:#fff}
+    .accent{display:inline-block;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{color:#cbd5e1;max-width:720px;margin:0 auto}
+
+    /* Controls */
+    .controls{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px auto}
+    .chip{padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#f0eaff;font-weight:700;cursor:pointer;transition:.2s}
+    .chip.active,.chip:hover{background:var(--grad);border-color:transparent}
+    .search{display:flex;gap:10px;justify-content:center;margin:10px auto 22px}
+    .search input{min-width:280px;max-width:560px;width:60vw;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#fff}
+    .tools{display:flex;gap:10px;justify-content:center;margin-top:-6px}
+
+    /* Masonry Grid */
+    .masonry{
+      column-count:4;
+      column-gap:16px;
+    }
+    @media (max-width:1200px){ .masonry{column-count:3} }
+    @media (max-width:900px){ .masonry{column-count:2} }
+    @media (max-width:560px){ .masonry{column-count:1} }
+
+    .card{
+      break-inside:avoid;
+      display:block;
+      margin:0 0 16px;
+      border-radius:20px;
+      overflow:hidden;
+      position:relative;
+      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:0 10px 40px rgba(0,0,0,.18);
+      transform:translateY(14px);
+      opacity:0;
+      transition:transform .5s cubic-bezier(.22,1,.36,1), opacity .5s ease, border-color .2s;
+    }
+    .card.in{opacity:1;transform:none}
+    .card figure{position:relative;margin:0;overflow:hidden}
+    .card img{width:100%; height:auto; display:block; transform:scale(1.01); transition:transform .6s ease}
+    .card:hover img{transform:scale(1.06)}
+    .shine::after{
+      content:""; position:absolute; inset:auto -60% 10% -60%;
+      height:120%; transform:rotate(12deg) translateY(60%);
+      background:linear-gradient(90deg, rgba(255,255,255,.12), transparent 35%, rgba(255,255,255,.12));
+      transition:transform .6s ease;
+      pointer-events:none;
+    }
+    .card:hover .shine::after{transform:rotate(12deg) translateY(-20%)}
+
+    .badge{position:absolute;left:12px;top:12px;z-index:2;font-size:12px;background:var(--grad);color:#fff;border-radius:999px;padding:4px 10px}
+
+    .meta{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:12px 14px;color:#e2e8f0;font-size:14px
+    }
+    .title{font-weight:900;color:#fff}
+    .tags{opacity:.85;font-size:12px}
+    .like{border:none;background:rgba(255,255,255,.1);color:#fff;border-radius:10px;padding:8px 10px;cursor:pointer}
+    .like.liked{background:var(--grad)}
+
+    /* Lightbox */
+    .lightbox{
+      position:fixed; inset:0; z-index:1000; display:none; align-items:center; justify-content:center;
+      background:rgba(0,0,0,.85); backdrop-filter:blur(4px);
+      padding:20px;
+    }
+    .lightbox.open{display:flex}
+    .lb-img-wrap{position:relative; max-width:min(92vw,1200px); max-height:86vh}
+    .lb-img{max-width:100%; max-height:86vh; object-fit:contain; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.5); transition:transform .2s ease}
+    .lb-meta{position:absolute; left:0; right:0; bottom:-52px; display:flex; align-items:center; justify-content:space-between; gap:12px; color:#fff}
+    .lb-title{font-weight:800}
+    .lb-tags{opacity:.9; font-size:14px}
+    .lb-close,.lb-prev,.lb-next{
+      position:fixed; top:20px; width:44px; height:44px; display:grid; place-items:center;
+      border-radius:12px; border:1px solid rgba(255,255,255,.2); color:#fff; background:rgba(0,0,0,.35); cursor:pointer
+    }
+    .lb-close{right:20px}
+    .lb-prev{left:20px; top:50%; transform:translateY(-50%)}
+    .lb-next{right:20px; top:50%; transform:translateY(-50%)}
+    .lb-close:hover,.lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.12)}
+    .hint{position:fixed; bottom:18px; left:50%; transform:translateX(-50%); color:#e2e8f0; font-size:13px; opacity:.8}
+
+    /* Reveal utility (matches home) */
+    .reveal{opacity:0; transform:translateY(20px); transition:opacity .45s ease, transform .45s ease; transition-delay:var(--d,0ms)}
+    .reveal.in{opacity:1; transform:none}
+
+    /* Responsive tweaks */
+    @media (max-width:780px){
+      .brand-text small,.brand-sep{display:none}
+      .brand-logo{width:60px;height:60px;border-radius:18px}
+      .brand-logo img{width:48px;height:48px}
+    }
+  
+    /* ===== IMPROVED MOBILE LAYOUT ===== */
+    @media (max-width:980px){
+      .main-grid, .booking-grid{grid-template-columns:1fr;gap:24px}
+      .contact-sidebar, .services-grid, .gallery-grid, .stats-section{grid-template-columns:1fr 1fr;gap:16px}
+      .story-section{grid-template-columns:1fr;gap:32px}
+      .artist-profile{flex-direction:column;text-align:center}
+    }
+    
+    @media (max-width:780px){
+      /* Header */
+      .site-header{backdrop-filter:none}
+      .brand{gap:12px}
+      .brand-logo{width:60px;height:60px;border-radius:18px}
+      .brand-logo img{width:46px;height:46px}
+      .brand-text strong{font-size:18px}
+      .brand-text small, .brand-sep{display:none}
+      .nav{display:none}
+      .menu-btn{display:block}
+      
+      /* Layout */
+      .container{padding-inline:18px}
+      .section{padding:24px 0}
+      .hero-section, .page-header{padding:28px 0 20px}
+      
+      /* Typography */
+      .h1, .page-title{font-size:28px;margin-bottom:14px}
+      .h2, .form-title, .section-title{font-size:24px;margin-bottom:16px}
+      .h3{font-size:20px}
+      .lead, .page-subtitle{font-size:15px;line-height:1.5}
+      
+      /* Forms */
+      .form-row{grid-template-columns:1fr;gap:12px}
+      .contact-form, .booking-form{padding:24px;border-radius:18px}
+      input, textarea, select{padding:11px 14px;font-size:14px;border-radius:10px}
+      .submit-btn, .btn{padding:12px 20px;font-size:14px}
+      
+      /* Cards & Grids */
+      .contact-sidebar, .services-grid, .gallery-grid, .values-grid{grid-template-columns:1fr;gap:14px}
+      .info-card, .service-card, .gallery-item, .value-card, .stat-card{padding:20px;border-radius:18px}
+      .info-icon, .service-icon{width:36px;height:36px;font-size:14px}
+      .stat-icon{width:44px;height:44px;font-size:22px}
+      
+      /* Story & Images */
+      .story-image{border-radius:22px}
+      .story-image img, .gallery-item img{height:auto;max-height:320px}
+      .experience-badge{position:static;margin-top:16px;display:inline-block}
+      
+      /* Stats */
+      .stats-section{grid-template-columns:1fr 1fr;gap:14px}
+      .stat-card{padding:20px 16px}
+      .stat-number{font-size:26px}
+      .stat-label{font-size:13px}
+      
+      /* Artist section */
+      .artist-section{padding:32px 20px;border-radius:22px}
+      .artist-profile{padding:24px 20px;gap:20px}
+      .artist-photo{width:100px;height:100px;border-width:3px}
+      .artist-info{text-align:center}
+      .artist-badges{justify-content:center;gap:10px}
+      .artist-badge{font-size:11px;padding:5px 10px}
+      
+      /* CTA */
+      .cta-section, .cta{padding:32px 20px;border-radius:20px;margin:32px 0}
+      .cta-title{font-size:24px;margin-bottom:10px}
+      .cta-text, .cta-sub{font-size:14px;margin-bottom:20px}
+      .cta-btn{padding:12px 24px;font-size:15px}
+      
+      /* Admin/Booking specific */
+      .calendar-grid{grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));gap:10px}
+      .time-slot{padding:10px 14px;font-size:13px}
+      .card{padding:20px;border-radius:20px}
+      .wrap{padding:24px 16px}
+      
+      /* Footer */
+      .footer-grid{grid-template-columns:1fr;gap:28px;padding:28px 0}
+      .footer-brand{padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.12)}
+      .footer-brand .brand-logo{width:46px;height:46px}
+      .footer-brand .brand-logo img{width:30px;height:30px}
+      .foot-title{font-size:16px;margin-bottom:10px}
+      .foot-list li{font-size:14px;margin:8px 0}
+      .copy-row{padding:16px 0;font-size:13px;text-align:center}
+    }
+    
+    @media (max-width:640px){
+      .container{padding-inline:16px}
+      .h1, .page-title{font-size:26px}
+      .page-header{padding:24px 0 18px}
+      .hero-section{padding:24px 0 18px}
+      .stats-section, .gallery-grid{grid-template-columns:1fr;gap:12px}
+      .story-image img{height:280px}
+      .contact-form, .booking-form{padding:20px}
+      .calendar-grid{grid-template-columns:repeat(auto-fill, minmax(120px, 1fr))}
+      .blob{opacity:.15}
+    }
+
+  </style>
+</head>
+<body>
+  <div class="bg"><div class="blob b1"></div><div class="blob b2"></div></div>
+
+  <!-- HEADER -->
+  <header class="site-header reveal">
+    <div class="container header-inner">
+      <a href="home.html" class="brand" aria-label="Nails By Sally home">
+        <span class="brand-logo" aria-hidden="true">
+          <img src="sffsfs.png" alt="Nails By Sally logo" loading="eager" decoding="async"/>
+        </span>
+        <span class="brand-sep" aria-hidden="true"></span>
+        <div class="brand-text">
+          <strong>Nails By Sally</strong>
+          <small>Nail Studio</small>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a class="nav-link" href="home.html">Home</a>
+        <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link btn btn-primary" href="booking.html">Book Now</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- TITLE -->
+  <section class="container title-wrap">
+    <h1 class="h1 reveal" style="--d:60ms">Our <span class="accent">Gallery</span></h1>
+    <p class="lead reveal" style="--d:140ms">Swipe, filter, and explore our favorite sets — from sleek classics to bold art.</p>
+  </section>
+
+  <!-- CONTROLS -->
+  <section class="container">
+    <div class="controls reveal" style="--d:180ms">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="manicure">Manicure</button>
+      <button class="chip" data-filter="acrylic">Acrylic</button>
+      <button class="chip" data-filter="art">Art</button>
+      <button class="chip" data-filter="pedicure">Pedicure</button>
+    </div>
+
+    <div class="search reveal" style="--d:220ms">
+      <input id="q" type="search" placeholder="Search looks (e.g. chrome, french, ombré)…" />
+    </div>
+
+    <div class="tools reveal" style="--d:260ms">
+      <button id="shuffleBtn" class="btn">Shuffle ✨</button>
+      <button id="likeFilterBtn" class="btn">Only Likes ❤️</button>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <main class="container">
+    <div id="grid" class="masonry" aria-live="polite"></div>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+    <button class="lb-prev" id="lbPrev" aria-label="Previous">❮</button>
+    <div class="lb-img-wrap">
+      <img id="lbImg" class="lb-img" alt="Gallery image" />
+      <div class="lb-meta">
+        <div>
+          <div id="lbTitle" class="lb-title"></div>
+          <div id="lbTags" class="lb-tags"></div>
+        </div>
+      </div>
+    </div>
+    <button class="lb-next" id="lbNext" aria-label="Next">❯</button>
+    <div class="hint">Tip: use ← → keys, click image to advance, double-click to zoom</div>
+  </div>
+
+  <script>
+    /* -------- Data (replace src with your images) -------- */
+    const ITEMS = [
+      {src:"./Images/Nails2.png",   w:800,h:1000, title:"Cateye butterfly set",  tags:["acrylic","cateye","french","art"]},
+      {src:"./Images/Nails4.png",   w:900,h:1125, title:"3D nail art set",           tags:["3D","art","acrylic"]},
+      {src:"./Images/Nails5.png",   w:800,h:1000, title:"Blue french summer set",    tags:["gel powder","french"]},
+      {src:"./Images/Nails7.png",   w:900,h:1125, title:"Ombre summer set",        tags:["gel powder","ombre","art"]},
+      {src:"./Images/Nails8.png",   w:900,h:1125, title:"tropicale flower set",        tags:["art","french","acrylic"]},
+      {src:"./Images/Nails3.png",   w:900,h:1125, title:"Cherry heart french set",   tags:["acrylic","french","art"]},
+      {src:"./Images/Nails9.png",   w:900,h:1125, title:"elegant silver set",   tags:["Acrylic","art","silver"]},
+      {src:"./Images/Nails10.png",   w:900,h:1125, title:"Marbel silver set",   tags:["acrylic","marbel","art"]},
+      {src:"./Images/Nails11.png",   w:900,h:1125, title:"isolated chrome set",   tags:["acrylic","chrome","art"]},
+      {src:"./Images/Nails12.png",   w:900,h:1125, title:"Duck Nail art set",   tags:["acrylic","art","duck set"]},
+      {src:"./Images/Nails13.png",   w:900,h:1125, title:"Bling french boujie set",   tags:["Acrlic","french","bling"]},
+      {src:"./Images/Nails14.png",   w:900,h:1125, title:"short bloom flowerm set",   tags:["acrylic","art","blooming gel"]},
+      {src:"./Images/Nails15.png",   w:900,h:1125, title:"Christam 3D set",   tags:["acrylic","3d","art","christmas"]},
+      {src:"./Images/Nails16.png",   w:900,h:1125, title:"Chrome cateye isolatiion set",   tags:["Acrylic","chrome","cateye"]},
+      {src:"./Images/Nails17.png",   w:900,h:1125, title:"Bubble gum 3d set",   tags:["Acrlyic","3d","art"]},
+    ];
+
+    /* -------- State -------- */
+    let currentFilter = "all";
+    let query = "";
+    let onlyLikes = false;
+    let liked = new Set(JSON.parse(localStorage.getItem("nbs_likes")||"[]"));
+    let view = [...ITEMS];
+    let currentIndex = 0;
+
+    /* -------- Helpers -------- */
+    const debounce = (fn,ms)=>{let t; return (...a)=>{clearTimeout(t); t=setTimeout(()=>fn(...a),ms)}};
+    function saveLikes(){ localStorage.setItem("nbs_likes", JSON.stringify([...liked])); }
+    function tagString(tags){ return tags.map(t=>`#${t}`).join(" "); }
+
+    /* -------- Render Cards -------- */
+    function cardTemplate(item,i){
+      const wrap = document.createElement("article");
+      wrap.className = "card reveal";
+      wrap.style.setProperty("--d", (60 + (i%8)*40) + "ms");
+
+      // dataset for filtering
+      wrap.dataset.tags = item.tags.join(" ");
+      wrap.dataset.index = i;
+
+      wrap.innerHTML = `
+        <figure class="shine">
+          <span class="badge">${item.tags[0]}</span>
+          <img 
+            src="${item.src}" 
+            alt="${item.title}" 
+            loading="lazy" 
+            decoding="async"
+            width="${item.w}" height="${item.h}">
+        </figure>
+        <div class="meta">
+          <div>
+            <div class="title">${item.title}</div>
+            <div class="tags">${tagString(item.tags)}</div>
+          </div>
+          <button class="like ${liked.has(item.src) ? "liked":""}" title="Like">❤️</button>
+        </div>
+      `;
+
+      const img = wrap.querySelector("img");
+      img.addEventListener("click", ()=>openLightbox(i));
+      wrap.querySelector(".like").addEventListener("click",(e)=>{
+        e.stopPropagation();
+        if(liked.has(item.src)){ liked.delete(item.src); e.currentTarget.classList.remove("liked"); }
+        else { liked.add(item.src); e.currentTarget.classList.add("liked"); }
+        saveLikes();
+        if(onlyLikes) applyFilters(); // live update when viewing only likes
+      });
+
+      return wrap;
+    }
+
+    function render(){
+      const grid = document.getElementById("grid");
+      grid.innerHTML = "";
+      view.forEach((it,i)=> grid.appendChild(cardTemplate(it,i)));
+      setupReveals();
+    }
+
+    /* -------- Filtering / Search -------- */
+    function applyFilters(){
+      view = ITEMS.filter(it=>{
+        const byFilter = (currentFilter==="all") || it.tags.includes(currentFilter);
+        const byQuery  = !query || (it.title.toLowerCase().includes(query) || it.tags.join(" ").includes(query));
+        const byLikes  = !onlyLikes || liked.has(it.src);
+        return byFilter && byQuery && byLikes;
+      });
+      render();
+    }
+
+    /* -------- Shuffle -------- */
+    function shuffle(arr){
+      for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; }
+      return arr;
+    }
+
+    /* -------- Reveal on view (matches site) -------- */
+    function setupReveals(){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+        });
+      }, {threshold:0.1, rootMargin:"120px"});
+      document.querySelectorAll(".reveal, .card").forEach(el=>io.observe(el));
+    }
+
+    /* -------- Lightbox -------- */
+    const lb = {
+      el: document.getElementById("lightbox"),
+      img: document.getElementById("lbImg"),
+      title: document.getElementById("lbTitle"),
+      tags: document.getElementById("lbTags"),
+      closeBtn: document.getElementById("lbClose"),
+      prevBtn: document.getElementById("lbPrev"),
+      nextBtn: document.getElementById("lbNext"),
+      zoom: 1
+    };
+
+    function openLightbox(i){
+      currentIndex = i;
+      const item = view[currentIndex];
+      if(!item) return;
+      lb.img.src = item.src;
+      lb.img.alt = item.title;
+      lb.title.textContent = item.title;
+      lb.tags.textContent = tagString(item.tags);
+      lb.el.classList.add("open");
+      lb.el.setAttribute("aria-hidden","false");
+      lb.zoom = 1; lb.img.style.transform = "scale(1)";
+    }
+    function closeLightbox(){
+      lb.el.classList.remove("open");
+      lb.el.setAttribute("aria-hidden","true");
+    }
+    function next(){ if(!view.length) return; currentIndex = (currentIndex+1)%view.length; openLightbox(currentIndex); }
+    function prev(){ if(!view.length) return; currentIndex = (currentIndex-1+view.length)%view.length; openLightbox(currentIndex); }
+
+    // Events
+    lb.closeBtn.addEventListener("click", closeLightbox);
+    lb.nextBtn.addEventListener("click", next);
+    lb.prevBtn.addEventListener("click", prev);
+    lb.img.addEventListener("click", next);
+    lb.img.addEventListener("dblclick", ()=>{
+      lb.zoom = lb.zoom === 1 ? 1.7 : 1;
+      lb.img.style.transform = `scale(${lb.zoom})`;
+    });
+    lb.el.addEventListener("click",(e)=>{ if(e.target===lb.el) closeLightbox(); });
+
+    // Keyboard
+    document.addEventListener("keydown",(e)=>{
+      if(!lb.el.classList.contains("open")) return;
+      if(e.key==="Escape") closeLightbox();
+      if(e.key==="ArrowRight") next();
+      if(e.key==="ArrowLeft") prev();
+    });
+
+    // Touch swipe
+    (function setupSwipe(){
+      let sx=0, sy=0;
+      lb.img.addEventListener("touchstart",(e)=>{ const t=e.touches[0]; sx=t.clientX; sy=t.clientY; }, {passive:true});
+      lb.img.addEventListener("touchend",(e)=>{
+        const t=e.changedTouches[0]; const dx=t.clientX-sx, dy=t.clientY-sy;
+        if(Math.abs(dx)>40 && Math.abs(dy)<60){ dx<0 ? next() : prev(); }
+      }, {passive:true});
+    })();
+
+    /* -------- Controls wiring -------- */
+    document.querySelectorAll(".chip").forEach(chip=>{
+      chip.addEventListener("click", ()=>{
+        document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
+        chip.classList.add("active");
+        currentFilter = chip.dataset.filter;
+        applyFilters();
+      });
+    });
+
+    document.getElementById("q").addEventListener("input", debounce((e)=>{
+      query = e.target.value.trim().toLowerCase();
+      applyFilters();
+    }, 200));
+
+    document.getElementById("shuffleBtn").addEventListener("click", ()=>{
+      shuffle(ITEMS);
+      applyFilters();
+    });
+
+    document.getElementById("likeFilterBtn").addEventListener("click", (e)=>{
+      onlyLikes = !onlyLikes;
+      e.currentTarget.textContent = onlyLikes ? "Show All" : "Only Likes ❤️";
+      applyFilters();
+    });
+
+    /* -------- Init -------- */
+    document.addEventListener("DOMContentLoaded", ()=>{
+      applyFilters();
+      // header reveal
+      document.querySelector(".site-header").classList.add("in");
+    });
+  </script>
+</body>
+</html>
