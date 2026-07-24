@@ -1,0 +1,98 @@
+/* Final typography cleanup: remove the raised 3D serif look from site headings. */
+:root {
+  --clean-display: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+body :is(
+  .values-title,
+  .artist-title,
+  .form-title,
+  .section-title,
+  .cta-title,
+  .services-cta h2,
+  .story-content h2,
+  .catalog-heading h2,
+  .services-reference .catalog-heading h2,
+  .services-reference .cta-copy h2,
+  .cta-copy h2,
+  .contact-cta h2,
+  .booking-cta h2,
+  .page-header h1,
+  .title-wrap .h1,
+  .hero-section .h1
+) {
+  font-family: var(--clean-display) !important;
+  font-style: normal !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.01em !important;
+  line-height: 0.96 !important;
+  text-transform: uppercase !important;
+  text-shadow: none !important;
+}
+
+body :is(
+  .values-title,
+  .artist-title,
+  .form-title,
+  .section-title,
+  .cta-title,
+  .story-content h2
+) {
+  color: #ffe5ef !important;
+  filter: drop-shadow(0 0 16px rgba(255, 195, 220, .16));
+}
+
+body :is(.values-title, .artist-title)::before,
+body :is(.values-title, .artist-title)::after,
+body :is(.story-content h2)::before,
+body :is(.story-content h2)::after {
+  text-shadow: none !important;
+}
+
+body :is(.values-title em, .artist-title em, .services-reference .cta-copy h2 em) {
+  font-family: inherit !important;
+  font-style: normal !important;
+  font-weight: inherit !important;
+  color: #ffc3dc !important;
+  text-shadow: none !important;
+}
+
+body :is(.artist-name, .brand-text strong, .site-header .brand-text strong) {
+  font-family: var(--clean-display) !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.03em !important;
+  text-shadow: none !important;
+}
+
+body :is(.value-title, .stat-number, .service-card h3, .svc-card h3, .gallery-card h3) {
+  font-family: var(--clean-display) !important;
+  text-shadow: none !important;
+}
+
+@media (max-width: 767px) {
+  body :is(.values-title, .artist-title) {
+    font-size: clamp(28px, 10.4vw, 44px) !important;
+    line-height: 0.98 !important;
+    letter-spacing: 0.01em !important;
+  }
+
+  body .artist-title {
+    max-width: 11ch !important;
+  }
+
+  body .values-title {
+    max-width: 13ch !important;
+    margin-inline: auto !important;
+    text-align: center !important;
+  }
+
+  body :is(.story-content h2, .form-title, .section-title, .cta-title) {
+    font-size: clamp(26px, 9vw, 38px) !important;
+    line-height: 1 !important;
+  }
+
+  body :is(.brand-text strong, .site-header .brand-text strong) {
+    letter-spacing: 0.02em !important;
+    text-shadow: none !important;
+  }
+}

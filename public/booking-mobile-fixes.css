@@ -1,0 +1,241 @@
+﻿/* Booking page mobile refinements. Loaded after shared page styles. */
+@media (max-width: 767px) {
+  body > .container {
+    width: 100% !important;
+    max-width: none !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    margin-inline: 0 !important;
+  }
+
+  body > .container > .page-title {
+    width: 100vw !important;
+    max-width: none !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    padding: 34px 28px 32px !important;
+    overflow: hidden !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, .28), rgba(0, 0, 0, .76) 58%, rgba(0, 0, 0, .96)),
+      radial-gradient(ellipse at -6% 84%, rgba(255, 195, 220, .82) 0 18%, transparent 19%),
+      radial-gradient(circle at 88% 12%, rgba(255, 195, 220, .22), transparent 34%),
+      linear-gradient(180deg, #1c1218 0%, #050505 78%) !important;
+  }
+
+  body > .container > .page-title::before {
+    right: -14px !important;
+    top: 16px !important;
+    color: rgba(255, 211, 227, .2) !important;
+  }
+
+  body > .container > .page-title h1 {
+    max-width: min(520px, 88vw) !important;
+    margin-bottom: 18px !important;
+    font-size: clamp(62px, 16vw, 96px) !important;
+    line-height: .78 !important;
+    text-shadow:
+      0 0 10px rgba(255, 160, 198, .74),
+      0 0 28px rgba(255, 116, 175, .34) !important;
+  }
+
+  body > .container > .page-title p {
+    position: relative !important;
+    z-index: 2 !important;
+    width: min(440px, calc(100vw - 56px)) !important;
+    max-width: none !important;
+    padding: 11px 13px !important;
+    color: #fff8fb !important;
+    border: 1px solid rgba(255, 195, 220, .26) !important;
+    border-left: 3px solid #ffc3dc !important;
+    border-radius: 10px !important;
+    background: rgba(0, 0, 0, .52) !important;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, .32) !important;
+    font-size: clamp(13px, 3vw, 16px) !important;
+    font-weight: 850 !important;
+    line-height: 1.35 !important;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, .85) !important;
+  }
+}
+
+@media (min-width: 620px) and (max-width: 767px) {
+  body > .container {
+    width: 100% !important;
+    max-width: none !important;
+    box-shadow: none !important;
+  }
+
+  body > .container > .page-title {
+    width: 100vw !important;
+  }
+}
+
+/* Remove the dead top band and let booking hero art bleed into the form section. */
+@media (max-width: 767px) {
+  body > .container {
+    padding-top: 0 !important;
+  }
+
+  body > .container > .page-title {
+    margin-top: 0 !important;
+    padding-top: 20px !important;
+    padding-bottom: 46px !important;
+    overflow: visible !important;
+    border-radius: 0 !important;
+  }
+
+  body > .container > .page-title::after {
+    content: "";
+    position: absolute;
+    left: -54px;
+    bottom: -42px;
+    width: 210px;
+    height: 210px;
+    z-index: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 195, 220, .72), rgba(255, 195, 220, .38) 44%, transparent 68%);
+    filter: blur(.4px);
+    pointer-events: none;
+  }
+
+  body > .container > .page-title h1,
+  body > .container > .page-title p {
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  body > .container > .page-title p {
+    margin-bottom: 0 !important;
+  }
+
+  body > .container > .page-title + form {
+    position: relative !important;
+    z-index: 1 !important;
+    margin-top: -18px !important;
+  }
+
+  body > .container > .page-title + form .form-section:first-child {
+    margin-top: 0 !important;
+  }
+}
+
+/* Carry the hero decoration language through the booking body. */
+@media (max-width: 767px) {
+  #bookingForm {
+    position: relative !important;
+    isolation: isolate !important;
+  }
+
+  #bookingForm::before,
+  #bookingForm::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    border-radius: 999px;
+    pointer-events: none;
+  }
+
+  #bookingForm::before {
+    top: 420px;
+    right: -72px;
+    width: 190px;
+    height: 190px;
+    background: radial-gradient(circle, rgba(255, 195, 220, .28), rgba(255, 195, 220, .11) 44%, transparent 70%);
+  }
+
+  #bookingForm::after {
+    top: 1040px;
+    left: -88px;
+    width: 230px;
+    height: 230px;
+    background: radial-gradient(circle, rgba(255, 195, 220, .32), rgba(255, 195, 220, .12) 42%, transparent 70%);
+  }
+
+  .form-section {
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  .form-section::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 118px;
+    height: 118px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 195, 220, .2), rgba(255, 195, 220, .06) 48%, transparent 72%);
+    pointer-events: none;
+  }
+
+  .form-section:nth-of-type(odd)::before {
+    right: -38px;
+    top: -28px;
+  }
+
+  .form-section:nth-of-type(even)::before {
+    left: -42px;
+    bottom: -34px;
+  }
+
+  .form-section::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    width: 58px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 195, 220, .55), transparent);
+    pointer-events: none;
+  }
+
+  .form-section:nth-of-type(odd)::after {
+    right: 18px;
+    top: 20px;
+    transform: rotate(-8deg);
+  }
+
+  .form-section:nth-of-type(even)::after {
+    left: 20px;
+    bottom: 22px;
+    transform: rotate(8deg);
+  }
+
+  .section-header,
+  .form-group,
+  .service-grid,
+  .date-time-grid,
+  .payment-summary,
+  .submit-section {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+}
+
+/* Final hamburger fix: hide the original text glyph and center one CSS icon. */
+#menuBtn.menu-btn,
+button.menu-btn {
+  position: relative !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: hidden !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-indent: -999px !important;
+}
+
+#menuBtn.menu-btn::before,
+button.menu-btn::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  width: 18px !important;
+  height: 2px !important;
+  margin: 0 !important;
+  border-radius: 999px !important;
+  background: #ffc3dc !important;
+  box-shadow: 0 -6px 0 #ffc3dc, 0 6px 0 #ffc3dc !important;
+  transform: translate(-50%, -50%) !important;
+  text-indent: 0 !important;
+}

@@ -1,0 +1,463 @@
+
+/* Desktop hero polish for booking and contact pages. Mobile stays handled by page-specific mobile fixes. */
+@media (min-width: 901px) {
+  body:has(#bookingForm),
+  body:has(#contactForm) {
+    background:
+      radial-gradient(circle at 14% 22%, rgba(255, 177, 207, .08), transparent 340px),
+      radial-gradient(circle at 88% 18%, rgba(255, 177, 207, .06), transparent 360px),
+      #030303 !important;
+  }
+
+  body:has(#bookingForm) > .container,
+  body:has(#contactForm) > .container {
+    width: min(calc(100% - 112px), 1520px) !important;
+    max-width: 1520px !important;
+    padding: 54px 0 96px !important;
+    position: relative !important;
+  }
+
+  body:has(#bookingForm) > .container::before,
+  body:has(#contactForm) > .container::before {
+    content: "";
+    position: absolute;
+    inset: 36px -42px auto auto;
+    width: 460px;
+    height: 460px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 177, 207, .13), rgba(255, 177, 207, .04) 46%, transparent 68%);
+    filter: blur(2px);
+    pointer-events: none;
+  }
+
+  body:has(#bookingForm) .page-title,
+  body:has(#contactForm) .hero-section {
+    position: relative !important;
+    isolation: isolate !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: clamp(500px, 36vw, 620px) !important;
+    margin: 0 0 52px !important;
+    padding: clamp(58px, 5.2vw, 92px) clamp(52px, 6vw, 96px) !important;
+    display: grid !important;
+    align-content: center !important;
+    text-align: left !important;
+    overflow: visible !important;
+    border: 1px solid rgba(255, 177, 207, .22) !important;
+    border-radius: 26px !important;
+    background:
+      radial-gradient(circle at 4% 76%, rgba(255, 177, 207, .28), transparent 250px),
+      radial-gradient(circle at 78% 36%, rgba(255, 177, 207, .13), transparent 320px),
+      linear-gradient(135deg, rgba(28, 12, 18, .9), rgba(3, 3, 3, .96) 44%, rgba(17, 6, 10, .82)) !important;
+    box-shadow: 0 34px 90px rgba(0, 0, 0, .5), inset 0 1px 0 rgba(255,255,255,.06) !important;
+  }
+
+  body:has(#bookingForm) .page-title::before,
+  body:has(#contactForm) .hero-section::before,
+  body:has(#bookingForm) .page-title::after,
+  body:has(#contactForm) .hero-section::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    display: block !important;
+    pointer-events: none;
+  }
+
+  body:has(#bookingForm) .page-title::before,
+  body:has(#contactForm) .hero-section::before {
+    right: clamp(72px, 8vw, 142px) !important;
+    top: clamp(58px, 6vw, 94px) !important;
+    width: clamp(330px, 26vw, 470px) !important;
+    height: clamp(360px, 27vw, 500px) !important;
+    border: 2px solid rgba(255,255,255,.92) !important;
+    border-radius: 28px !important;
+    background-image: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.28)), url("Images/Nails8.png") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    transform: rotate(6deg) !important;
+    box-shadow: 0 32px 70px rgba(0,0,0,.62), 0 0 42px rgba(255, 159, 202, .16) !important;
+  }
+
+  body:has(#bookingForm) .page-title::after,
+  body:has(#contactForm) .hero-section::after {
+    right: clamp(330px, 31vw, 570px) !important;
+    bottom: clamp(42px, 5vw, 86px) !important;
+    width: clamp(210px, 18vw, 330px) !important;
+    height: clamp(220px, 18vw, 330px) !important;
+    border: 2px solid rgba(255,255,255,.92) !important;
+    border-radius: 24px !important;
+    background-image: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.22)), url("Images/Services/GelPolish.jpg") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    transform: rotate(-8deg) !important;
+    box-shadow: 0 26px 56px rgba(0,0,0,.56) !important;
+  }
+
+  body:has(#contactForm) .hero-section::before {
+    background-image: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.3)), url("Images/Nails16.png") !important;
+  }
+
+  body:has(#contactForm) .hero-section::after {
+    background-image: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.24)), url("Images/Services/NailArt.jpg") !important;
+  }
+
+  body:has(#bookingForm) .page-title h1,
+  body:has(#contactForm) .hero-section .h1 {
+    position: relative !important;
+    z-index: 2 !important;
+    max-width: min(780px, 55vw) !important;
+    margin: 0 !important;
+    color: #fff !important;
+    font-family: Inter, system-ui, sans-serif !important;
+    font-size: clamp(76px, 7.1vw, 138px) !important;
+    font-weight: 900 !important;
+    letter-spacing: -.045em !important;
+    line-height: .86 !important;
+    text-align: left !important;
+    text-transform: uppercase !important;
+    text-shadow: 0 0 28px rgba(255, 177, 207, .32), 0 16px 44px rgba(0,0,0,.7) !important;
+  }
+
+  body:has(#bookingForm) .page-title h1::before,
+  body:has(#contactForm) .hero-section .h1::before {
+    content: "WELCOME TO MY BOOKING SITE";
+    display: block;
+    margin: 0 0 16px 4px;
+    color: #ffd8e6;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: .48em;
+    line-height: 1.2;
+    text-shadow: none;
+  }
+
+  body:has(#contactForm) .hero-section .h1::before {
+    content: "CONTACT NAILS BY SALLY";
+  }
+
+  body:has(#bookingForm) .page-title h1::after,
+  body:has(#contactForm) .hero-section .h1::after {
+    content: "NBS";
+    position: absolute;
+    z-index: -1;
+    right: -38vw;
+    top: 2vw;
+    color: rgba(255, 214, 229, .12);
+    font-size: clamp(96px, 10vw, 190px);
+    letter-spacing: -.08em;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  body:has(#bookingForm) .page-title .accent,
+  body:has(#contactForm) .hero-section .accent {
+    color: #ffc2d8 !important;
+    text-shadow: 0 0 22px rgba(255, 177, 207, .55) !important;
+  }
+
+  body:has(#bookingForm) .page-title p,
+  body:has(#contactForm) .hero-section .lead {
+    position: relative !important;
+    z-index: 2 !important;
+    width: min(570px, 42vw) !important;
+    max-width: none !important;
+    margin: 28px 0 0 !important;
+    padding: 18px 20px !important;
+    color: #fff8fb !important;
+    border: 1px solid rgba(255, 177, 207, .36) !important;
+    border-left: 4px solid #ff9fca !important;
+    border-radius: 0 18px 18px 0 !important;
+    background: linear-gradient(90deg, rgba(0,0,0,.72), rgba(0,0,0,.36)) !important;
+    font-size: clamp(17px, 1.15vw, 22px) !important;
+    font-weight: 800 !important;
+    line-height: 1.45 !important;
+    text-align: left !important;
+    text-shadow: 0 2px 12px rgba(0,0,0,.75) !important;
+  }
+
+  body:has(#bookingForm) .page-title p::after,
+  body:has(#contactForm) .hero-section .lead::after {
+    content: "?";
+    position: absolute;
+    right: -58px;
+    bottom: -38px;
+    color: #ffc2d8;
+    font-size: 48px;
+    line-height: 1;
+    text-shadow: 0 0 22px rgba(255, 177, 207, .68);
+  }
+
+  body:has(#bookingForm) #bookingForm,
+  body:has(#contactForm) .main-grid,
+  body:has(#contactForm) .cta-section {
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  body:has(#bookingForm) #bookingForm::before,
+  body:has(#contactForm) .main-grid::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -46px -70px auto auto;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 177, 207, .1), transparent 68%);
+    pointer-events: none;
+  }
+
+  body:has(#bookingForm) .form-section,
+  body:has(#contactForm) .contact-form,
+  body:has(#contactForm) .info-card,
+  body:has(#contactForm) .cta-section {
+    border-color: rgba(255, 177, 207, .28) !important;
+    background:
+      radial-gradient(circle at 88% 0, rgba(255, 177, 207, .08), transparent 220px),
+      linear-gradient(180deg, rgba(20, 17, 19, .94), rgba(8, 8, 8, .96)) !important;
+    box-shadow: 0 28px 70px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.04) !important;
+  }
+
+  body:has(#bookingForm) .form-section:first-child {
+    margin-top: -10px !important;
+  }
+
+  body:has(#contactForm) .main-grid {
+    grid-template-columns: minmax(420px, .86fr) minmax(500px, 1.14fr) !important;
+    gap: 34px !important;
+    margin-top: -8px !important;
+  }
+
+  body:has(#contactForm) .contact-sidebar {
+    display: grid !important;
+    gap: 18px !important;
+  }
+
+  body:has(#contactForm) .info-icon {
+    width: 58px !important;
+    height: 58px !important;
+    display: grid !important;
+    place-items: center !important;
+    overflow: hidden !important;
+    border-radius: 16px !important;
+    color: transparent !important;
+    background:
+      linear-gradient(135deg, rgba(255, 143, 190, .95), rgba(255, 196, 217, .56)) !important;
+  }
+
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  body:has(#bookingForm) > .container,
+  body:has(#contactForm) > .container {
+    width: min(calc(100% - 56px), 1120px) !important;
+  }
+
+  body:has(#bookingForm) .page-title,
+  body:has(#contactForm) .hero-section {
+    min-height: 500px !important;
+    padding-inline: 46px !important;
+  }
+
+  body:has(#bookingForm) .page-title::before,
+  body:has(#contactForm) .hero-section::before {
+    right: 38px !important;
+    width: 300px !important;
+    height: 355px !important;
+    opacity: .78 !important;
+  }
+
+  body:has(#bookingForm) .page-title::after,
+  body:has(#contactForm) .hero-section::after {
+    right: 290px !important;
+    width: 190px !important;
+    height: 210px !important;
+    opacity: .82 !important;
+  }
+
+  body:has(#bookingForm) .page-title h1,
+  body:has(#contactForm) .hero-section .h1 {
+    max-width: 620px !important;
+    font-size: 76px !important;
+  }
+
+  body:has(#contactForm) .main-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Contact desktop sidebar content polish. */
+@media (min-width: 901px) {
+  body:has(#contactForm) .contact-sidebar {
+    grid-template-rows: auto 1fr !important;
+    gap: 22px !important;
+  }
+
+  body:has(#contactForm) .info-icon {
+    position: relative !important;
+    display: grid !important;
+    place-items: center !important;
+    overflow: hidden !important;
+    color: transparent !important;
+    font-size: 0 !important;
+  }
+
+  body:has(#contactForm) .info-icon::before,
+  body:has(#contactForm) .info-icon::after {
+    content: "" !important;
+    position: absolute !important;
+    pointer-events: none !important;
+  }
+
+  body:has(#contactForm) .info-icon-hours::before {
+    width: 26px !important;
+    height: 26px !important;
+    border: 2px solid #090909 !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    opacity: .95 !important;
+  }
+
+  body:has(#contactForm) .info-icon-hours::after {
+    width: 9px !important;
+    height: 11px !important;
+    border-left: 2px solid #090909 !important;
+    border-bottom: 2px solid #090909 !important;
+    transform: translate(3px, -2px) rotate(-8deg) !important;
+    transform-origin: left bottom !important;
+  }
+
+  body:has(#contactForm) .info-icon-message::before {
+    width: 28px !important;
+    height: 20px !important;
+    border: 2px solid #090909 !important;
+    border-radius: 7px !important;
+  }
+
+  body:has(#contactForm) .info-icon-message::after {
+    width: 12px !important;
+    height: 12px !important;
+    border-right: 2px solid #090909 !important;
+    border-bottom: 2px solid #090909 !important;
+    transform: translateY(-3px) rotate(45deg) !important;
+  }
+
+  body:has(#contactForm) .contact-guide-card {
+    min-height: 310px !important;
+    padding: 26px !important;
+    background:
+      radial-gradient(circle at 88% 12%, rgba(255,177,207,.16), transparent 210px),
+      linear-gradient(145deg, rgba(24,18,21,.96), rgba(5,5,5,.98)) !important;
+  }
+
+  body:has(#contactForm) .contact-guide-body {
+    display: grid !important;
+    grid-template-columns: 180px minmax(0, 1fr) !important;
+    gap: 22px !important;
+    align-items: stretch !important;
+  }
+
+  body:has(#contactForm) .contact-guide-photo {
+    position: relative !important;
+    min-height: 210px !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    border: 1.5px solid rgba(255,255,255,.85) !important;
+    border-radius: 20px !important;
+    transform: rotate(-4deg) !important;
+    box-shadow: 0 24px 50px rgba(0,0,0,.42) !important;
+  }
+
+  body:has(#contactForm) .contact-guide-photo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    filter: brightness(.88) saturate(.95) !important;
+  }
+
+  body:has(#contactForm) .contact-guide-copy {
+    display: grid !important;
+    align-content: center !important;
+    gap: 16px !important;
+    color: #f5edf1 !important;
+  }
+
+  body:has(#contactForm) .contact-guide-copy p {
+    margin: 0 !important;
+    max-width: 34ch !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    line-height: 1.45 !important;
+  }
+
+  body:has(#contactForm) .contact-guide-copy ul {
+    display: grid !important;
+    gap: 10px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+
+  body:has(#contactForm) .contact-guide-copy li {
+    position: relative !important;
+    padding-left: 20px !important;
+    color: #d9ced4 !important;
+    font-size: 13px !important;
+    line-height: 1.35 !important;
+  }
+
+  body:has(#contactForm) .contact-guide-copy li::before {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: .55em !important;
+    width: 7px !important;
+    height: 7px !important;
+    border-radius: 50% !important;
+    background: #ffafd1 !important;
+    box-shadow: 0 0 14px rgba(255,177,207,.55) !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  body:has(#contactForm) .contact-guide-body {
+    grid-template-columns: 140px minmax(0, 1fr) !important;
+  }
+}
+
+/* Contact desktop form/sidebar height alignment. */
+@media (min-width: 901px) {
+  body:has(#contactForm) .main-grid {
+    align-items: stretch !important;
+  }
+
+  body:has(#contactForm) .contact-form {
+    align-self: stretch !important;
+    min-height: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  body:has(#contactForm) .contact-form form {
+    flex: 1 1 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  body:has(#contactForm) .contact-form .form-group:has(textarea) {
+    flex: 1 1 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  body:has(#contactForm) .contact-form textarea {
+    flex: 1 1 auto !important;
+    min-height: 180px !important;
+  }
+
+  body:has(#contactForm) .contact-form .submit-btn {
+    margin-top: auto !important;
+  }
+}
+

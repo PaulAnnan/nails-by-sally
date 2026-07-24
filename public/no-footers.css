@@ -1,0 +1,354 @@
+/* Compact shared footer. Old oversized footers stay hidden, the new mini footer is allowed. */
+footer:not(.mini-site-footer),
+.site-footer:not(.mini-site-footer),
+.gallery-footer,
+.gallery-copyright,
+.footer-grid:not(.mini-footer-grid),
+.copy-row:not(.mini-footer-bottom) {
+  display: none !important;
+}
+
+html {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 100% !important;
+  max-height: none !important;
+  overscroll-behavior-y: auto !important;
+  touch-action: auto !important;
+}
+
+body {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 100% !important;
+  max-height: none !important;
+  overscroll-behavior-y: auto !important;
+  touch-action: auto !important;
+  padding-bottom: 0 !important;
+}
+
+.mini-site-footer {
+  width: min(calc(100% - 48px), 1280px) !important;
+  margin: clamp(18px, 2.2vw, 34px) auto 22px !important;
+  padding: 18px 22px !important;
+  display: block !important;
+  color: #f7eff3 !important;
+  border: 1px solid rgba(255, 181, 207, .25) !important;
+  border-radius: 26px !important;
+  background:
+    radial-gradient(circle at 6% 0%, rgba(255, 181, 207, .13), transparent 32%),
+    linear-gradient(135deg, rgba(255,255,255,.055), rgba(255,255,255,.015)),
+    rgba(6, 5, 6, .92) !important;
+  box-shadow: 0 22px 70px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.07) !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.mini-footer-grid {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(300px, 1.05fr) minmax(360px, 1fr) minmax(330px, .85fr) auto !important;
+  align-items: center !important;
+  gap: 18px !important;
+  color: inherit !important;
+}
+
+.mini-footer-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  min-width: 0 !important;
+}
+
+.mini-footer-logo {
+  width: 62px !important;
+  height: 62px !important;
+  flex: 0 0 62px !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 0 !important;
+  border: 1px solid rgba(255, 255, 255, .95) !important;
+  border-radius: 50% !important;
+  background: #fff !important;
+  overflow: hidden !important;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, .08) !important;
+}
+
+.mini-footer-logo img {
+  width: 48px !important;
+  height: 48px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+.mini-footer-brand strong {
+  display: block !important;
+  color: #fff !important;
+  font-family: Arial, sans-serif !important;
+  font-size: 21px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  letter-spacing: .07em !important;
+  text-transform: uppercase !important;
+  text-shadow: none !important;
+  white-space: nowrap !important;
+}
+
+.mini-footer-wordmark > span,
+.mini-footer-wordmark > small,
+.mini-footer-bottom,
+.mini-footer-meta a,
+.mini-footer-meta span,
+.mini-footer-links a {
+  color: rgba(247,239,243,.68) !important;
+  font-size: 11px !important;
+  line-height: 1.45 !important;
+  text-decoration: none !important;
+}
+
+.mini-footer-wordmark > span,
+.mini-footer-wordmark > small {
+  display: block !important;
+  margin-top: 9px !important;
+  color: #fff !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+  letter-spacing: .32em !important;
+  text-transform: uppercase !important;
+}
+
+.mini-footer-meta {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.mini-footer-meta a,
+.mini-footer-meta span,
+.mini-footer-links a {
+  min-height: 32px !important;
+  padding: 8px 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid rgba(255,181,207,.20) !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,.025) !important;
+  box-sizing: border-box !important;
+}
+
+.mini-footer-links {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-end !important;
+  gap: 8px !important;
+}
+
+.mini-footer-links a:hover,
+.mini-footer-meta a:hover,
+.mini-footer-socials a:hover {
+  color: #080607 !important;
+  border-color: #f4a7cb !important;
+  background: #f4a7cb !important;
+  transform: translateY(-1px) !important;
+}
+
+.mini-footer-socials {
+  display: flex !important;
+  justify-content: flex-end !important;
+  gap: 8px !important;
+}
+
+.mini-footer-socials a {
+  width: 34px !important;
+  height: 34px !important;
+  display: grid !important;
+  place-items: center !important;
+  color: #ffd3e5 !important;
+  border: 1px solid rgba(255,181,207,.34) !important;
+  border-radius: 50% !important;
+  background: rgba(255,255,255,.025) !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  letter-spacing: .06em !important;
+  text-decoration: none !important;
+  transition: transform .18s ease, background-color .18s ease, border-color .18s ease, color .18s ease !important;
+}
+
+.mini-footer-bottom {
+  margin-top: 14px !important;
+  padding-top: 12px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  border-top: 1px solid rgba(255,255,255,.08) !important;
+}
+
+@media (min-width: 1201px) {
+  body:has(.services-reference) .mini-site-footer,
+  body:has(.gallery-reference) .mini-site-footer {
+    width: min(calc(100vw - 180px), 1710px) !important;
+  }
+
+  body:has(.about-poster-page) .mini-site-footer {
+    width: min(calc(100vw - 96px), 1600px) !important;
+  }
+
+  body:has(#bookingForm) .mini-site-footer,
+  body:has(#contactForm) .mini-site-footer {
+    width: min(calc(100% - 112px), 1520px) !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .mini-site-footer {
+    width: min(calc(100% - 40px), 1040px) !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .mini-site-footer {
+    width: calc(100% - 28px) !important;
+    margin: 24px auto 18px !important;
+    padding: 16px !important;
+    border-radius: 22px !important;
+  }
+
+  .mini-footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .mini-footer-links,
+  .mini-footer-socials {
+    justify-content: flex-start !important;
+  }
+
+  .mini-footer-bottom {
+    flex-direction: column !important;
+    gap: 5px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .mini-footer-logo {
+    width: 54px !important;
+    height: 54px !important;
+    flex-basis: 54px !important;
+  }
+
+  .mini-footer-logo img {
+    width: 44px !important;
+    height: 44px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .mini-footer-brand strong {
+  display: block !important;
+  color: #fff !important;
+  font-family: Arial, sans-serif !important;
+  font-size: 21px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  letter-spacing: .07em !important;
+  text-transform: uppercase !important;
+  text-shadow: none !important;
+  white-space: nowrap !important;
+}
+
+  .mini-footer-meta,
+  .mini-footer-links {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .mini-footer-meta a,
+  .mini-footer-meta span,
+  .mini-footer-links a {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding-inline: 8px !important;
+    font-size: 10px !important;
+  }
+}
+
+/* Late page-scroll rescue. Keep the document as the only vertical scroller. */
+html {
+  position: static !important;
+  height: auto !important;
+  min-height: 100% !important;
+  max-height: none !important;
+  overscroll-behavior-y: auto !important;
+  touch-action: auto !important;
+}
+
+body {
+  position: static !important;
+  height: auto !important;
+  min-height: 100% !important;
+  max-height: none !important;
+  overscroll-behavior-y: auto !important;
+  touch-action: auto !important;
+}
+
+/* Horizontal decoration containment. Avoid root/body overflow rules so vertical scroll stays native. */
+.site-header,
+.poster-home,
+.about-poster-page,
+.services-poster,
+.gallery-page,
+body > .container,
+.mini-site-footer {
+  max-width: 100vw !important;
+  box-sizing: border-box !important;
+}
+
+/* Final vertical scroll container fix. Some earlier page CSS breaks root scrolling, so the body owns vertical scroll. */
+html {
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: 100% !important;
+  overflow: hidden !important;
+  overscroll-behavior-y: auto !important;
+  touch-action: auto !important;
+}
+
+body {
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  max-height: 100dvh !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior-y: auto !important;
+  touch-action: pan-y !important;
+}
+/* Final footer rhythm: trim the last content wrapper so the footer sits close to the section above it. */
+body:has(.services-reference) .services-poster.services-reference,
+body:has(.gallery-reference) .gallery-reference,
+body:has(.about-poster-page) .about-poster-page,
+body:has(#bookingForm) > .container,
+body:has(#contactForm) > .container,
+body:has(.poster-home) .poster-home {
+  padding-bottom: clamp(10px, 1.2vw, 18px) !important;
+}
+
+body:has(.services-reference) .services-reference .services-cta,
+body:has(.gallery-reference) .booking-banner,
+body:has(.poster-home) .popular-services-section,
+body:has(.about-poster-page) .artist-profile,
+body:has(#bookingForm) .submit-section,
+body:has(#contactForm) .contact-booking-card {
+  margin-bottom: 0 !important;
+}
+
+.mini-site-footer {
+  margin-top: clamp(10px, 1.1vw, 18px) !important;
+}

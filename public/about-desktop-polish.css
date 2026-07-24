@@ -1,0 +1,1771 @@
+
+/* About desktop layout polish. Keeps mobile controlled by about-mobile-fixes.css. */
+@media (min-width: 901px) {
+  body:has(.about-poster-page) {
+    background:
+      radial-gradient(circle at 8% 12%, rgba(255,177,207,.09), transparent 330px),
+      radial-gradient(circle at 84% 24%, rgba(255,177,207,.07), transparent 380px),
+      #030303 !important;
+  }
+
+  .about-poster-page {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 0 92px !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+  }
+
+  .about-poster-page > .section,
+  .about-home-service-row {
+    width: min(calc(100% - 112px), 1320px) !important;
+    max-width: 1320px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .about-poster-page > .section {
+    padding: 0 !important;
+    margin-top: 62px !important;
+  }
+
+  .about-poster-page > .section > .container {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .about-home-hero {
+    position: relative !important;
+    isolation: isolate !important;
+    width: min(calc(100% - 80px), 1520px) !important;
+    max-width: 1520px !important;
+    min-height: clamp(420px, 30vw, 540px) !important;
+    margin: 38px auto 0 !important;
+    padding: clamp(40px, 4vw, 64px) clamp(46px, 5.6vw, 88px) clamp(34px, 3.2vw, 52px) !important;
+    display: grid !important;
+    grid-template-columns: minmax(430px, .92fr) minmax(460px, 1.08fr) !important;
+    align-items: center !important;
+    column-gap: clamp(30px, 5vw, 84px) !important;
+    overflow: visible !important;
+    border: 1px solid rgba(255,177,207,.24) !important;
+    border-radius: 28px !important;
+    background:
+      radial-gradient(circle at 4% 72%, rgba(255,177,207,.30), transparent 260px),
+      radial-gradient(circle at 77% 33%, rgba(255,177,207,.13), transparent 340px),
+      linear-gradient(135deg, rgba(28,12,18,.92), rgba(3,3,3,.97) 48%, rgba(17,6,10,.82)) !important;
+    box-shadow: 0 34px 90px rgba(0,0,0,.52), inset 0 1px 0 rgba(255,255,255,.06) !important;
+  }
+
+  .about-home-hero::before {
+    content: "" !important;
+    position: absolute !important;
+    left: -70px !important;
+    bottom: -58px !important;
+    z-index: 0 !important;
+    width: 260px !important;
+    height: 260px !important;
+    border-radius: 50% !important;
+    background: radial-gradient(circle, rgba(255,177,207,.42), rgba(255,177,207,.16) 48%, transparent 70%) !important;
+    filter: blur(1px) !important;
+    pointer-events: none !important;
+  }
+
+  .about-home-hero::after {
+    content: "NBS" !important;
+    position: absolute !important;
+    right: clamp(34px, 5vw, 92px) !important;
+    top: clamp(24px, 3vw, 54px) !important;
+    z-index: 0 !important;
+    color: rgba(255,214,229,.10) !important;
+    font-family: Inter, system-ui, sans-serif !important;
+    font-size: clamp(110px, 11vw, 205px) !important;
+    font-weight: 950 !important;
+    letter-spacing: -.08em !important;
+    line-height: 1 !important;
+  }
+
+  .about-home-eyebrow {
+    grid-column: 1 !important;
+    margin: 0 0 13px !important;
+    position: relative !important;
+    z-index: 2 !important;
+    color: #ffd8e6 !important;
+    font-size: 12px !important;
+    font-weight: 900 !important;
+    letter-spacing: .48em !important;
+    line-height: 1.2 !important;
+    text-transform: uppercase !important;
+  }
+
+  .about-home-title {
+    grid-column: 1 !important;
+    position: relative !important;
+    z-index: 2 !important;
+    margin: 0 !important;
+    color: #ffc2d8 !important;
+    font-family: Inter, system-ui, sans-serif !important;
+    font-size: clamp(86px, 8vw, 138px) !important;
+    font-weight: 950 !important;
+    letter-spacing: -.055em !important;
+    line-height: .82 !important;
+    text-transform: uppercase !important;
+    text-shadow: 0 0 28px rgba(255,177,207,.42), 0 15px 46px rgba(0,0,0,.7) !important;
+  }
+
+  .about-home-intro {
+    grid-column: 1 / -1 !important;
+    position: relative !important;
+    z-index: 2 !important;
+    min-height: 250px !important;
+    margin-top: 8px !important;
+    display: grid !important;
+    grid-template-columns: minmax(260px, 390px) minmax(420px, 1fr) !important;
+    align-items: end !important;
+    gap: clamp(30px, 5vw, 80px) !important;
+  }
+
+  .about-home-portrait {
+    position: relative !important;
+    z-index: 3 !important;
+    width: clamp(260px, 22vw, 360px) !important;
+    height: clamp(270px, 23vw, 380px) !important;
+    margin: -132px 0 0 clamp(16px, 2.4vw, 42px) !important;
+    overflow: hidden !important;
+    border: 2px solid rgba(255,255,255,.92) !important;
+    border-radius: 26px !important;
+    transform: rotate(-7deg) !important;
+    box-shadow: 0 30px 72px rgba(0,0,0,.62), 0 0 42px rgba(255,159,202,.16) !important;
+  }
+
+  .about-home-portrait img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: 49% 48% !important;
+  }
+
+  .about-home-copy {
+    position: relative !important;
+    z-index: 2 !important;
+    width: min(720px, 100%) !important;
+    padding: 24px 28px 24px 0 !important;
+  }
+
+  .about-home-script {
+    margin: 0 0 4px !important;
+    color: #fff !important;
+    font-family: Allura, "Brush Script MT", "Segoe Script", cursive !important;
+    font-size: clamp(74px, 6vw, 112px) !important;
+    font-weight: 400 !important;
+    line-height: .82 !important;
+    text-shadow: 0 0 20px rgba(255,255,255,.32), 0 0 34px rgba(255,177,207,.2) !important;
+  }
+
+  .about-home-copy h2 {
+    margin: 0 0 6px !important;
+    color: #ffc2d8 !important;
+    font-size: clamp(40px, 3.2vw, 58px) !important;
+    font-weight: 950 !important;
+    letter-spacing: -.03em !important;
+    line-height: .95 !important;
+    text-shadow: 0 0 22px rgba(255,177,207,.52) !important;
+  }
+
+  .about-home-copy > p:not(.about-home-script) {
+    width: min(560px, 42vw) !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 16px 20px !important;
+    color: #fff8fb !important;
+    border: 1px solid rgba(255,177,207,.34) !important;
+    border-left: 4px solid #ff9fca !important;
+    border-radius: 0 18px 18px 0 !important;
+    background: linear-gradient(90deg, rgba(0,0,0,.72), rgba(0,0,0,.37)) !important;
+    font-size: clamp(14px, .95vw, 17px) !important;
+    font-weight: 800 !important;
+    line-height: 1.46 !important;
+    text-align: left !important;
+    text-shadow: 0 2px 12px rgba(0,0,0,.75) !important;
+  }
+
+  .about-home-heart {
+    right: 2px !important;
+    bottom: 4px !important;
+    color: #ffc2d8 !important;
+    font-size: 44px !important;
+    text-shadow: 0 0 22px rgba(255,177,207,.68) !important;
+  }
+
+  .about-home-bar {
+    position: absolute !important;
+    left: clamp(42px, 5vw, 84px) !important;
+    bottom: -18px !important;
+    z-index: 5 !important;
+    width: auto !important;
+    min-width: 220px !important;
+    padding: 10px 26px !important;
+    border: 1px solid rgba(255,255,255,.42) !important;
+    border-radius: 999px !important;
+    background: rgba(255,177,207,.82) !important;
+    color: #090909 !important;
+    font-size: 11px !important;
+    font-weight: 950 !important;
+    letter-spacing: .45em !important;
+    text-align: center !important;
+    box-shadow: 0 18px 36px rgba(0,0,0,.34) !important;
+  }
+
+  .about-home-service-row {
+    position: relative !important;
+    z-index: 3 !important;
+    margin-top: 44px !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: clamp(22px, 3vw, 48px) !important;
+    padding: 0 !important;
+  }
+
+  .about-home-service-card {
+    height: clamp(180px, 14vw, 230px) !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    border: 2px solid rgba(255,255,255,.9) !important;
+    border-radius: 22px !important;
+    background: #111 !important;
+    box-shadow: 0 22px 56px rgba(0,0,0,.5) !important;
+    transform: rotate(-3deg) !important;
+  }
+
+  .about-home-service-card:nth-child(2) {
+    transform: translateY(-22px) rotate(1deg) !important;
+  }
+
+  .about-home-service-card:nth-child(3) {
+    transform: rotate(4deg) !important;
+  }
+
+  .about-home-service-card img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    filter: brightness(.82) saturate(.94) !important;
+  }
+
+  .about-home-service-card span {
+    left: 50% !important;
+    bottom: 14px !important;
+    transform: translateX(-50%) rotate(-2deg) !important;
+    padding: 8px 16px !important;
+    border-radius: 8px !important;
+    background: #ffafd1 !important;
+    color: #070707 !important;
+    font-size: 11px !important;
+    font-weight: 950 !important;
+    letter-spacing: .04em !important;
+  }
+
+  .story-section {
+    min-height: 0 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, .95fr) minmax(380px, .75fr) !important;
+    gap: clamp(34px, 5vw, 72px) !important;
+    align-items: center !important;
+    padding: clamp(42px, 4vw, 66px) !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(255,177,207,.25) !important;
+    border-radius: 28px !important;
+    background:
+      radial-gradient(circle at 86% 14%, rgba(255,177,207,.10), transparent 250px),
+      linear-gradient(135deg, rgba(20,17,19,.94), rgba(8,8,8,.96)) !important;
+    box-shadow: 0 28px 70px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.04) !important;
+  }
+
+  .story-content {
+    max-width: 650px !important;
+    padding: 0 !important;
+  }
+
+  .story-content h2,
+  .values-title,
+  .artist-title {
+    color: #ffc2d8 !important;
+    font-family: Inter, system-ui, sans-serif !important;
+    font-weight: 950 !important;
+    letter-spacing: -.035em !important;
+    text-transform: uppercase !important;
+    text-shadow: 0 0 18px rgba(255,177,207,.34) !important;
+  }
+
+  .story-content h2 {
+    margin-bottom: 28px !important;
+    font-size: clamp(52px, 4.5vw, 78px) !important;
+    line-height: .9 !important;
+  }
+
+  .story-content p {
+    max-width: 58ch !important;
+    margin-bottom: 18px !important;
+    color: #eee6ea !important;
+    font-size: 15px !important;
+    line-height: 1.72 !important;
+  }
+
+  .story-image {
+    position: relative !important;
+    height: clamp(360px, 30vw, 470px) !important;
+    overflow: visible !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .story-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border: 2px solid rgba(255,255,255,.92) !important;
+    border-radius: 26px !important;
+    transform: rotate(4deg) !important;
+    box-shadow: 0 30px 72px rgba(0,0,0,.56), 0 0 32px rgba(255,159,202,.14) !important;
+  }
+
+  .experience-badge {
+    left: -28px !important;
+    right: auto !important;
+    bottom: 28px !important;
+    width: 138px !important;
+    height: 138px !important;
+    border-radius: 50% !important;
+    background: linear-gradient(145deg, #ffd3e5, #ef91bb) !important;
+    color: #080808 !important;
+    transform: rotate(-8deg) !important;
+    box-shadow: 0 18px 42px rgba(0,0,0,.42) !important;
+  }
+
+  .experience-badge .years,
+  .experience-badge .label {
+    color: #080808 !important;
+  }
+
+  .stats-section {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+    margin: 0 !important;
+  }
+
+  .stat-card {
+    min-height: 150px !important;
+    padding: 22px 18px !important;
+    border: 1px solid rgba(255,177,207,.24) !important;
+    border-radius: 20px !important;
+    background: linear-gradient(145deg, rgba(20,17,19,.92), rgba(6,6,6,.96)) !important;
+    box-shadow: 0 18px 44px rgba(0,0,0,.32) !important;
+  }
+
+  .stat-card:nth-child(4) {
+    color: #080808 !important;
+    border-color: #ffafd1 !important;
+    background: linear-gradient(180deg, #ffd0e3, #f3a4c5) !important;
+  }
+
+  .stat-number {
+    font-size: clamp(34px, 3vw, 48px) !important;
+  }
+
+  .stat-label {
+    font-size: 10px !important;
+  }
+
+  .values-title {
+    margin: 0 0 32px !important;
+    font-size: clamp(48px, 4vw, 72px) !important;
+    line-height: .95 !important;
+    text-align: center !important;
+  }
+
+  .values-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+  }
+
+  .value-card {
+    min-height: 255px !important;
+    padding: 38px 28px 30px !important;
+    display: grid !important;
+    align-content: end !important;
+    border: 1px solid rgba(255,177,207,.24) !important;
+    border-radius: 22px !important;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.82)),
+      var(--value-img, linear-gradient(145deg, rgba(20,17,19,.94), rgba(8,8,8,.96))) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    box-shadow: 0 20px 54px rgba(0,0,0,.34) !important;
+    overflow: hidden !important;
+    text-align: left !important;
+  }
+
+  .value-card:nth-child(1) { --value-img: url("Images/Nails2.png"); }
+  .value-card:nth-child(2) { --value-img: url("Images/Nails12.png"); }
+  .value-card:nth-child(3) { --value-img: url("Images/Nails8.png"); }
+
+  .value-icon {
+    position: absolute !important;
+    left: 24px !important;
+    top: 24px !important;
+    width: 50px !important;
+    height: 50px !important;
+    margin: 0 !important;
+    border: 1px solid rgba(255,177,207,.68) !important;
+    border-radius: 50% !important;
+    background: rgba(0,0,0,.58) !important;
+    color: #ffc2d8 !important;
+    font-size: 22px !important;
+    box-shadow: 0 0 22px rgba(255,177,207,.18) !important;
+  }
+
+  .value-title {
+    margin: 0 0 12px !important;
+    color: #ffc2d8 !important;
+    font-size: 18px !important;
+    font-weight: 950 !important;
+    line-height: 1.08 !important;
+    text-transform: uppercase !important;
+  }
+
+  .value-title::after {
+    content: "" !important;
+    display: block !important;
+    width: 34px !important;
+    height: 2px !important;
+    margin-top: 10px !important;
+    background: #ffafd1 !important;
+  }
+
+  .value-desc {
+    max-width: 32ch !important;
+    color: #fff8fb !important;
+    font-size: 13px !important;
+    font-weight: 750 !important;
+    line-height: 1.5 !important;
+    text-shadow: 0 2px 12px rgba(0,0,0,.8) !important;
+  }
+
+  .artist-section {
+    margin: 0 !important;
+    padding: clamp(44px, 4vw, 64px) !important;
+    border: 1px solid rgba(255,177,207,.28) !important;
+    border-radius: 28px !important;
+    background:
+      radial-gradient(circle at 82% 48%, rgba(255,177,207,.12), transparent 330px),
+      linear-gradient(135deg, rgba(20,17,19,.94), rgba(8,8,8,.96)) !important;
+    box-shadow: 0 28px 70px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.04) !important;
+    overflow: hidden !important;
+    text-align: left !important;
+  }
+
+  .artist-content {
+    max-width: none !important;
+    display: grid !important;
+    grid-template-columns: .78fr 1fr !important;
+    gap: clamp(36px, 5vw, 72px) !important;
+    align-items: center !important;
+  }
+
+  .artist-title {
+    margin: 0 0 22px !important;
+    font-size: clamp(46px, 4vw, 72px) !important;
+    line-height: .92 !important;
+  }
+
+  .artist-subtitle {
+    max-width: 52ch !important;
+    margin: 0 !important;
+    color: #efe7eb !important;
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+    text-align: left !important;
+  }
+
+  .artist-profile {
+    display: grid !important;
+    grid-template-columns: 220px minmax(0, 1fr) !important;
+    gap: 30px !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 28px !important;
+    border: 1px solid rgba(255,177,207,.24) !important;
+    border-radius: 24px !important;
+    background: rgba(0,0,0,.36) !important;
+    backdrop-filter: none !important;
+  }
+
+  .artist-photo {
+    width: 220px !important;
+    height: 270px !important;
+    border: 2px solid rgba(255,255,255,.92) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 26px 60px rgba(0,0,0,.52) !important;
+    transform: rotate(-5deg) !important;
+  }
+
+  .artist-name {
+    margin: 0 0 8px !important;
+    color: #fff !important;
+    font-size: clamp(34px, 2.8vw, 48px) !important;
+    line-height: .98 !important;
+  }
+
+  .artist-role {
+    color: #ffafd1 !important;
+    font-size: 11px !important;
+    font-weight: 900 !important;
+    letter-spacing: .18em !important;
+  }
+
+  .artist-bio {
+    color: #efe7eb !important;
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+  }
+
+  .artist-badge {
+    padding: 8px 12px !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    background: #ffafd1 !important;
+    color: #080808 !important;
+    font-size: 10px !important;
+    font-weight: 850 !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .about-poster-page > .section,
+  .about-home-service-row,
+  .about-home-hero {
+    width: min(calc(100% - 56px), 1080px) !important;
+  }
+
+  .about-home-hero {
+    grid-template-columns: 1fr !important;
+  }
+
+  .about-home-intro {
+    grid-template-columns: 280px 1fr !important;
+  }
+
+  .story-section,
+  .artist-content {
+    grid-template-columns: 1fr !important;
+  }
+
+  .story-image {
+    height: 360px !important;
+  }
+}
+
+/* About desktop overflow and artist grid repair */
+@media (min-width: 901px) {
+  .about-home-intro {
+    grid-template-columns: minmax(240px, 360px) minmax(0, 1fr) !important;
+    gap: clamp(24px, 4vw, 56px) !important;
+  }
+
+  .about-home-copy {
+    width: 100% !important;
+    max-width: 620px !important;
+    min-width: 0 !important;
+    padding-right: 0 !important;
+    overflow: visible !important;
+  }
+
+  .about-home-script,
+  .about-home-copy h2 {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .about-home-copy > p:not(.about-home-script) {
+    width: min(510px, 100%) !important;
+  }
+
+  .about-home-heart {
+    right: 12px !important;
+  }
+
+  .artist-content {
+    grid-template-columns: minmax(360px, .8fr) minmax(560px, 1.2fr) !important;
+    grid-template-rows: auto 1fr !important;
+    align-items: center !important;
+  }
+
+  .artist-title {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  }
+
+  .artist-subtitle {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    align-self: start !important;
+  }
+
+  .artist-profile {
+    grid-column: 2 !important;
+    grid-row: 1 / span 2 !important;
+    align-self: center !important;
+    min-height: 0 !important;
+  }
+
+  .artist-section {
+    min-height: 0 !important;
+  }
+}
+
+/* About desktop hero copy position reset */
+@media (min-width: 901px) {
+  .about-home-copy {
+    left: 0 !important;
+    right: auto !important;
+    transform: none !important;
+  }
+}
+
+/* About desktop creative repair pass: clearer hero layering and richer body rhythm. */
+@media (min-width: 901px) {
+  .about-home-hero {
+    min-height: clamp(610px, 44vw, 720px) !important;
+    padding-top: clamp(44px, 4vw, 68px) !important;
+    padding-bottom: clamp(92px, 7vw, 124px) !important;
+    grid-template-rows: auto auto minmax(310px, 1fr) !important;
+    align-items: start !important;
+  }
+
+  .about-home-hero::before {
+    left: -44px !important;
+    bottom: 28px !important;
+    width: 250px !important;
+    height: 250px !important;
+    opacity: .92 !important;
+  }
+
+  .about-home-title {
+    grid-row: 2 !important;
+    max-width: 760px !important;
+  }
+
+  .about-home-intro {
+    grid-row: 3 !important;
+    min-height: 330px !important;
+    margin-top: 20px !important;
+    grid-template-columns: minmax(270px, 390px) minmax(470px, 640px) !important;
+    align-items: start !important;
+    gap: clamp(42px, 6vw, 92px) !important;
+  }
+
+  .about-home-portrait {
+    width: clamp(270px, 21vw, 350px) !important;
+    height: clamp(310px, 25vw, 410px) !important;
+    margin: -18px 0 0 clamp(12px, 2vw, 34px) !important;
+    align-self: start !important;
+    transform: rotate(-7deg) !important;
+  }
+
+  .about-home-copy {
+    align-self: center !important;
+    margin-top: clamp(12px, 2.4vw, 42px) !important;
+    padding: 0 !important;
+    max-width: 620px !important;
+  }
+
+  .about-home-script {
+    font-size: clamp(78px, 6vw, 116px) !important;
+  }
+
+  .about-home-copy h2 {
+    font-size: clamp(44px, 3.2vw, 62px) !important;
+  }
+
+  .about-home-copy > p:not(.about-home-script) {
+    width: min(540px, 100%) !important;
+    padding: 18px 22px !important;
+    background:
+      linear-gradient(90deg, rgba(0,0,0,.86), rgba(7,4,6,.56)),
+      radial-gradient(circle at 100% 0%, rgba(255,177,207,.14), transparent 150px) !important;
+    box-shadow: 0 20px 46px rgba(0,0,0,.34) !important;
+  }
+
+  .about-home-heart {
+    right: 20px !important;
+    bottom: -18px !important;
+  }
+
+  .about-home-bar {
+    left: clamp(56px, 6vw, 110px) !important;
+    bottom: 30px !important;
+    z-index: 6 !important;
+  }
+
+  .about-home-service-row {
+    margin-top: 76px !important;
+  }
+
+  .about-home-service-card {
+    height: clamp(210px, 15vw, 260px) !important;
+  }
+
+  .about-home-service-card:nth-child(2) {
+    transform: translateY(0) rotate(1deg) !important;
+  }
+
+  .about-home-service-card:hover {
+    transform: translateY(-8px) rotate(0deg) !important;
+  }
+
+  .story-section {
+    position: relative !important;
+    grid-template-columns: minmax(480px, .88fr) minmax(430px, .72fr) !important;
+    padding: clamp(54px, 5vw, 82px) !important;
+    overflow: visible !important;
+  }
+
+  .story-section::before {
+    content: "DETAIL" !important;
+    position: absolute !important;
+    right: 28px !important;
+    top: -34px !important;
+    z-index: 0 !important;
+    color: rgba(255,214,229,.06) !important;
+    font-size: clamp(120px, 11vw, 190px) !important;
+    font-weight: 950 !important;
+    letter-spacing: -.08em !important;
+    line-height: 1 !important;
+    pointer-events: none !important;
+  }
+
+  .story-content,
+  .story-image {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  .story-content {
+    padding-left: clamp(8px, 2vw, 34px) !important;
+  }
+
+  .story-content h2 {
+    font-size: clamp(58px, 5vw, 92px) !important;
+  }
+
+  .story-content h2::after {
+    content: "" !important;
+    display: block !important;
+    width: 116px !important;
+    height: 3px !important;
+    margin-top: 18px !important;
+    border-radius: 999px !important;
+    background: linear-gradient(90deg, #ffafd1, transparent) !important;
+  }
+
+  .story-content p {
+    font-size: clamp(15px, .92vw, 17px) !important;
+  }
+
+  .story-image {
+    height: clamp(380px, 28vw, 500px) !important;
+  }
+
+  .story-image::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 32px -26px -32px 26px !important;
+    z-index: -1 !important;
+    border: 1px solid rgba(255,177,207,.5) !important;
+    border-radius: 28px !important;
+    transform: rotate(-4deg) !important;
+  }
+
+  .story-image img {
+    transform: rotate(3deg) !important;
+  }
+
+  .experience-badge {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+
+  .stats-section {
+    position: relative !important;
+    gap: 22px !important;
+  }
+
+  .stat-card {
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .stat-card::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: auto 18px 16px auto !important;
+    width: 88px !important;
+    height: 88px !important;
+    border-radius: 50% !important;
+    background: radial-gradient(circle, rgba(255,177,207,.15), transparent 68%) !important;
+    pointer-events: none !important;
+  }
+
+  .values-grid {
+    grid-template-columns: 1.05fr .9fr 1.05fr !important;
+    align-items: stretch !important;
+  }
+
+  .value-card {
+    position: relative !important;
+    min-height: 360px !important;
+    padding: 34px !important;
+    align-content: end !important;
+    overflow: hidden !important;
+  }
+
+  .value-card:nth-child(2) {
+    transform: translateY(32px) !important;
+  }
+
+  .value-card::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+    background:
+      radial-gradient(circle at 18% 18%, rgba(255,177,207,.18), transparent 190px),
+      linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.86) 72%) !important;
+    pointer-events: none !important;
+  }
+
+  .value-icon,
+  .value-title,
+  .value-desc {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  .artist-section {
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  .artist-section::after {
+    content: "SALLY" !important;
+    position: absolute !important;
+    right: -24px !important;
+    top: 22px !important;
+    z-index: 0 !important;
+    color: rgba(255,214,229,.055) !important;
+    font-size: clamp(120px, 10vw, 180px) !important;
+    font-weight: 950 !important;
+    letter-spacing: -.08em !important;
+    writing-mode: vertical-rl !important;
+    line-height: .8 !important;
+    pointer-events: none !important;
+  }
+
+  .artist-content {
+    position: relative !important;
+    z-index: 1 !important;
+    grid-template-columns: minmax(420px, .78fr) minmax(560px, 1fr) !important;
+  }
+
+  .artist-profile {
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  .artist-profile::before {
+    content: "" !important;
+    position: absolute !important;
+    left: -28px !important;
+    top: 34px !important;
+    width: 130px !important;
+    height: 130px !important;
+    border-radius: 50% !important;
+    background: radial-gradient(circle, rgba(255,177,207,.18), transparent 70%) !important;
+    pointer-events: none !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .about-home-hero {
+    min-height: 650px !important;
+  }
+
+  .about-home-intro {
+    grid-template-columns: minmax(240px, 310px) minmax(0, 1fr) !important;
+    gap: 36px !important;
+  }
+
+  .about-home-portrait {
+    width: 290px !important;
+    height: 350px !important;
+  }
+
+  .story-section,
+  .artist-content,
+  .values-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .value-card:nth-child(2) {
+    transform: none !important;
+  }
+}
+
+/* About desktop final hero composition repair. */
+@media (min-width: 901px) {
+  .about-home-hero {
+    width: min(calc(100% - 96px), 1680px) !important;
+    min-height: clamp(560px, 36vw, 650px) !important;
+    margin-top: 34px !important;
+    padding: clamp(54px, 4vw, 76px) clamp(64px, 5vw, 104px) clamp(82px, 5.2vw, 108px) !important;
+    display: grid !important;
+    grid-template-columns: minmax(460px, .92fr) minmax(560px, 1fr) !important;
+    grid-template-rows: auto auto 1fr auto !important;
+    grid-template-areas:
+      "eyebrow visual"
+      "title visual"
+      "portrait copy"
+      "location location" !important;
+    column-gap: clamp(54px, 6vw, 112px) !important;
+    row-gap: 18px !important;
+    align-items: start !important;
+    overflow: hidden !important;
+    border-radius: 30px !important;
+  }
+
+  .about-home-hero::before {
+    left: -40px !important;
+    bottom: 38px !important;
+    width: clamp(230px, 16vw, 310px) !important;
+    height: clamp(230px, 16vw, 310px) !important;
+  }
+
+  .about-home-hero::after {
+    right: clamp(58px, 5vw, 110px) !important;
+    top: clamp(54px, 4vw, 86px) !important;
+    font-size: clamp(130px, 10vw, 210px) !important;
+  }
+
+  .about-home-eyebrow {
+    grid-area: eyebrow !important;
+    align-self: end !important;
+    margin: 0 !important;
+    padding-left: clamp(84px, 7vw, 132px) !important;
+  }
+
+  .about-home-title {
+    grid-area: title !important;
+    max-width: none !important;
+    margin: 0 !important;
+    font-size: clamp(118px, 8.6vw, 176px) !important;
+    line-height: .82 !important;
+  }
+
+  .about-home-intro {
+    display: contents !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+  }
+
+  .about-home-portrait {
+    grid-area: portrait !important;
+    place-self: start center !important;
+    width: clamp(315px, 22vw, 430px) !important;
+    height: clamp(380px, 26vw, 500px) !important;
+    margin: clamp(18px, 2vw, 34px) 0 0 !important;
+    z-index: 4 !important;
+    border-radius: 26px !important;
+    transform: rotate(-7deg) !important;
+  }
+
+  .about-home-copy {
+    grid-area: copy !important;
+    place-self: center start !important;
+    width: min(100%, 640px) !important;
+    max-width: 640px !important;
+    margin: clamp(52px, 5vw, 92px) 0 0 !important;
+    padding: 0 !important;
+    z-index: 5 !important;
+  }
+
+  .about-home-script {
+    display: block !important;
+    margin: 0 0 10px !important;
+    font-size: clamp(78px, 6vw, 122px) !important;
+    line-height: .82 !important;
+  }
+
+  .about-home-copy h2 {
+    margin: 0 0 8px !important;
+    font-size: clamp(50px, 3.5vw, 72px) !important;
+  }
+
+  .about-home-copy > p:not(.about-home-script) {
+    width: min(560px, 100%) !important;
+    margin: 0 !important;
+    padding: 18px 22px !important;
+    border-radius: 0 18px 18px 0 !important;
+    font-size: clamp(14px, .9vw, 17px) !important;
+    line-height: 1.45 !important;
+  }
+
+  .about-home-heart {
+    right: -58px !important;
+    bottom: -34px !important;
+    z-index: 6 !important;
+  }
+
+  .about-home-bar {
+    grid-area: location !important;
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    justify-self: start !important;
+    align-self: end !important;
+    width: fit-content !important;
+    min-width: 0 !important;
+    max-width: max-content !important;
+    margin: clamp(18px, 2vw, 32px) 0 0 clamp(84px, 7vw, 132px) !important;
+    padding: 12px 28px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 999px !important;
+    letter-spacing: .38em !important;
+    white-space: nowrap !important;
+  }
+
+  .about-home-service-row {
+    width: min(calc(100% - 160px), 1420px) !important;
+    margin-top: 62px !important;
+    gap: clamp(34px, 4vw, 70px) !important;
+  }
+
+  .about-home-service-card {
+    height: clamp(230px, 14vw, 300px) !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .about-home-hero {
+    width: min(calc(100% - 56px), 1080px) !important;
+    min-height: 620px !important;
+    padding: 46px 42px 76px !important;
+    grid-template-columns: minmax(300px, .86fr) minmax(420px, 1fr) !important;
+    column-gap: 38px !important;
+  }
+
+  .about-home-title {
+    font-size: clamp(92px, 11vw, 124px) !important;
+  }
+
+  .about-home-eyebrow,
+  .about-home-bar {
+    margin-left: 20px !important;
+    padding-left: 0 !important;
+  }
+
+  .about-home-portrait {
+    width: 300px !important;
+    height: 370px !important;
+  }
+
+  .about-home-copy {
+    margin-top: 58px !important;
+  }
+
+  .about-home-script {
+    font-size: 82px !important;
+  }
+
+  .about-home-service-row {
+    width: min(calc(100% - 72px), 1080px) !important;
+  }
+}
+
+/* About desktop balanced hero reset. */
+@media (min-width: 901px) {
+  .about-home-hero {
+    width: min(calc(100% - 96px), 1600px) !important;
+    min-height: 0 !important;
+    height: clamp(560px, 33vw, 660px) !important;
+    margin: 34px auto 0 !important;
+    padding: clamp(46px, 3.7vw, 68px) clamp(58px, 4.8vw, 92px) !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 430px) !important;
+    grid-template-rows: auto auto 1fr auto !important;
+    grid-template-areas:
+      "eyebrow portrait"
+      "title portrait"
+      "copy portrait"
+      "location portrait" !important;
+    column-gap: clamp(58px, 6vw, 110px) !important;
+    row-gap: 12px !important;
+    align-items: start !important;
+    overflow: hidden !important;
+  }
+
+  .about-home-hero::before {
+    left: 22px !important;
+    bottom: 26px !important;
+    width: clamp(220px, 15vw, 300px) !important;
+    height: clamp(220px, 15vw, 300px) !important;
+    opacity: .72 !important;
+  }
+
+  .about-home-hero::after {
+    right: clamp(36px, 4vw, 78px) !important;
+    top: clamp(38px, 3.5vw, 72px) !important;
+    font-size: clamp(112px, 9vw, 188px) !important;
+  }
+
+  .about-home-eyebrow {
+    grid-area: eyebrow !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    letter-spacing: .42em !important;
+  }
+
+  .about-home-title {
+    grid-area: title !important;
+    margin: 0 !important;
+    max-width: 780px !important;
+    font-size: clamp(112px, 8vw, 166px) !important;
+    line-height: .84 !important;
+  }
+
+  .about-home-intro {
+    display: contents !important;
+  }
+
+  .about-home-portrait {
+    grid-area: portrait !important;
+    place-self: center end !important;
+    width: clamp(300px, 20vw, 410px) !important;
+    height: clamp(380px, 25vw, 505px) !important;
+    margin: 0 !important;
+    z-index: 4 !important;
+    border-radius: 28px !important;
+    transform: rotate(4deg) !important;
+  }
+
+  .about-home-copy {
+    grid-area: copy !important;
+    place-self: start start !important;
+    width: min(620px, 100%) !important;
+    max-width: 620px !important;
+    margin: 4px 0 0 !important;
+    padding: 0 !important;
+    z-index: 5 !important;
+  }
+
+  .about-home-script {
+    margin: 0 0 8px !important;
+    font-size: clamp(68px, 5vw, 104px) !important;
+    line-height: .86 !important;
+  }
+
+  .about-home-copy h2 {
+    margin: 0 0 8px !important;
+    font-size: clamp(42px, 3vw, 60px) !important;
+    line-height: .92 !important;
+  }
+
+  .about-home-copy > p:not(.about-home-script) {
+    width: min(560px, 100%) !important;
+    max-width: 560px !important;
+    padding: 16px 20px !important;
+    font-size: clamp(14px, .86vw, 16px) !important;
+    line-height: 1.45 !important;
+  }
+
+  .about-home-heart {
+    right: -44px !important;
+    bottom: 8px !important;
+    font-size: 42px !important;
+  }
+
+  .about-home-bar {
+    grid-area: location !important;
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    justify-self: start !important;
+    align-self: end !important;
+    width: fit-content !important;
+    min-width: 0 !important;
+    max-width: max-content !important;
+    margin: 16px 0 0 !important;
+    padding: 11px 26px !important;
+    display: inline-flex !important;
+    white-space: nowrap !important;
+  }
+
+  .about-home-service-row {
+    width: min(calc(100% - 140px), 1420px) !important;
+    margin-top: 52px !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .about-home-hero {
+    width: min(calc(100% - 56px), 1080px) !important;
+    height: auto !important;
+    min-height: 600px !important;
+    padding: 44px 40px 56px !important;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 330px) !important;
+    column-gap: 34px !important;
+  }
+
+  .about-home-title {
+    font-size: clamp(86px, 10vw, 118px) !important;
+  }
+
+  .about-home-portrait {
+    width: 288px !important;
+    height: 360px !important;
+  }
+
+  .about-home-script {
+    font-size: 74px !important;
+  }
+
+  .about-home-copy h2 {
+    font-size: 44px !important;
+  }
+
+  .about-home-service-row {
+    width: min(calc(100% - 72px), 1080px) !important;
+  }
+}
+
+/* About desktop hero containment tune. */
+@media (min-width: 901px) {
+  .about-home-hero {
+    height: clamp(640px, 34vw, 700px) !important;
+    grid-template-rows: auto auto auto auto !important;
+    row-gap: 12px !important;
+  }
+
+  .about-home-portrait {
+    place-self: start end !important;
+    width: clamp(280px, 18vw, 360px) !important;
+    height: clamp(330px, 22vw, 430px) !important;
+    margin-top: clamp(54px, 4.4vw, 86px) !important;
+  }
+
+  .about-home-copy {
+    margin-top: clamp(12px, 1.4vw, 26px) !important;
+  }
+
+  .about-home-script {
+    font-size: clamp(62px, 4.6vw, 92px) !important;
+  }
+
+  .about-home-copy h2 {
+    font-size: clamp(38px, 2.7vw, 54px) !important;
+  }
+
+  .about-home-copy > p:not(.about-home-script) {
+    padding: 14px 18px !important;
+    line-height: 1.38 !important;
+  }
+
+  .about-home-bar {
+    margin-top: 14px !important;
+  }
+
+  .about-home-heart {
+    right: -42px !important;
+    bottom: 12px !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .about-home-hero {
+    min-height: 0 !important;
+    height: 620px !important;
+  }
+
+  .about-home-portrait {
+    width: 258px !important;
+    height: 326px !important;
+    margin-top: 60px !important;
+  }
+
+  .about-home-script {
+    font-size: 66px !important;
+  }
+}
+
+/* About desktop poster hero definitive layout. */
+@media (min-width: 901px) {
+  .about-home-hero {
+    position: relative !important;
+    display: block !important;
+    width: min(calc(100% - 96px), 1600px) !important;
+    height: clamp(660px, 34vw, 720px) !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .about-home-eyebrow {
+    position: absolute !important;
+    left: clamp(110px, 7vw, 150px) !important;
+    top: clamp(72px, 4.8vw, 96px) !important;
+    z-index: 4 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .about-home-title {
+    position: absolute !important;
+    left: clamp(110px, 7vw, 150px) !important;
+    top: clamp(132px, 7vw, 168px) !important;
+    z-index: 4 !important;
+    width: auto !important;
+    max-width: min(55vw, 820px) !important;
+    margin: 0 !important;
+    font-size: clamp(112px, 8vw, 166px) !important;
+  }
+
+  .about-home-intro {
+    display: block !important;
+    position: static !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+  }
+
+  .about-home-portrait {
+    position: absolute !important;
+    right: clamp(100px, 7vw, 150px) !important;
+    top: clamp(158px, 8.4vw, 190px) !important;
+    z-index: 5 !important;
+    width: clamp(300px, 18vw, 380px) !important;
+    height: clamp(350px, 22vw, 450px) !important;
+    margin: 0 !important;
+    transform: rotate(4deg) !important;
+  }
+
+  .about-home-copy {
+    position: absolute !important;
+    left: clamp(110px, 7vw, 150px) !important;
+    top: clamp(390px, 20.5vw, 438px) !important;
+    z-index: 6 !important;
+    width: min(620px, 45vw) !important;
+    max-width: 620px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .about-home-script {
+    margin: 0 0 8px !important;
+    font-size: clamp(62px, 4.4vw, 92px) !important;
+  }
+
+  .about-home-copy h2 {
+    margin: 0 0 8px !important;
+    font-size: clamp(38px, 2.7vw, 54px) !important;
+  }
+
+  .about-home-copy > p:not(.about-home-script) {
+    width: min(560px, 100%) !important;
+    max-width: 560px !important;
+    padding: 14px 18px !important;
+    line-height: 1.38 !important;
+  }
+
+  .about-home-heart {
+    right: -44px !important;
+    bottom: -10px !important;
+  }
+
+  .about-home-bar {
+    position: absolute !important;
+    left: clamp(110px, 7vw, 150px) !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: clamp(44px, 3.8vw, 64px) !important;
+    z-index: 7 !important;
+    transform: none !important;
+    width: fit-content !important;
+    min-width: 0 !important;
+    max-width: max-content !important;
+    margin: 0 !important;
+    padding: 11px 26px !important;
+    white-space: nowrap !important;
+  }
+
+  .about-home-service-row {
+    margin-top: 52px !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .about-home-hero {
+    width: min(calc(100% - 56px), 1080px) !important;
+    height: 640px !important;
+  }
+
+  .about-home-eyebrow,
+  .about-home-title,
+  .about-home-copy,
+  .about-home-bar {
+    left: 56px !important;
+  }
+
+  .about-home-title {
+    top: 132px !important;
+    font-size: clamp(84px, 10vw, 116px) !important;
+    max-width: 58vw !important;
+  }
+
+  .about-home-copy {
+    top: 350px !important;
+    width: min(540px, 52vw) !important;
+  }
+
+  .about-home-script {
+    font-size: 66px !important;
+  }
+
+  .about-home-portrait {
+    right: 58px !important;
+    top: 180px !important;
+    width: 260px !important;
+    height: 330px !important;
+  }
+}
+
+/* About desktop hero copy-pill separation. */
+@media (min-width: 901px) {
+  .about-home-copy {
+    top: clamp(330px, 17.5vw, 350px) !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .about-home-copy {
+    top: 318px !important;
+  }
+}
+
+/* About story section composed image card repair. */
+@media (min-width: 901px) {
+  .story-section {
+    grid-template-columns: minmax(560px, .98fr) minmax(500px, .82fr) !important;
+    gap: clamp(54px, 5vw, 96px) !important;
+    align-items: center !important;
+    min-height: 0 !important;
+    padding: clamp(58px, 5vw, 86px) !important;
+    overflow: hidden !important;
+  }
+
+  .story-section::before {
+    content: "STORY" !important;
+    right: 42px !important;
+    top: 26px !important;
+    font-size: clamp(120px, 10vw, 180px) !important;
+    opacity: .75 !important;
+  }
+
+  .story-content {
+    max-width: 720px !important;
+    padding-left: 0 !important;
+  }
+
+  .story-content h2 {
+    font-size: clamp(64px, 5vw, 96px) !important;
+    margin-bottom: 44px !important;
+  }
+
+  .story-content p {
+    max-width: 62ch !important;
+    font-size: clamp(16px, 1vw, 19px) !important;
+    line-height: 1.78 !important;
+  }
+
+  .story-image {
+    position: relative !important;
+    width: 100% !important;
+    height: clamp(430px, 27vw, 560px) !important;
+    overflow: visible !important;
+    border-radius: 0 !important;
+    isolation: isolate !important;
+  }
+
+  .story-image::before {
+    inset: 42px 18px 24px 48px !important;
+    z-index: 0 !important;
+    border: 1px solid rgba(255,177,207,.38) !important;
+    border-radius: 30px !important;
+    transform: rotate(-3deg) !important;
+    background: radial-gradient(circle at 90% 15%, rgba(255,177,207,.08), transparent 190px) !important;
+  }
+
+  .story-image::after {
+    content: "" !important;
+    position: absolute !important;
+    left: -28px !important;
+    bottom: 18px !important;
+    z-index: 1 !important;
+    width: 178px !important;
+    height: 178px !important;
+    border-radius: 50% !important;
+    background: radial-gradient(circle, rgba(255,177,207,.32), rgba(255,177,207,.08) 62%, transparent 70%) !important;
+    filter: blur(.5px) !important;
+    pointer-events: none !important;
+  }
+
+  .story-image img {
+    position: absolute !important;
+    inset: 38px 48px 38px 0 !important;
+    z-index: 2 !important;
+    width: calc(100% - 54px) !important;
+    height: calc(100% - 76px) !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border: 2px solid rgba(255,255,255,.9) !important;
+    border-radius: 28px !important;
+    transform: rotate(2deg) !important;
+    box-shadow: 0 28px 70px rgba(0,0,0,.48), 0 0 40px rgba(255,177,207,.12) !important;
+  }
+
+  .experience-badge {
+    left: auto !important;
+    right: 18px !important;
+    bottom: 18px !important;
+    z-index: 4 !important;
+    width: 138px !important;
+    height: 138px !important;
+    min-width: 0 !important;
+    padding: 18px !important;
+    border-radius: 50% !important;
+    transform: rotate(-8deg) !important;
+  }
+
+  .experience-badge .years {
+    font-size: 22px !important;
+    line-height: 1 !important;
+  }
+
+  .experience-badge .label {
+    max-width: 90px !important;
+    margin: 7px auto 0 !important;
+    font-size: 10px !important;
+    line-height: 1.12 !important;
+    text-transform: uppercase !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .story-section {
+    grid-template-columns: 1fr !important;
+  }
+
+  .story-image {
+    height: 420px !important;
+  }
+}
+/* Final About desktop width lock: every body section lines up with the hero container. */
+@media (min-width: 901px) {
+  .about-home-hero,
+  .about-home-service-row,
+  .about-poster-page > .section,
+  .about-poster-page > .section > .container,
+  .about-poster-page .stats-section,
+  .about-poster-page .values-grid,
+  .about-poster-page .artist-profile {
+    width: min(calc(100% - 96px), 1600px) !important;
+    max-width: 1600px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .about-poster-page > .section > .container {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .about-home-hero,
+  .about-home-service-row,
+  .about-poster-page > .section,
+  .about-poster-page > .section > .container,
+  .about-poster-page .stats-section,
+  .about-poster-page .values-grid,
+  .about-poster-page .artist-profile {
+    width: min(calc(100% - 56px), 1080px) !important;
+    max-width: 1080px !important;
+  }
+
+  .about-poster-page > .section > .container {
+    width: 100% !important;
+  }
+}
+/* Final About hero composition repair: compact, layered, no collisions. */
+@media (min-width: 901px) {
+  body:has(.about-poster-page) {
+    background:
+      radial-gradient(ellipse at 8% 22%, rgba(255,177,207,.18), transparent 330px),
+      radial-gradient(ellipse at 92% 38%, rgba(255,177,207,.10), transparent 360px),
+      radial-gradient(ellipse at 48% 78%, rgba(255,177,207,.07), transparent 430px),
+      #030303 !important;
+  }
+
+  body:has(.about-poster-page)::before {
+    content: "" !important;
+    position: fixed !important;
+    inset: 78px 0 0 !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    background:
+      repeating-radial-gradient(ellipse at 9% 18%, rgba(255,177,207,.10) 0 1px, transparent 1px 22px),
+      linear-gradient(105deg, transparent 0 38%, rgba(255,177,207,.08) 38% 38.4%, transparent 38.4% 100%) !important;
+    opacity: .65 !important;
+    mask-image: linear-gradient(180deg, transparent, #000 12%, #000 82%, transparent) !important;
+  }
+
+  .about-poster-page {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  .about-home-hero {
+    height: clamp(590px, 30vw, 640px) !important;
+    overflow: hidden !important;
+  }
+
+  .about-home-hero::before {
+    inset: auto auto -120px -110px !important;
+    width: clamp(360px, 24vw, 520px) !important;
+    height: clamp(360px, 24vw, 520px) !important;
+    opacity: .82 !important;
+  }
+
+  .about-home-hero::after {
+    right: clamp(40px, 5vw, 90px) !important;
+    top: clamp(70px, 5vw, 105px) !important;
+    font-size: clamp(110px, 11vw, 210px) !important;
+    opacity: .5 !important;
+  }
+
+  .about-home-eyebrow {
+    left: clamp(92px, 6vw, 128px) !important;
+    top: clamp(58px, 3.8vw, 76px) !important;
+  }
+
+  .about-home-title {
+    left: clamp(92px, 6vw, 128px) !important;
+    top: clamp(112px, 5.9vw, 136px) !important;
+    font-size: clamp(102px, 7.2vw, 148px) !important;
+    line-height: .78 !important;
+  }
+
+  .about-home-portrait {
+    right: clamp(88px, 6.2vw, 132px) !important;
+    top: clamp(138px, 7.4vw, 168px) !important;
+    width: clamp(292px, 16.5vw, 350px) !important;
+    height: clamp(330px, 19.5vw, 405px) !important;
+    z-index: 6 !important;
+  }
+
+  .about-home-copy {
+    left: clamp(92px, 6vw, 128px) !important;
+    top: clamp(332px, 17.2vw, 368px) !important;
+    width: min(660px, 47vw) !important;
+    max-width: 660px !important;
+    z-index: 7 !important;
+  }
+
+  .about-home-script {
+    margin-bottom: 4px !important;
+    font-size: clamp(56px, 3.8vw, 78px) !important;
+    line-height: .82 !important;
+  }
+
+  .about-home-copy h2 {
+    margin-bottom: 6px !important;
+    font-size: clamp(34px, 2.3vw, 46px) !important;
+    line-height: .88 !important;
+  }
+
+  .about-home-copy > p:not(.about-home-script) {
+    width: min(640px, 100%) !important;
+    max-width: 640px !important;
+    min-height: 0 !important;
+    padding: 13px 20px !important;
+    font-size: clamp(15px, .9vw, 18px) !important;
+    line-height: 1.34 !important;
+  }
+
+  .about-home-heart {
+    right: clamp(-86px, -4vw, -50px) !important;
+    bottom: 4px !important;
+  }
+
+  .about-home-bar {
+    left: clamp(92px, 6vw, 128px) !important;
+    top: clamp(522px, 26.1vw, 558px) !important;
+    bottom: auto !important;
+    z-index: 8 !important;
+    padding: 12px 30px !important;
+  }
+
+  .about-home-service-row {
+    margin-top: 22px !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .about-home-hero {
+    height: 575px !important;
+  }
+
+  .about-home-eyebrow,
+  .about-home-title,
+  .about-home-copy,
+  .about-home-bar {
+    left: 54px !important;
+  }
+
+  .about-home-title {
+    top: 108px !important;
+    font-size: clamp(86px, 10vw, 118px) !important;
+  }
+
+  .about-home-copy {
+    top: 308px !important;
+    width: min(560px, 54vw) !important;
+  }
+
+  .about-home-bar {
+    top: 498px !important;
+  }
+
+  .about-home-portrait {
+    right: 54px !important;
+    top: 148px !important;
+    width: 244px !important;
+    height: 310px !important;
+  }
+}

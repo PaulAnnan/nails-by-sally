@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Nails By Sally — Gallery</title>
+  <title>Nails By Sally - Gallery</title>
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -253,6 +253,16 @@
     }
 
   </style>
+  <link rel="stylesheet" href="poster-pages.css">
+  <link rel="stylesheet" href="unified-pages.css">
+  <link rel="stylesheet" href="gallery-redesign.css?v=20260722banner4">
+  <link rel="stylesheet" href="home-navbar.css?v=20260722a">
+  <link rel="stylesheet" href="gallery-mobile-fixes.css">
+  <link rel="stylesheet" href="navbar-logo-consistency.css">
+  <link rel="stylesheet" href="navbar-unified-behavior.css?v=20260722navfix1">
+  <link rel="stylesheet" href="no-footers.css?v=20260722footer3">
+  <link rel="stylesheet" href="premium-typography-cleanup.css?v=20260722type1">
+  <link rel="stylesheet" href="gallery-services-hero-unified.css?v=20260722d">
 </head>
 <body>
   <div class="bg"><div class="blob b1"></div><div class="blob b2"></div></div>
@@ -271,20 +281,113 @@
         </div>
       </a>
 
-      <nav class="nav">
-        <a class="nav-link" href="home.html">Home</a>
-        <a class="nav-link" href="services.html">Services</a>
-        <a class="nav-link btn btn-primary" href="booking.html">Book Now</a>
-        <a class="nav-link" href="about.html">About</a>
-        <a class="nav-link" href="contact.html">Contact</a>
-      </nav>
+      <nav class="nav"></nav>
+
+      <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open Menu"></button>
     </div>
   </header>
+  <nav id="mobileMenu" class="mobile-menu" hidden></nav>
 
+  <main class="gallery-reference">
+    <section class="gallery-hero" aria-labelledby="gallery-title">
+      <div class="hero-copy">
+        <span class="spark spark-one" aria-hidden="true">&#10022;</span>
+        <span class="spark spark-two" aria-hidden="true">&#10022;</span>
+        <p class="script-title">Nail Gallery</p>
+        <h1 id="gallery-title">By Sally</h1>
+        <div class="ornament-line" aria-hidden="true"><span></span></div>
+        <p class="hero-intro">A collection of detail, creativity and confidence. Discover nails that inspire and elevate.</p>
+        <p class="ghost-script">Beauty in every detail</p>
+      </div>
+
+      <div class="hero-collage" aria-label="Featured nail gallery collage">
+        <span class="spark spark-three" aria-hidden="true">&#10022;</span>
+        <span class="spark spark-four" aria-hidden="true">&#10022;</span>
+        <span class="glow-ring" aria-hidden="true"></span>
+        <article class="collage-card collage-one"><img src="./Images/Nails1.png" alt="Soft nude chrome manicure"></article>
+        <article class="collage-card collage-two"><img src="./Images/Nails8.png" alt="Glossy almond acrylic nails"></article>
+        <article class="collage-card collage-three"><img src="./Images/Nails12.png" alt="Pink almond nail set"></article>
+        <article class="collage-card collage-four"><img src="./Images/Nails14.png" alt="Elegant long nail design"></article>
+        <article class="collage-card collage-five"><img src="./Images/Nails16.png" alt="French chrome nail detail"></article>
+      </div>
+    </section>
+
+    <section class="gallery-controls-ref" aria-label="Gallery filters and search">
+      <div class="filter-row">
+        <button class="filter-pill active" type="button">&#10022; <span>All</span></button>
+        <button class="filter-pill" type="button">&#9826; <span>Manicure</span></button>
+        <button class="filter-pill" type="button">&#9827; <span>Acrylic</span></button>
+        <button class="filter-pill" type="button">&#10023; <span>Art</span></button>
+        <button class="filter-pill" type="button">&#9819; <span>Pedicure</span></button>
+        <button class="filter-pill" type="button">&#10022; <span>Chrome</span></button>
+        <button class="filter-pill" type="button">&#9825; <span>French</span></button>
+        <button class="filter-pill" type="button">3D</button>
+      </div>
+      <div class="gallery-search-row">
+        <label class="gallery-search"><span aria-hidden="true">&#9906;</span><input type="search" placeholder="Search looks, colors, styles..."></label>
+        <button class="sort-pill" type="button">Most Loved <span aria-hidden="true">&#9829;</span> <b aria-hidden="true">v</b></button>
+      </div>
+    </section>
+
+    <section class="feature-grid" aria-label="Curated gallery looks">
+      <article class="look-card look-feature" style="--bg:url('./Images/Nails12.png')">
+        <span class="tag">Featured Look +</span>
+        <div class="look-content">
+          <h2>Blush Chrome <em>Elegance</em></h2>
+          <p class="love">&#9825; 879 loves</p>
+          <p>Soft pink chrome with a mirror finish. Sophisticated, timeless and effortlessly you.</p>
+          <a href="booking.html">View Look</a>
+        </div>
+      </article>
+      <article class="look-card look-tall" style="--bg:url('./Images/Nails14.png')">
+        <span class="tag">Trending</span>
+        <div class="look-content compact"><h3>Silver Chrome Aura</h3><p class="love">&#9829; 742 loves</p></div>
+        <button class="round-arrow" type="button" aria-label="View Silver Chrome Aura">&gt;</button>
+      </article>
+      <article class="look-card" style="--bg:url('./Images/Nails2.png')">
+        <span class="tag">Art</span><div class="look-content compact"><h3>Celerye Butterfly Set</h3><p class="love">&#9825; 623 loves</p></div><button class="heart-btn" type="button" aria-label="Like Celerye Butterfly Set">&#9825;</button>
+      </article>
+      <article class="look-card" style="--bg:url('./Images/Nails6.png')">
+        <span class="tag">French</span><div class="look-content compact"><h3>Classic French Tips</h3><p class="love">&#9825; 556 loves</p></div><button class="heart-btn" type="button" aria-label="Like Classic French Tips">&#9825;</button>
+      </article>
+      <article class="look-card look-large" style="--bg:url('./Images/Nails17.png')">
+        <span class="tag">3D Art</span><div class="look-content compact"><h3>Red French Swirl</h3><p class="love">&#9825; 688 loves</p></div><button class="heart-btn" type="button" aria-label="Like Red French Swirl">&#9825;</button>
+      </article>
+      <article class="look-card" style="--bg:url('./Images/Nails10.png')">
+        <span class="tag">Chrome</span><div class="look-content compact"><h3>Aurora Chrome Set</h3><p class="love">&#9825; 612 loves</p></div><button class="heart-btn" type="button" aria-label="Like Aurora Chrome Set">&#9825;</button>
+      </article>
+      <article class="look-card" style="--bg:url('./Images/Nails7.png')">
+        <span class="tag">Acrylic</span><div class="look-content compact"><h3>Tropical Flower Set</h3><p class="love">&#9825; 571 loves</p></div><button class="heart-btn" type="button" aria-label="Like Tropical Flower Set">&#9825;</button>
+      </article>
+    </section>
+
+    <section class="booking-banner">
+      <div class="banner-image"><img src="./Images/Design.png" alt="Luxury nail studio vanity"></div>
+      <div class="banner-copy">
+        <p class="script-title small">Your best nails</p>
+        <h2>Are A Booking Away</h2>
+        <p>Let's create a look that's uniquely you. Book your appointment today.</p>
+        <div class="banner-points"><span>&#10046; Expert Nail Artists</span><span>&#9819; Premium Products</span><span>&#10023; Relaxing Experience</span></div>
+      </div>
+      <a class="banner-button" href="booking.html">Book Your Appointment <span aria-hidden="true">&#10022;</span></a>
+    </section>
+
+    <footer class="gallery-footer">
+      <div class="footer-brand">
+        <div class="footer-logo-row"><img src="sffsfs.png" alt="Nails By Sally logo"><div><strong>Nails By Sally</strong><span>Nail Studio</span></div></div>
+        <p>Elevating beauty, one set at a time. Luxury nail services with a personal touch.</p>
+        <div class="footer-socials"><a href="#" aria-label="Instagram">ig</a><a href="#" aria-label="TikTok">tk</a><a href="#" aria-label="Facebook">fb</a><a href="#" aria-label="Pinterest">p</a></div>
+      </div>
+      <div><h3>Quick Links</h3><a href="home.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a class="active" href="gallery.html">Gallery</a><a href="booking.html">Book Appointment</a><a href="contact.html">Contact</a></div>
+      <div><h3>Services</h3><a href="services.html">Manicure</a><a href="services.html">Acrylic</a><a href="services.html">Nail Art</a><a href="services.html">Pedicure</a><a href="services.html">Chrome Nails</a><a href="services.html">3D Designs</a></div>
+      <div><h3>Contact</h3><p>(323) 456-7890</p><p>hello@nailsbysally.com</p><p>123 Beauty Lane<br>Los Angeles, CA 90001</p></div>
+    </footer>
+    <div class="gallery-copyright"><span>&copy; 2025 Nails By Sally. All rights reserved.</span><span class="footer-ornament">&#10022; ----- &#10046; ----- &#10022;</span><span>Beauty. Confidence. You. &#9829;</span></div>
+  </main>
   <!-- TITLE -->
   <section class="container title-wrap">
     <h1 class="h1 reveal" style="--d:60ms">Our <span class="accent">Gallery</span></h1>
-    <p class="lead reveal" style="--d:140ms">Swipe, filter, and explore our favorite sets — from sleek classics to bold art.</p>
+    <p class="lead reveal" style="--d:140ms">Swipe, filter, and explore our favorite sets - from sleek classics to bold art.</p>
   </section>
 
   <!-- CONTROLS -->
@@ -298,12 +401,12 @@
     </div>
 
     <div class="search reveal" style="--d:220ms">
-      <input id="q" type="search" placeholder="Search looks (e.g. chrome, french, ombré)…" />
+      <input id="q" type="search" placeholder="Search looks (e.g. chrome, french, ombre)..." />
     </div>
 
     <div class="tools reveal" style="--d:260ms">
-      <button id="shuffleBtn" class="btn">Shuffle ✨</button>
-      <button id="likeFilterBtn" class="btn">Only Likes ❤️</button>
+      <button id="shuffleBtn" class="btn">Shuffle &#10022;</button>
+      <button id="likeFilterBtn" class="btn">Only Likes &#9825;</button>
     </div>
   </section>
 
@@ -314,8 +417,8 @@
 
   <!-- LIGHTBOX -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
-    <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
-    <button class="lb-prev" id="lbPrev" aria-label="Previous">❮</button>
+    <button class="lb-close" id="lbClose" aria-label="Close">x</button>
+    <button class="lb-prev" id="lbPrev" aria-label="Previous">&lsaquo;</button>
     <div class="lb-img-wrap">
       <img id="lbImg" class="lb-img" alt="Gallery image" />
       <div class="lb-meta">
@@ -325,8 +428,8 @@
         </div>
       </div>
     </div>
-    <button class="lb-next" id="lbNext" aria-label="Next">❯</button>
-    <div class="hint">Tip: use ← → keys, click image to advance, double-click to zoom</div>
+    <button class="lb-next" id="lbNext" aria-label="Next">&rsaquo;</button>
+    <div class="hint">Tip: use left/right keys, click image to advance, double-click to zoom</div>
   </div>
 
   <script>
@@ -387,7 +490,7 @@
             <div class="title">${item.title}</div>
             <div class="tags">${tagString(item.tags)}</div>
           </div>
-          <button class="like ${liked.has(item.src) ? "liked":""}" title="Like">❤️</button>
+          <button class="like ${liked.has(item.src) ? "liked":""}" title="Like">&#9825;</button>
         </div>
       `;
 
@@ -520,7 +623,7 @@
 
     document.getElementById("likeFilterBtn").addEventListener("click", (e)=>{
       onlyLikes = !onlyLikes;
-      e.currentTarget.textContent = onlyLikes ? "Show All" : "Only Likes ❤️";
+      e.currentTarget.textContent = onlyLikes ? "Show All" : "Only Likes &#9825;";
       applyFilters();
     });
 
@@ -531,5 +634,63 @@
       document.querySelector(".site-header").classList.add("in");
     });
   </script>
+  <script>
+    function setupMobileMenu(){
+      const btn = document.getElementById('menuBtn');
+      const menu = document.getElementById('mobileMenu');
+      if (!btn || !menu) return;
+      const closeMenu = () => {
+        menu.classList.remove('open');
+        menu.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open Menu');
+      };
+      btn.addEventListener('click', () => {
+        const willOpen = !menu.classList.contains('open');
+        menu.classList.toggle('open', willOpen);
+        menu.hidden = !willOpen;
+        btn.setAttribute('aria-expanded', String(willOpen));
+        btn.setAttribute('aria-label', willOpen ? 'Close Menu' : 'Open Menu');
+      });
+      document.addEventListener('click', (event) => {
+        if (!menu.classList.contains('open')) return;
+        if (menu.contains(event.target) || btn.contains(event.target)) return;
+        closeMenu();
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape' || !menu.classList.contains('open')) return;
+        closeMenu();
+        btn.focus();
+      });
+      menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+      window.addEventListener('resize', () => { if (window.innerWidth >= 768) closeMenu(); });
+      closeMenu();
+    }
+    document.addEventListener('DOMContentLoaded', setupMobileMenu);
+  </script>
+  <script>
+    function setupGalleryScrollMotion(){
+      const targets = document.querySelectorAll('.gallery-hero, .gallery-controls-ref, .look-card, .booking-banner, .gallery-footer');
+      if (!targets.length) return;
+      targets.forEach((target, index) => {
+        target.classList.add('gallery-motion');
+        target.style.transitionDelay = `${Math.min(index * 45, 180)}ms`;
+      });
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach((target) => target.classList.add('gallery-in'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('gallery-in');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+      targets.forEach((target) => observer.observe(target));
+    }
+    document.addEventListener('DOMContentLoaded', setupGalleryScrollMotion);
+  </script>
+  <script src="unified-pages.js?v=20260722footer2"></script>
 </body>
 </html>

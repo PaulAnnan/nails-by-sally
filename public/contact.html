@@ -241,6 +241,14 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="poster-pages.css">
+  <link rel="stylesheet" href="unified-pages.css">
+  <link rel="stylesheet" href="contact-mobile-fixes.css">
+  <link rel="stylesheet" href="navbar-logo-consistency.css">
+  <link rel="stylesheet" href="navbar-unified-behavior.css?v=20260722navfix1">
+  <link rel="stylesheet" href="no-footers.css?v=20260722footer3">
+  <link rel="stylesheet" href="premium-typography-cleanup.css?v=20260722type1">
+  <link rel="stylesheet" href="booking-contact-desktop.css?v=20260722desktop3">
 </head>
 <body>
   <div class="bg">
@@ -262,33 +270,21 @@
         </div>
       </a>
 
-      <nav class="nav">
-        <a class="nav-link" href="home.html">Home</a>
-        <a class="nav-link" href="services.html">Services</a>
-        <a class="nav-link btn btn-primary" href="booking.html">Book Now</a>
-        <a class="nav-link" href="about.html">About</a>
-        <a class="nav-link active" href="contact.html">Contact</a>
-      </nav>
+      <nav class="nav"></nav>
 
-      <button id="menuBtn" class="menu-btn" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open Menu">☰</button>
+      <button id="menuBtn" class="menu-btn" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open Menu"></button>
     </div>
   </header>
 
   <!-- MOBILE MENU -->
-  <nav id="mobileMenu" class="mobile-menu" hidden>
-    <a href="home.html">Home</a>
-    <a href="services.html">Services</a>
-    <a class="btn btn-primary" data-glow href="booking.html">Book Now</a>
-    <a href="about.html">About</a>
-    <a class="active" href="contact.html">Contact</a>
-  </nav>
+  <nav id="mobileMenu" class="mobile-menu" hidden></nav>
 
   <!-- MAIN -->
   <div class="container">
     <!-- Hero -->
     <section class="hero-section">
       <h1 class="h1 reveal" style="--d:80ms"><span class="accent">Get In Touch</span></h1>
-      <p class="lead reveal" style="--d:140ms">Ready to transform your nails? Have questions about our services? We'd love to hear from you. Contact us today to schedule your appointment or learn more about our nail services.</p>
+      <p class="lead reveal" style="--d:140ms">Have a question or need help choosing a set? Send a message and Sally will get back to you.</p>
     </section>
 
     <!-- Grid -->
@@ -326,51 +322,7 @@
       <div class="contact-sidebar">
         <div class="info-card reveal" style="--d:200ms">
           <div class="info-header">
-            <div class="info-icon">📞</div>
-            <h3 class="info-title">Call Us</h3>
-          </div>
-          <div class="info-content">
-            <strong>(514) 546-0687</strong>
-            Mon - Sat: 9AM - 7PM
-          </div>
-        </div>
-
-        <div class="info-card reveal" style="--d:240ms">
-          <div class="info-header">
-            <div class="info-icon">✉️</div>
-            <h3 class="info-title">Email Us</h3>
-          </div>
-          <div class="info-content">
-            <strong><a href="/cdn-cgi/l/email-protection#8eece1e1e5e7e0e9cee0efe7e2fdecf7fdefe2e2f7a0ede1e3"><span class="__cf_email__" data-cfemail="79371810150a3b002a01151500391e14181015571a1614">[email&#160;protected]</span></a></strong>
-            We respond within 24 hours
-          </div>
-        </div>
-
-        <div class="info-card reveal" style="--d:280ms">
-          <div class="info-header">
-            <div class="info-icon">📱</div>
-            <h3 class="info-title">Follow Us</h3>
-          </div>
-          <div class="info-content">
-            <strong>@nailsbysally</strong>
-            See our latest nail art
-            <div class="social-links">
-              <a href="https://www.instagram.com/nails.by.sxlly" target="_blank" aria-label="Instagram">
-                <img src="Images/Socials/Instagram.png" alt="Instagram logo">
-              </a>
-              <a href="https://www.tiktok.com/@nails.by.sxlly?lang=en" target="_blank" aria-label="TikTok">
-                <img src="Images/Socials/Tiktok.png" alt="TikTok logo">
-              </a>
-              <a href="https://facebook.com" target="_blank" aria-label="Facebook">
-                <img src="Images/Socials/Facebook.png" alt="Facebook logo">
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="info-card reveal" style="--d:320ms">
-          <div class="info-header">
-            <div class="info-icon">🕒</div>
+            <div class="info-icon info-icon-hours" aria-hidden="true"></div>
             <h3 class="info-title">Business Hours</h3>
           </div>
           <div class="info-content">
@@ -391,6 +343,26 @@
           </div>
         </div>
 
+        <div class="info-card contact-guide-card reveal" style="--d:240ms">
+          <div class="info-header">
+            <div class="info-icon info-icon-message" aria-hidden="true"></div>
+            <h3 class="info-title">Before You Message</h3>
+          </div>
+          <div class="contact-guide-body">
+            <figure class="contact-guide-photo">
+              <img src="Images/Nails8.png" alt="Soft floral nail design by Nails By Sally" loading="lazy" decoding="async">
+            </figure>
+            <div class="contact-guide-copy">
+              <p>Send your preferred date, nail inspo, and the service you are interested in.</p>
+              <ul>
+                <li>Replies usually within 24 hours</li>
+                <li>Inspo photos are welcome</li>
+                <li>Exact address is shared after booking</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -398,7 +370,7 @@
     <section class="cta-section reveal" style="--d:360ms">
       <h2 class="cta-title">Ready to Book Your Nail Appointment?</h2>
       <p class="cta-text">Skip the contact form and schedule your nail service directly. Our booking system makes it easy to find the perfect time for you.</p>
-      <a href="booking.html" class="cta-btn">Book Now <span class="arr">→</span></a>
+      <a href="booking.html" class="cta-btn">Book Now <span class="arr">+</span></a>
     </section>
   </div>
 
@@ -435,7 +407,7 @@
         </ul>
       </div>
     </div>
-    <div class="container copy-row">© <span id="year"></span> Nails By Sally. All rights reserved.</div>
+    <div class="container copy-row">&copy; <span id="year"></span> Nails By Sally. All rights reserved.</div>
   </footer>
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
@@ -490,7 +462,7 @@
         const result = await response.json();
 
         if (response.ok) {
-          button.textContent = 'Message Sent! ✨';
+          button.textContent = 'Message Sent!';
           button.style.background = 'linear-gradient(90deg, #10b981, #059669)';
           setTimeout(() => {
             button.textContent = originalText;
@@ -505,9 +477,9 @@
         console.error('Error:', error);
         
         // Show helpful error message
-        let errorMsg = 'Failed to Send ❌';
+        let errorMsg = 'Failed to Send';
         if (error.message.includes('Failed to fetch')) {
-          errorMsg = 'Server Not Running ❌';
+          errorMsg = 'Server Not Running';
           console.error('Make sure your server is running on port 4000');
         }
         
@@ -570,5 +542,6 @@
       onResize();
     }
   </script>
+  <script src="unified-pages.js?v=20260722footer2"></script>
 </body>
 </html>

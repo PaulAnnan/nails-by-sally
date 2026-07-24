@@ -419,6 +419,39 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="poster-pages.css">
+  <link rel="stylesheet" href="about-redesign.css">
+  <link rel="stylesheet" href="unified-pages.css">
+  <link rel="stylesheet" href="about-reference.css?v=20260722a">
+  <link rel="stylesheet" href="home-navbar.css?v=20260722a">
+  <link rel="stylesheet" href="navbar-logo-consistency.css">
+  <link rel="stylesheet" href="navbar-unified-behavior.css?v=20260722navfix1">
+  <link rel="stylesheet" href="no-footers.css?v=20260722footer3">
+  <link rel="stylesheet" href="about-mobile-fixes.css?v=20260722heart1">
+  <link rel="stylesheet" href="premium-typography-cleanup.css?v=20260722type1">
+  <link rel="stylesheet" href="about-desktop-polish.css?v=20260722m">
+  <style id="about-scroll-guard">
+    html,
+    body {
+      height: auto !important;
+      min-height: 100% !important;
+      max-height: none !important;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      overscroll-behavior-y: auto !important;
+      touch-action: auto !important;
+      position: static !important;
+    }
+
+    main.about-poster-page {
+      display: block !important;
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      overflow: visible !important;
+      contain: none !important;
+    }
+  </style>
 </head>
 <body>
   <div class="bg"><div class="blob b1"></div><div class="blob b2"></div></div>
@@ -437,36 +470,50 @@
         </div>
       </a>
 
-      <nav class="nav">
-        <a class="nav-link" href="home.html">Home</a>
-        <a class="nav-link" href="services.html">Services</a>
-        <a class="nav-link btn btn-primary" href="booking.html">Book Now</a>
-        <a class="nav-link active" href="about.html">About</a>
-        <a class="nav-link" href="contact.html">Contact</a>
-      </nav>
+      <nav class="nav"></nav>
 
-      <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open Menu">☰</button>
+      <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open Menu"></button>
     </div>
   </header>
 
   <!-- MOBILE MENU -->
-  <nav id="mobileMenu" class="mobile-menu" hidden>
-    <a href="home.html">Home</a>
-    <a href="services.html">Services</a>
-    <a class="btn btn-primary" data-glow href="booking.html">Book Now</a>
-    <a class="active" href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <nav id="mobileMenu" class="mobile-menu" hidden></nav>
 
-  <main>
-    <!-- Page Header -->
-    <section class="page-header">
-      <div class="container">
-        <h1 class="page-title reveal" style="--d:60ms">About <span class="accent">Nails By Sally</span></h1>
-        <p class="page-subtitle reveal" style="--d:120ms">
-          We're passionate about creating beautiful nails that reflect your unique style. Our nail studio combines artistry with expertise to deliver exceptional results in a relaxing, welcoming environment.
-        </p>
+  <main class="about-poster-page">
+    <!-- About poster hero -->
+    <section class="about-home-hero reveal" style="--d:60ms" aria-label="About Nails By Sally">
+      <p class="about-home-eyebrow">Welcome to my nail studio</p>
+      <h1 class="about-home-title">ABOUT</h1>
+
+      <div class="about-home-intro">
+        <figure class="about-home-portrait">
+          <img src="Images/Sally.jpg" alt="Sally, owner and nail artist" decoding="async">
+        </figure>
+
+        <div class="about-home-copy">
+          <p class="about-home-script">by Sally</p>
+          <h2>Hi,</h2>
+          <p>I'm Sally, the nail artist behind Nails By Sally. I create polished, detailed sets that feel personal, clean, and confidently you.</p>
+          <span class="about-home-heart" aria-hidden="true">&#9825;</span>
+        </div>
       </div>
+
+      <div class="about-home-bar">Montreal, Quebec</div>
+    </section>
+
+    <section class="about-home-service-row reveal" style="--d:120ms" aria-label="About Nails By Sally highlights">
+      <figure class="about-home-service-card">
+        <img src="Images/Nails2.png" alt="Clean gel manicure by Nails By Sally" loading="lazy" decoding="async">
+        <span>Clean Prep</span>
+      </figure>
+      <figure class="about-home-service-card about-home-service-main">
+        <img src="Images/Nails4.png" alt="Detailed acrylic nail art by Nails By Sally" loading="lazy" decoding="async">
+        <span>Custom Art</span>
+      </figure>
+      <figure class="about-home-service-card">
+        <img src="Images/Nails8.png" alt="Floral nail design by Nails By Sally" loading="lazy" decoding="async">
+        <span>Soft Detail</span>
+      </figure>
     </section>
 
     <!-- Story Section -->
@@ -476,7 +523,7 @@
           <div class="story-content">
             <h2>Our Story</h2>
             <p>Founded with a passion for nail artistry, Nails By Sally has been creating beautiful nails for over three years. What started as a love for nail design has grown into a premier nail studio dedicated to bringing out the beauty in every client.</p>
-            <p>We believe that beautiful nails are more than just an accessory — they're a form of self-expression. Whether you prefer classic elegance or bold artistic designs, our talented team works with you to create nails that perfectly reflect your personality and style.</p>
+            <p>We believe that beautiful nails are more than just an accessory. They're a form of self-expression. Whether you prefer classic elegance or bold artistic designs, our talented team works with you to create nails that perfectly reflect your personality and style.</p>
             <p>Today, we're proud to have served over 300 clients, building lasting relationships based on trust, creativity, and exceptional nail care. Every client leaves feeling confident and beautifully polished.</p>
           </div>
 
@@ -496,22 +543,22 @@
       <div class="container">
         <div class="stats-section reveal" style="--d:200ms">
           <div class="stat-card">
-            <div class="stat-icon">👥</div>
+            <div class="stat-icon">&#9671;</div>
             <div class="stat-number">300+</div>
             <div class="stat-label">Happy Clients</div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">🏆</div>
+            <div class="stat-icon">&#9733;</div>
             <div class="stat-number">3</div>
             <div class="stat-label">Years Experience</div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">⭐</div>
+            <div class="stat-icon">&#9733;</div>
             <div class="stat-number">4.9</div>
             <div class="stat-label">Average Rating</div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">✨</div>
+            <div class="stat-icon">&#10022;</div>
             <div class="stat-number">100%</div>
             <div class="stat-label">Satisfaction Rate</div>
           </div>
@@ -525,17 +572,17 @@
         <h2 class="values-title reveal" style="--d:240ms">What We Stand For</h2>
         <div class="values-grid reveal" style="--d:280ms">
           <div class="value-card">
-            <div class="value-icon">🎨</div>
+            <div class="value-icon">&#9671;</div>
             <h3 class="value-title">Artistic Excellence</h3>
             <p class="value-desc">Every nail design is crafted with precision and artistic flair to create stunning results that exceed expectations.</p>
           </div>
           <div class="value-card">
-            <div class="value-icon">🏅</div>
+            <div class="value-icon">&#9733;</div>
             <h3 class="value-title">Professional Expertise</h3>
             <p class="value-desc">Our certified nail technician stays current with the latest trends and techniques to deliver the highest quality service.</p>
           </div>
           <div class="value-card">
-            <div class="value-icon">💎</div>
+            <div class="value-icon">&#9671;</div>
             <h3 class="value-title">Quality Products</h3>
             <p class="value-desc">We use only premium nail products and tools for long-lasting, beautiful results that prioritize nail health.</p>
           </div>
@@ -606,7 +653,7 @@
       </div>
     </div>
 
-    <div class="container copy-row">© <span id="year"></span> Nails By Sally. All rights reserved.</div>
+    <div class="container copy-row">&copy; <span id="year"></span> Nails By Sally. All rights reserved.</div>
   </footer>
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
@@ -676,5 +723,6 @@
       onResize();
     }
   </script>
+  <script src="unified-pages.js?v=20260722footer2"></script>
 </body>
 </html>

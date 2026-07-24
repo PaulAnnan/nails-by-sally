@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nails By Sally — Services</title>
+  <title>Nails By Sally - Services</title>
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     /* ================= Theme ================= */
@@ -435,6 +435,16 @@
     }
 
   </style>
+  <link rel="stylesheet" href="services-redesign.css">
+  <link rel="stylesheet" href="unified-pages.css">
+  <link rel="stylesheet" href="services-hero-fix.css?v=20260722i">
+  <link rel="stylesheet" href="home-navbar.css?v=20260722a">
+  <link rel="stylesheet" href="navbar-logo-consistency.css">
+  <link rel="stylesheet" href="navbar-unified-behavior.css?v=20260722navfix1">
+  <link rel="stylesheet" href="no-footers.css?v=20260722footer3">
+  <link rel="stylesheet" href="premium-typography-cleanup.css?v=20260722type1">
+  <link rel="stylesheet" href="services-gallery-style.css?v=20260722hero5">
+  <link rel="stylesheet" href="gallery-services-hero-unified.css?v=20260722d">
 </head>
 <body>
   <div class="bg" id="bg">
@@ -456,26 +466,96 @@
         </div>
       </a>
 
-      <nav class="nav">
-        <a class="nav-link" href="home.html">Home</a>
-        <a class="nav-link active" href="services.html" aria-current="page">Services</a>
-        <a class="nav-link btn btn-primary" data-glow href="booking.html">Book Now</a>
-        <a class="nav-link" href="about.html">About</a>
-        <a class="nav-link" href="contact.html">Contact</a>
-      </nav>
+      <nav class="nav"></nav>
 
-      <button id="menuBtn" class="menu-btn" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open Menu">☰</button>
+      <button id="menuBtn" class="menu-btn" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open Menu"></button>
     </div>
   </header>
 
   <!-- MOBILE MENU -->
-  <nav id="mobileMenu" class="mobile-menu" hidden>
-    <a href="home.html">Home</a>
-    <a class="active" href="services.html">Services</a>
-    <a class="btn btn-primary" data-glow href="booking.html">Book Now</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <nav id="mobileMenu" class="mobile-menu" hidden></nav>
+
+  <main class="services-poster services-reference">
+    <section class="services-gallery-hero reveal" aria-labelledby="services-title">
+      <div class="services-gallery-copy">
+        <span class="service-spark service-spark-one" aria-hidden="true">&#10022;</span>
+        <span class="service-spark service-spark-two" aria-hidden="true">&#10022;</span>
+        <p class="service-script-title">Nail Services</p>
+        <h1 id="services-title">By Sally</h1>
+        <div class="service-ornament-line" aria-hidden="true"><span></span></div>
+        <p class="services-intro">Polished sets, soft details, clean prep and custom art. Choose the service that fits your next look.</p>
+        <p class="service-ghost-script">Luxury in every detail</p>
+      </div>
+
+      <div class="services-gallery-collage" aria-label="Nails By Sally service collage">
+        <span class="service-spark service-spark-three" aria-hidden="true">&#10022;</span>
+        <span class="service-spark service-spark-four" aria-hidden="true">&#10022;</span>
+        <span class="service-glow-ring" aria-hidden="true"></span>
+        <article class="service-collage-card service-collage-one"><img src="Images/Services/GelPolish.jpg" alt="Glossy pink gel polish manicure"></article>
+        <article class="service-collage-card service-collage-two"><img src="Images/Services/Acrylics.jpg" alt="Acrylic nail extension service"></article>
+        <article class="service-collage-card service-collage-three"><img src="Images/Nails8.png" alt="Custom floral nail art service"></article>
+        <article class="service-collage-card service-collage-four"><img src="Images/Services/pedicure.jpg" alt="Pedicure service in progress"></article>
+        <article class="service-collage-card service-collage-five"><img src="Images/Nails16.png" alt="Finished soft nail detail"></article>
+      </div>
+    </section>
+
+    <section class="services-menu-shell" aria-labelledby="catalog-title">
+      <header class="catalog-heading reveal">
+        <p class="section-eyebrow">Explore Our Services</p>
+        <h2 id="catalog-title">Nail Services <span aria-hidden="true">&#9825;</span></h2>
+      </header>
+
+      <div class="svc-tabs reveal" id="svcTabsPoster" aria-label="Service categories">
+        <button class="svc-tab active" data-filter="all" aria-pressed="true">All Services</button>
+        <button class="svc-tab" data-filter="manicures" aria-pressed="false">Manicures</button>
+        <button class="svc-tab" data-filter="pedicures" aria-pressed="false">Pedicures</button>
+        <button class="svc-tab" data-filter="nail_art" aria-pressed="false">Nail Art</button>
+        <button class="svc-tab" data-filter="extensions" aria-pressed="false">Extensions</button>
+        <button class="svc-tab" data-filter="treatments" aria-pressed="false">Treatments</button>
+      </div>
+
+      <section class="svc-grid" id="svcGridPoster" aria-label="Services list">
+        <article class="svc-card reveal svc-card-featured" data-category="manicures">
+          <div class="svc-media"><img src="Images/Services/Manicure.jpg" alt="Classic manicure" loading="lazy"><span class="svc-pill">Most Popular</span><a class="svc-primary" href="booking.html" aria-label="Book Classic Manicure">&rarr;</a></div>
+          <div class="svc-content"><h3>Classic Manicure</h3><p class="svc-desc">Nail shaping, cuticle care, exfoliation, massage, and polish.</p><div class="svc-meta"><span>45 min</span><span class="svc-price">$45</span></div></div>
+        </article>
+        <article class="svc-card reveal" data-category="pedicures">
+          <div class="svc-media"><img src="Images/Services/pedicure.jpg" alt="Relaxing pedicure" loading="lazy"><a class="svc-primary" href="booking.html" aria-label="Book Pedicure">&rarr;</a></div>
+          <div class="svc-content"><h3>Pedicure</h3><p class="svc-desc">Relaxing foot soak, exfoliation, callus care, massage, and polish.</p><div class="svc-meta"><span>60 min</span><span class="svc-price">$55</span></div></div>
+        </article>
+        <article class="svc-card reveal" data-category="extensions">
+          <div class="svc-media"><img src="Images/Services/GelExtensions.jpg" alt="Gel nail extensions" loading="lazy"><a class="svc-primary" href="booking.html" aria-label="Book Gel Extensions">&rarr;</a></div>
+          <div class="svc-content"><h3>Gel Extensions</h3><p class="svc-desc">Lightweight, durable extensions with a glossy gel finish.</p><div class="svc-meta"><span>120 min</span><span class="svc-price">$70</span></div></div>
+        </article>
+        <article class="svc-card reveal" data-category="nail_art">
+          <div class="svc-media"><img src="Images/Services/NailArt.jpg" alt="Custom floral nail art" loading="lazy"><a class="svc-primary" href="booking.html" aria-label="Book Custom Nail Art">&rarr;</a></div>
+          <div class="svc-content"><h3>Custom Nail Art</h3><p class="svc-desc">Bespoke nail art designs tailored to your style.</p><div class="svc-meta"><span>60+ min</span><span class="svc-price">From $15</span></div></div>
+        </article>
+        <article class="svc-card reveal" data-category="extensions">
+          <div class="svc-media"><img src="Images/Services/Acrylics.jpg" alt="Acrylic nail extensions" loading="lazy"><a class="svc-primary" href="booking.html" aria-label="Book Acrylic Extensions">&rarr;</a></div>
+          <div class="svc-content"><h3>Acrylic Extensions</h3><p class="svc-desc">Strong and stylish acrylic extensions in any shape you love.</p><div class="svc-meta"><span>120 min</span><span class="svc-price">$65</span></div></div>
+        </article>
+        <article class="svc-card reveal" data-category="manicures">
+          <div class="svc-media"><img src="Images/Services/GelPolish.jpg" alt="Pink dip powder manicure" loading="lazy"><a class="svc-primary" href="booking.html" aria-label="Book Dip Powder">&rarr;</a></div>
+          <div class="svc-content"><h3>Dip Powder</h3><p class="svc-desc">Long-lasting, chip-resistant dip powder with a smooth finish.</p><div class="svc-meta"><span>60 min</span><span class="svc-price">$50</span></div></div>
+        </article>
+        <article class="svc-card reveal" data-category="treatments">
+          <div class="svc-media"><img src="Images/Services/NailTreatment.jpg" alt="Nail strengthening products" loading="lazy"><a class="svc-primary" href="booking.html" aria-label="Book Strength Treatment">&rarr;</a></div>
+          <div class="svc-content"><h3>Strength Treatment</h3><p class="svc-desc">Nourishing treatment to strengthen, restore, and protect natural nails.</p><div class="svc-meta"><span>30 min</span><span class="svc-price">$40</span></div></div>
+        </article>
+      </section>
+
+      <section class="services-cta reveal">
+        <div class="cta-collage" aria-hidden="true"><img src="Images/Nails7.png" alt=""><img src="Images/Nails10.png" alt=""><span>&#10022;</span></div>
+        <div class="cta-copy"><p class="section-eyebrow">Ready To Glow?</p><h2>Your perfect nails <em>are just one booking away.</em></h2><a href="booking.html" class="services-cta-btn">Book Appointment <span aria-hidden="true">&#10022;</span></a></div>
+        <div class="cta-benefits">
+          <div><span aria-hidden="true">&#9671;</span><p><strong>Experienced Nail Artist</strong><small>3+ years of passion &amp; expertise</small></p></div>
+          <div><span aria-hidden="true">&#9671;</span><p><strong>Clean &amp; Hygienic Tools</strong><small>Your safety is our priority</small></p></div>
+          <div><span aria-hidden="true">&#9671;</span><p><strong>Premium Quality Products</strong><small>Long-lasting, beautiful results</small></p></div>
+        </div>
+      </section>
+    </section>
+  </main>
 
   <!-- SERVICES HERO -->
   <section class="svc-hero container reveal">
@@ -506,7 +586,7 @@
         <div class="svc-content">
           <h3>Acrylic</h3>
           <p class="svc-desc">Durable and versatile! Adds strength and length to your nails with a flawless finish. Choose your shape and style for a custom look that lasts.</p>
-          <div class="svc-meta"><span>⏱️ 45 min</span><span class="svc-price">$80</span></div>
+          <div class="svc-meta"><span>45 min</span><span class="svc-price">$80</span></div>
           <a href="booking.html" class="svc-primary">Book This Service</a>
         </div>
       </article>
@@ -519,7 +599,7 @@
         <div class="svc-content">
           <h3>Classic Manicure</h3>
           <p class="svc-desc">A clean and simple treatment with nail shaping, cuticle care, and polish for natural, elegant hands.</p>
-          <div class="svc-meta"><span>⏱️ 60 min</span><span class="svc-price">$65</span></div>
+          <div class="svc-meta"><span>60 min</span><span class="svc-price">$65</span></div>
           <a href="booking.html" class="svc-primary">Book This Service</a>
         </div>
       </article>
@@ -534,7 +614,7 @@
         <div class="svc-content">
           <h3>Gel Polish</h3>
           <p class="svc-desc">Long-lasting gel polish with cuticle care, nail shaping, and hand massage.</p>
-          <div class="svc-meta"><span>⏱️ 60 min</span><span class="svc-price">$45</span></div>
+          <div class="svc-meta"><span>60 min</span><span class="svc-price">$45</span></div>
           <a href="booking.html" class="svc-primary">Book This Service</a>
         </div>
       </article>
@@ -549,7 +629,7 @@
         <div class="svc-content">
           <h3>Nail Strengthening Treatment</h3>
           <p class="svc-desc">Intensive treatment for weak, damaged nails using pro strengthening formulas and oils.</p>
-          <div class="svc-meta"><span>⏱️ 30 min</span><span class="svc-price">$40</span></div>
+          <div class="svc-meta"><span>30 min</span><span class="svc-price">$40</span></div>
           <a href="booking.html" class="svc-primary">Book This Service</a>
         </div>
       </article>
@@ -562,7 +642,7 @@
         <div class="svc-content">
           <h3>Gel Extensions</h3>
           <p class="svc-desc">Beautiful length and strength with gel extensions. Choose your perfect shape and length.</p>
-          <div class="svc-meta"><span>⏱️ 120 min</span><span class="svc-price">$60</span></div>
+          <div class="svc-meta"><span>120 min</span><span class="svc-price">$60</span></div>
           <a href="booking.html" class="svc-primary">Book This Service</a>
         </div>
       </article>
@@ -573,7 +653,7 @@
       <h3 class="h2">Need Help Choosing the Perfect Service?</h3>
       <p>Book a consultation with our nail artists to discuss your nail goals and find the perfect treatment for you.</p>
       <div style="margin-top:14px">
-        <a href="booking.html" class="btn btn-primary btn-wiggle" data-glow>Book Consultation <span class="arr">→</span></a>
+        <a href="booking.html" class="btn btn-primary btn-wiggle" data-glow>Book Consultation <span class="arr">&rarr;</span></a>
       </div>
     </section>
   </main>
@@ -589,13 +669,20 @@
           <strong style="color:#fff">Nails By Sally</strong>
         </div>
         <p class="muted">Transform your nails with our premium services. Luxury, artistry, and exceptional results every visit.</p>
+        <div class="footer-socials" aria-label="Social media">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="TikTok">TK</a>
+          <a href="#" aria-label="Facebook">f</a>
+        </div>
       </div>
       <div>
         <div class="foot-title">Quick Links</div>
         <ul class="foot-list">
           <li><a href="home.html">Home</a></li>
-          <li><a href="services.html">Services</a></li>
           <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="booking.html">Book Appointment</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
@@ -604,11 +691,11 @@
         <ul class="foot-list">
           <li>(514) 546-0687</li>
           <li><a href="mailto:NailsBySxlly@gmail.com">NailsBySxlly@gmail.com</a></li>
-          <li>@nailsbysally</li>
+          <li>Montreal, Quebec</li>
         </ul>
       </div>
     </div>
-    <div class="container copy-row">© <span id="year"></span> Nails By Sally. All rights reserved.</div>
+    <div class="container copy-row"><span>&copy; <span id="year"></span> Nails By Sally. All rights reserved.</span><span>Made with <b>&#9825;</b> for beautiful nails.</span></div>
   </footer>
 
   <script>
@@ -776,5 +863,6 @@
       preloadCriticalImages();
     }
   </script>
+  <script src="unified-pages.js?v=20260722footer2"></script>
 </body>
 </html>

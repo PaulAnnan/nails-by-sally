@@ -1,0 +1,38 @@
+﻿/* Site-wide navbar logo consistency. Loaded last on every page. */
+.site-header .brand-logo,
+.header .brand-logo {
+  width: 62px !important;
+  height: 62px !important;
+  flex: 0 0 62px !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255, 255, 255, .95) !important;
+  border-radius: 50% !important;
+  background: #fff !important;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, .08) !important;
+}
+
+.site-header .brand-logo img,
+.header .brand-logo img {
+  width: 48px !important;
+  height: 48px !important;
+  display: block !important;
+  object-fit: contain !important;
+}
+
+@media (max-width: 767px) {
+  .site-header .brand-logo,
+  .header .brand-logo {
+    width: 54px !important;
+    height: 54px !important;
+    flex-basis: 54px !important;
+  }
+
+  .site-header .brand-logo img,
+  .header .brand-logo img {
+    width: 44px !important;
+    height: 44px !important;
+  }
+}

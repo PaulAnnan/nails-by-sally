@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nails By Sally — Nail Studio</title>
+  <title>Nails By Sally - Nail Studio</title>
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -655,6 +655,13 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="luxury-brand.css">
+  <link rel="stylesheet" href="home-redesign.css?v=20260722actions1">
+  <link rel="stylesheet" href="home-navbar.css?v=20260722a">
+  <link rel="stylesheet" href="navbar-logo-consistency.css">
+  <link rel="stylesheet" href="navbar-unified-behavior.css?v=20260722navfix1">
+  <link rel="stylesheet" href="no-footers.css?v=20260722footer3">
+  <link rel="stylesheet" href="premium-typography-cleanup.css?v=20260722type1">
 </head>
 <body>
   <div class="bg" id="bg">
@@ -676,47 +683,432 @@
         </div>
       </a>
 
-      <nav class="nav">
-        <a class="nav-link active" href="home.html">Home</a>
-        <a class="nav-link" href="services.html">Services</a>
-        <a class="nav-link btn btn-primary" data-glow href="booking.html">Book Now</a>
-        <a class="nav-link" href="about.html">About</a>
-        <a class="nav-link" href="contact.html">Contact</a>
-      </nav>
+      <nav class="nav"></nav>
 
-      <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open Menu">☰</button>
+      <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open Menu"></button>
     </div>
   </header>
 
   <!-- MOBILE MENU -->
-  <nav id="mobileMenu" class="mobile-menu" hidden>
-    <a class="active" href="home.html">Home</a>
-    <a href="services.html">Services</a>
-    <a class="btn btn-primary" data-glow href="booking.html">Book Now</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <nav id="mobileMenu" class="mobile-menu" hidden></nav>
+
+  <main class="poster-home">
+    <div class="poster-shell">
+      <section class="poster-card poster-hero" id="about">
+        <p class="poster-eyebrow">Welcome to my booking site</p>
+        <h1 class="poster-title">NAILS</h1>
+        <div class="poster-intro">
+          <figure class="stylist-card">
+            <img src="./Images/Sally.jpg" alt="Sally, owner and nail artist" decoding="async">
+          </figure>
+          <div class="intro-copy">
+            <p class="script-name">by Sally</p>
+            <h2>Hi,</h2>
+            <p>Beautiful! Welcome to my salon. I can't wait to pamper you. You deserve to look and feel your best.</p>
+            <span class="heart-mark" aria-hidden="true">&#9825;</span>
+          </div>
+        </div>
+        <div class="location-bar">Montreal, Quebec</div>
+      </section>
+
+      <section class="service-photo-row" id="services" aria-label="Featured services">
+        <article class="service-photo">
+          <img src="./Images/Nails4.png" alt="Gel manicure nail set" loading="lazy">
+          <span>Gel manicure</span>
+          <p>Flawless, long-lasting shine<br>that keeps you polished.</p>
+        </article>
+        <article class="service-photo service-photo-main">
+          <img src="./Images/Nails2.png" alt="Acrylic nails set" loading="lazy">
+          <span>Acrylic nails</span>
+          <p>Bold, beautiful, and built<br>to stand out.</p>
+        </article>
+        <article class="service-photo">
+          <img src="./Images/Nails8.png" alt="Dip powder style nail set" loading="lazy">
+          <span>Dip powder</span>
+          <p>Strong, lightweight, and<br>naturally gorgeous.</p>
+        </article>
+      </section>
+
+      <section class="poster-actions" aria-label="Primary links">
+        <a href="gallery.html">View Gallery</a>
+        <a href="booking.html">Book Appointment</a>
+        <a href="services.html">View Services</a>
+      </section>
+
+      <section class="poster-socials" aria-label="Social media links">
+        <a href="https://www.instagram.com/nails.by.sxlly" target="_blank" rel="noopener noreferrer">
+          <img src="Images/Socials/Instagram.png" alt="Instagram">
+          <span>Instagram</span>
+        </a>
+        <a href="https://www.tiktok.com/@nails.by.sxlly?lang=en" target="_blank" rel="noopener noreferrer">
+          <img src="Images/Socials/Tiktok.png" alt="TikTok">
+          <span>TikTok</span>
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+          <img src="Images/Socials/Facebook.png" alt="Facebook">
+          <span>Facebook</span>
+        </a>
+      </section>
+
+      <section class="popular-services" aria-labelledby="popularServicesTitle">
+        <div class="popular-services-head">
+          <p>Most requested</p>
+          <h2 id="popularServicesTitle">Popular services</h2>
+        </div>
+        <div class="popular-service-stack">
+          <article class="popular-service-card popular-service-card-main">
+            <img src="./Images/Acrylic.png" alt="Acrylic extension nail set" loading="lazy">
+            <div>
+              <span>01</span>
+              <h3>Acrylic extensions</h3>
+              <p>Length, structure, shaping, and a polished finish for a bold set.</p>
+              <a href="services.html">View service</a>
+            </div>
+          </article>
+          <article class="popular-service-card">
+            <img src="./Images/Manicure.png" alt="Gel manicure nail set" loading="lazy">
+            <div>
+              <span>02</span>
+              <h3>Gel manicure</h3>
+              <p>Clean prep, glossy color, and a natural-looking finish.</p>
+              <a href="services.html">View service</a>
+            </div>
+          </article>
+          <article class="popular-service-card">
+            <img src="./Images/Design.png" alt="Custom nail design set" loading="lazy">
+            <div>
+              <span>03</span>
+              <h3>Custom design</h3>
+              <p>Art, chrome, gems, and details matched to your set.</p>
+              <a href="services.html">View service</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact-hours">
+        <figure class="contact-feature">
+          <img src="./Images/Nails3.png" alt="Cherry heart French nail set" loading="lazy">
+          <figcaption>Details first</figcaption>
+        </figure>
+        <figure class="contact-mini">
+          <img src="./Images/Nails10.png" alt="Marble silver nail set" loading="lazy">
+        </figure>
+        <div class="info-panel info-panel-contact">
+          <h3>Contacts</h3>
+          <p>(514) 546-0687</p>
+          <p>NailsBySxlly@gmail.com</p>
+          <p>@nailsbysally</p>
+        </div>
+        <figure class="contact-editorial-accent" aria-label="Featured nail set">
+          <div class="contact-accent-star" aria-hidden="true">&#10022;</div>
+          <img src="./Images/Nails13.png" alt="Pink sculpted nail set with crystal details" loading="lazy">
+          <figcaption>
+            <span>Fresh set</span>
+            <strong>Made to be noticed.</strong>
+            <a href="gallery.html">See the lookbook&nbsp; &rarr;</a>
+          </figcaption>
+        </figure>
+        <div class="info-panel info-panel-hours">
+          <h3>Hours</h3>
+          <p>Mon - Fri 9AM - 7PM</p>
+          <p>Sat 9AM - 6PM</p>
+          <p>Sun by request</p>
+        </div>
+        <div class="info-panel info-panel-location">
+          <h3>Location</h3>
+          <p>Address provided when your appointment is confirmed.</p>
+        </div>
+
+        <div class="contact-desktop-showcase">
+          <div class="contact-side-mark" aria-hidden="true">
+            <b>S</b><span>Nails by Sally</span><i></i>
+          </div>
+
+          <figure class="contact-arch-photo">
+            <img src="./Images/Nails3.png" alt="Red French tip nail art with cherry details" loading="lazy">
+          </figure>
+          <figure class="contact-overlap-photo">
+            <img src="./Images/Nails13.png" alt="Pink sculpted nail set with crystal details" loading="lazy">
+          </figure>
+          <div class="contact-photo-seal" aria-hidden="true">
+            <span>Made to be noticed</span><b>&#10022;</b><span>Details that last</span>
+          </div>
+
+          <div class="contact-showcase-copy">
+            <p class="contact-showcase-kicker">Nail art that speaks for you <span>&#10022;</span></p>
+            <h2>Luxury nail art,<br><em>tailored</em> to you.<span>&#10022;</span></h2>
+            <p class="contact-showcase-lead">Custom designs. Flawless detail. Premium results.<br>Every set is created with precision, passion, and<br>a touch of luxury, just for you.</p>
+            <div class="contact-showcase-actions">
+              <a href="booking.html">Book now <span>&#10022;</span></a>
+              <a href="gallery.html">See the lookbook <span>&rarr;</span></a>
+            </div>
+          </div>
+
+          <div class="contact-showcase-cards">
+            <article>
+              <div class="contact-card-title"><i>&#9742;</i><h3>Contact</h3></div>
+              <p><b>&#9742;</b> (514) 546-0687</p>
+              <p><b>&#9993;</b> NailsBySxlly@gmail.com</p>
+              <p><b>&#9635;</b> @nailsbysally</p>
+            </article>
+            <article>
+              <div class="contact-card-title"><i>&#9716;</i><h3>Hours</h3></div>
+              <p>Mon - Fri <span>9AM - 7PM</span></p>
+              <p>Sat <span>9AM - 6PM</span></p>
+              <p>Sun <span>by request</span></p>
+            </article>
+            <article>
+              <div class="contact-card-title"><i>&#9906;</i><h3>Location</h3></div>
+              <p>Address provided<br>when your appointment<br>is confirmed.</p>
+            </article>
+          </div>
+
+          <div class="contact-benefits">
+            <article><i class="benefit-icon benefit-icon-product" aria-hidden="true"></i><div><h3>Premium products</h3><p>Top-quality gels and tools<br>for long-lasting beauty.</p></div></article>
+            <article><i class="benefit-icon benefit-icon-artistry" aria-hidden="true"></i><div><h3>Detailed artistry</h3><p>Precision in every line,<br>crafted to perfection.</p></div></article>
+            <article><i class="benefit-icon benefit-icon-custom" aria-hidden="true"></i><div><h3>Custom designs</h3><p>Your vision, brought to life<br>with a personal touch.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="prepare-section" aria-labelledby="prepareTitle">
+        <div class="prepare-copy">
+          <p class="prepare-kicker">Before your visit <span>&#10022;</span></p>
+          <h2 id="prepareTitle">Prepare for<br><em>your appointment.</em></h2>
+          <p class="prepare-lead">A few thoughtful steps help us begin on time and give your set the attention it deserves.</p>
+          <a href="contact.html">Questions before booking? <span>&rarr;</span></a>
+        </div>
+
+        <figure class="prepare-photo">
+          <img src="./Images/Nails14.png" alt="Freshly finished pink nail set" loading="lazy">
+          <figcaption><span>01</span> Come ready</figcaption>
+        </figure>
+
+        <div class="prepare-checklist">
+          <article><span>01</span><div><h3>Dress comfortably</h3><p>Choose clothing that lets you settle in and relax.</p></div></article>
+          <article><span>02</span><div><h3>Come feeling well</h3><p>Please reschedule if you are feeling unwell.</p></div></article>
+          <article><span>03</span><div><h3>Bring clean hands</h3><p>Arrive without hand cream, oils, or nail products.</p></div></article>
+          <article><span>04</span><div><h3>Plan ahead</h3><p>Use the restroom and arrive a few minutes early.</p></div></article>
+          <article><span>05</span><div><h3>Keep it one-to-one</h3><p>No extra guests or children during your appointment.</p></div></article>
+        </div>
+      </section>
+
+      <section class="booking-policies">
+      <div class="pink-divider booking-policy-divider"><span>&#10022;</span> Booking policies <span>&#10022;</span></div>
+
+      <section class="policy-art" aria-label="Nail detail preview">
+        <div class="policy-seal" aria-hidden="true"><span>Details today</span><b>&#10022;</b><span>Smooth appointment</span></div>
+        <figure class="policy-art-main">
+          <img src="./Images/Nails11.png" alt="Chrome nail detail set" loading="lazy">
+        </figure>
+        <div class="policy-art-copy">
+          <span>Before you book</span>
+          <strong>Read the details<br>so your appointment<br><em>starts smooth.</em></strong>
+          <small>A little prep now = the best experience later.</small>
+        </div>
+        <figure class="policy-art-small">
+          <img src="./Images/Nails12.png" alt="Duck nail art set" loading="lazy">
+        </figure>
+        <figure class="policy-art-third">
+          <img src="./Images/Nails10.png" alt="Purple sculpted nail detail" loading="lazy">
+        </figure>
+        <div class="policy-sparkles" aria-hidden="true">&#10022;<span>&#10022;</span></div>
+      </section>
+
+      <section class="policy-grid">
+        <article>
+          <div class="policy-icon policy-icon--calendar" aria-hidden="true"></div>
+          <div class="policy-card-copy"><h3>Appointments</h3>
+          <p>Please book at least 5 days in advance. Rush and after-hours appointments may include an extra fee.</p></div>
+        </article>
+        <article>
+          <div class="policy-icon">$</div>
+          <div class="policy-card-copy"><h3>Deposit</h3>
+          <p>A 25% deposit secures your appointment and goes toward your service total.</p></div>
+        </article>
+        <article>
+          <div class="policy-icon policy-icon--clock" aria-hidden="true"></div>
+          <div class="policy-card-copy"><h3>Late arrivals</h3>
+          <p>Please arrive on time. If you are more than 15 minutes late, your appointment may be rescheduled.</p></div>
+        </article>
+        <article>
+          <div class="policy-icon policy-icon--cancel" aria-hidden="true">&times;</div>
+          <div class="policy-card-copy"><h3>Cancellations</h3>
+          <p>Please cancel at least 48 hours in advance. Late cancellations may incur a fee.</p></div>
+        </article>
+      </section>
+      </section>
+
+      <section class="selfie-block" id="reels">
+        <div class="selfie-copy">
+          <h2>Tag us in your selfies</h2>
+          <p>#nailsbysally</p>
+        </div>
+        <div class="selfie-stack">
+          <img src="./Images/Nails5.png" alt="Blue French nail selfie" loading="lazy">
+          <img src="./Images/Nails15.png" alt="Detailed nail art selfie" loading="lazy">
+        </div>
+      </section>
+
+      <section class="thank-you" id="booking">
+        <p class="ready-script">Ready to book?</p>
+        <h2>Thank you <span>for booking</span></h2>
+        <a href="booking.html" class="poster-book-btn">Go to booking services below</a>
+      </section>
+    </div>
+  </main>
+
+  <main class="home-redesign">
+    <section class="home-hero container container--wide">
+      <div class="hero-copy">
+        <p class="studio-kicker reveal" style="--d:40ms">Private nail studio</p>
+        <h1 class="hero-title reveal" style="--d:90ms">Manicures with restraint, detail, and a polished finish.</h1>
+        <p class="hero-lead reveal" style="--d:150ms">
+          Structured gel, acrylic extensions, and custom art shaped for clients who want their nails to look considered, not loud.
+        </p>
+        <div class="hero-actions reveal" style="--d:220ms">
+          <a href="booking.html" class="btn btn-primary">Book an appointment <span class="arr">&rarr;</span></a>
+          <a href="gallery.html" class="text-link">View recent work</a>
+        </div>
+      </div>
+
+      <div class="hero-editorial reveal" style="--d:280ms">
+        <figure class="hero-portrait" aria-label="Featured nail design">
+          <img src="./Images/Nails2.png" alt="Chrome French nail design" decoding="async">
+        </figure>
+        <figure class="hero-detail hero-detail-a">
+          <img src="./Images/Nails4.png" alt="Detailed 3D nail art set" decoding="async">
+        </figure>
+        <figure class="hero-detail hero-detail-b">
+          <img src="./Images/Nails8.png" alt="Floral nail art set" decoding="async">
+        </figure>
+        <aside class="hero-note">
+          <span>Studio focus</span>
+          <strong>Clean prep. Balanced shape. Custom finish.</strong>
+        </aside>
+      </div>
+    </section>
+
+    <section class="home-strip container" aria-label="Studio highlights">
+      <div class="strip-item reveal" style="--d:0ms">
+        <span>01</span>
+        <strong>Structured gel</strong>
+      </div>
+      <div class="strip-item reveal" style="--d:70ms">
+        <span>02</span>
+        <strong>Acrylic extensions</strong>
+      </div>
+      <div class="strip-item reveal" style="--d:140ms">
+        <span>03</span>
+        <strong>Custom art</strong>
+      </div>
+      <div class="strip-item reveal" style="--d:210ms">
+        <span>04</span>
+        <strong>By appointment</strong>
+      </div>
+    </section>
+
+    <section class="atelier-section container container--wide" id="hidden-about">
+      <div class="atelier-media reveal" style="--d:80ms">
+        <img src="./Images/Sally.jpg" alt="Sally, owner and nail artist" loading="lazy">
+      </div>
+      <div class="atelier-copy">
+        <p class="studio-kicker reveal" style="--d:40ms">The studio</p>
+        <h2 class="section-title reveal" style="--d:90ms">Quiet, careful nail work from prep to top coat.</h2>
+        <p class="section-lead reveal" style="--d:140ms">
+          Sally's appointments are built around clean prep, precise shaping, and art that works with your hands, your length, and your day-to-day routine.
+        </p>
+        <div class="method-list reveal" style="--d:190ms">
+          <div>
+            <span>Prep</span>
+            <p>Cuticle care and nail health come first, so the set wears cleanly.</p>
+          </div>
+          <div>
+            <span>Shape</span>
+            <p>Length, structure, and profile are balanced before any design starts.</p>
+          </div>
+          <div>
+            <span>Finish</span>
+            <p>Gloss, chrome, 3D details, or soft art are finished with restraint.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services-editorial container container--wide" id="hidden-services">
+      <div class="section-heading reveal" style="--d:40ms">
+        <p class="studio-kicker">Services</p>
+        <h2 class="section-title">Choose the level of finish.</h2>
+        <a href="services.html" class="text-link">See all services</a>
+      </div>
+      <div class="service-index">
+        <article>
+          <span>01</span>
+          <h3>Classic gel polish</h3>
+          <p>A clean, glossy set for clients who want a simple finish that still feels done.</p>
+          <a href="booking.html">Book gel polish</a>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Acrylic nails</h3>
+          <p>Longer structure, stronger shape, and more room for detailed art or chrome.</p>
+          <a href="booking.html">Book acrylics</a>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Gel X</h3>
+          <p>Lightweight extensions with a polished look and a softer feel on the nail.</p>
+          <a href="booking.html">Book Gel X</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="gallery-preview container container--wide" id="hidden-reels">
+      <div class="gallery-copy reveal" style="--d:40ms">
+        <p class="studio-kicker">Recent sets</p>
+        <h2 class="section-title">A small lookbook of shape, shine, and detail.</h2>
+        <p class="section-lead">Browse finished sets from chrome French to sculpted 3D art.</p>
+        <a href="gallery.html" class="btn btn-primary">Open the gallery <span class="arr">&rarr;</span></a>
+      </div>
+      <div class="lookbook reveal" style="--d:120ms">
+        <figure><img src="./Images/Nails4.png" alt="3D nail art set" loading="lazy"></figure>
+        <figure><img src="./Images/Nails5.png" alt="Blue French summer nail set" loading="lazy"></figure>
+        <figure><img src="./Images/Nails15.png" alt="Detailed Christmas 3D nail set" loading="lazy"></figure>
+        <figure><img src="./Images/Nails7.png" alt="Ombre summer nail set" loading="lazy"></figure>
+      </div>
+    </section>
+
+    <section class="booking-panel container container--wide reveal" id="hidden-booking">
+      <div>
+        <p class="studio-kicker">Appointments</p>
+        <h2 class="section-title">Reserve a set that fits your day.</h2>
+      </div>
+      <p class="section-lead">Choose your service, pick a time, and secure the appointment with a deposit.</p>
+      <a href="booking.html" class="btn btn-primary">Book now <span class="arr">&rarr;</span></a>
+    </section>
+  </main>
 
   <!-- HERO -->
   <section class="hero container container--wide">
     <div class="hero__left">
       <div class="badges reveal" style="--d:40ms">
-        <span class="badge">★★★★★</span>
+        <span class="badge">By appointment</span>
         <span class="badge">Nails By Sally</span>
       </div>
 
       <h1 class="h1">
-        <span class="reveal" style="--d:90ms">Perfect Nails,</span><br>
-        <span class="accent reveal" style="--d:150ms">Every Time</span>
+        <span class="reveal" style="--d:90ms">Refined nails,</span><br>
+        <span class="accent reveal" style="--d:150ms">carefully finished</span>
       </h1>
 
       <p class="lead reveal" style="--d:210ms">
-        Transform your nails with our premium services — from classic manicures to head-turning nail art — in a luxe, relaxing vibe.
+        Detail-led manicures, sculpted extensions, and custom nail art finished with a calm studio feel.
       </p>
 
       <div class="actions reveal" style="--d:270ms">
         <a href="booking.html" class="btn btn-primary btn-wiggle" data-glow>
-          Book Appointment <span class="arr">→</span>
+          Book an appointment <span class="arr">&rarr;</span>
         </a>
         <a href="services.html" class="btn btn-outline">View Services</a>
       </div>
@@ -730,29 +1122,29 @@
         </div>
         <div class="card-overlay">
           <div class="overlay-content">
-            <h3>Chrome French Tips</h3>
-            <p>High-shine chrome with clean lines. Subtle, luxe, and durable.</p>
+            <h3>Chrome French tips</h3>
+            <p>Clean shaping, reflective finish, and a polished wear.</p>
           </div>
         </div>
       </article>
 
       <div class="rating-chip">
-        <div class="chip-stars">★ 4.9/5</div>
+        <div class="chip-stars">&#9733; 4.9/5</div>
         <div class="chip-note">300+ Happy Clients</div>
       </div>
     </div>
   </section>
 
-  <!-- ===== UNDER-HERO: Dynamic View Gallery CTA ===== -->
+  <!-- ===== UNDER-HERO: Dynamic View Gallery &rarr;
   <section class="container reveal" style="--d:80ms">
-    <div class="gallery-cta" aria-label="View Gallery CTA">
+    <div class="gallery-cta" aria-label="View Gallery &rarr;
       <div class="left">
-        <div class="title">Peek the latest sets</div>
+        <div class="title">Latest finished sets</div>
         <div class="thumbs" id="galleryThumbs" aria-hidden="false"></div>
       </div>
       <div class="right">
         <a id="galleryBtn" href="gallery.html" class="btn btn-primary btn-wiggle" data-glow>
-          View Gallery  →
+          View Gallery &rarr;
         </a>
       </div>
     </div>
@@ -762,13 +1154,13 @@
   <section class="social-section">
     <h2>Follow Us</h2>
     <div class="social-links">
-      <a href="https://www.instagram.com/nails.by.sxlly" target="_blank" aria-label="Instagram">
+      <a href="https://www.instagram.com/nails.by.sxlly" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
         <img src="Images/Socials/Instagram.png" alt="Instagram logo">
       </a>
-      <a href="https://www.tiktok.com/@nails.by.sxlly?lang=en" target="_blank" aria-label="TikTok">
+      <a href="https://www.tiktok.com/@nails.by.sxlly?lang=en" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
         <img src="Images/Socials/Tiktok.png" alt="TikTok logo">
       </a>
-      <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
         <img src="Images/Socials/Facebook.png" alt="Facebook logo">
       </a>
     </div>
@@ -777,16 +1169,16 @@
   <!-- MARQUEE -->
   <div class="marquee">
     <div class="marquee-track" id="marqueeTrack">
-      <div aria-hidden="true" class="tick">Nails By Sally • Long-lasting Gel • Custom Nail Art • Cuticle Care • Hand Massage • Paraffin Treatment • Crystal Accents • Nail Health First •</div>
-      <div aria-hidden="true" class="tick">Nails By Sally • Long-lasting Gel • Custom Nail Art • Cuticle Care • Hand Massage • Paraffin Treatment • Crystal Accents • Nail Health First •</div>
+      <div aria-hidden="true" class="tick">Nails By Sally &bull; Long-lasting Gel &bull; Custom Nail Art &bull; Cuticle Care &bull; Hand Massage &bull; Nail Repair &bull; Crystal Accents &bull; Nail Health First &bull;</div>
+      <div aria-hidden="true" class="tick">Nails By Sally &bull; Long-lasting Gel &bull; Custom Nail Art &bull; Cuticle Care &bull; Hand Massage &bull; Nail Repair &bull; Crystal Accents &bull; Nail Health First &bull;</div>
     </div>
   </div>
 
   <!-- WHY CHOOSE -->
-  <section class="container section" id="about">
-    <h2 class="h2 center reveal">Why Choose <span class="accent" style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">Nails By Sally</span></h2>
+  <section class="container section" id="legacy-about">
+    <h2 class="h2 center reveal">Why clients book <span class="accent" style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">Sally</span></h2>
     <p class="muted center max-640 reveal" style="--d:80ms">
-      Artistic creativity meets professional expertise to deliver stand-out nails in a luxe, cozy environment.
+      Precise prep, balanced shaping, and custom details for sets that feel considered from every angle.
     </p>
 
     <div class="grid-3 features">
@@ -823,23 +1215,23 @@
   </section>
 
   <!-- POPULAR SERVICES -->
-  <section class="container section" id="services">
-    <h3 class="h3 center reveal">Popular Services</h3>
-    <p class="muted center max-640 reveal" style="--d:80ms">Our most-loved services for beautiful, long-lasting results.</p>
+  <section class="container section" id="legacy-services">
+    <h3 class="h3 center reveal">Signature services</h3>
+    <p class="muted center max-640 reveal" style="--d:80ms">Client favourites for clean structure, lasting shine, and expressive detail.</p>
     <div id="popularGrid" class="cards"></div>
     <div class="center reveal" style="margin-top:32px;--d:240ms">
-      <a href="services.html" class="btn btn-outline">View All Services →</a>
+      <a href="services.html" class="btn btn-outline">View All Services &rarr;</a>
     </div>
   </section>
 
   <!-- NAIL REELS (images only) -->
-  <section class="container section reels" id="reels">
-    <h3 class="h3 center reveal">Nail Reels 
+  <section class="container section reels" id="legacy-reels">
+    <h3 class="h3 center reveal">Studio gallery
       <span class="accent" style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">
         (Finished Looks)
       </span>
     </h3>
-    <p class="reels-sub center reveal" style="--d:80ms">Our finished looks gallery — swipe through stunning nail sets.</p>
+    <p class="reels-sub center reveal" style="--d:80ms">Browse recent sets, finishes, and details from the studio.</p>
 
     <div class="reels-wrap reveal" style="--d:140ms">
       <div class="reels-nav" aria-hidden="false">
@@ -861,15 +1253,15 @@
     </div>
 
     <div class="reels-cta reveal" style="--d:220ms">
-      <a href="https://www.instagram.com/nails.by.sxlly" class="btn btn-outline">See More On Instagram →</a>
+      <a href="https://www.instagram.com/nails.by.sxlly" class="btn btn-outline">View more on Instagram &rarr;</a>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="cta container container--wide reveal" id="booking">
-    <h3 class="h2">Ready for Perfect Nails?</h3>
-    <p class="muted cta-sub">Book today and experience the artistry of beautiful nails.</p>
-    <a href="booking.html" class="btn btn-primary btn-wiggle" data-glow>Schedule Your Appointment <span class="arr">→</span></a>
+  <section class="cta container container--wide reveal" id="legacy-booking">
+    <h3 class="h2">Ready for a fresh set?</h3>
+    <p class="muted cta-sub">Choose your service, reserve a time, and arrive ready for a polished finish.</p>
+    <a href="booking.html" class="btn btn-primary btn-wiggle" data-glow>Schedule your appointment <span class="arr">&rarr;</span></a>
   </section>
 
   <!-- FOOTER -->
@@ -882,7 +1274,7 @@
           </span>
           <strong style="color:#fff">Nails By Sally</strong>
         </div>
-        <p class="muted">Transform your nails with our premium services. Luxury, artistry, and exceptional results every visit.</p>
+        <p class="muted">Careful nail work, clean shaping, and custom details for a polished studio experience.</p>
       </div>
 
       <div>
@@ -906,7 +1298,7 @@
       </div>
     </div>
 
-    <div class="container copy-row">© <span id="year"></span> Nails By Sally. All rights reserved.</div>
+    <div class="container copy-row">&copy; <span id="year"></span> Nails By Sally. All rights reserved.</div>
   </footer>
 
   <script>
@@ -948,7 +1340,7 @@
           <div class="title">${s.name}</div>
           <p class="desc">${s.desc}</p>
           <div class="meta">
-            <span>⏱️ ${s.duration} min</span>
+            <span>${s.duration} min</span>
             <strong>$${s.price}</strong>
           </div>
           <div class="cta2">
@@ -983,15 +1375,47 @@
 
     /* ---------- Reveal on view ---------- */
     function setupReveals(){
+      const motionTargets = [
+        '.poster-hero .intro-copy',
+        '.service-photo-row',
+        '.popular-services-head',
+        '.popular-service-stack',
+        '.contact-showcase-copy',
+        '.contact-showcase-cards',
+        '.contact-benefits',
+        '.booking-policies .policy-art',
+        '.booking-policies .policy-grid',
+        '.prepare-section',
+        '.selfie-block',
+        '.thank-you'
+      ];
+
+      motionTargets.forEach(selector => {
+        document.querySelectorAll(selector).forEach((el, index) => {
+          el.classList.add('scroll-reveal');
+          el.style.setProperty('--reveal-delay', `${(index % 4) * 65}ms`);
+        });
+      });
+
+      document.documentElement.classList.add('reveal-ready');
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.reveal, .scroll-reveal').forEach(el => {
+          el.classList.add('in', 'is-visible');
+        });
+        return;
+      }
+
       const io = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('in');
+            entry.target.classList.add('is-visible');
             io.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.1, rootMargin: '50px' });
-      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+      document.querySelectorAll('.reveal, .scroll-reveal').forEach(el => io.observe(el));
     }
 
     /* ---------- Mobile menu (FIXED) ---------- */
@@ -1010,6 +1434,25 @@
         menu.classList.toggle('open', willOpen);
         menu.hidden = !willOpen;
         btn.setAttribute('aria-expanded', String(willOpen));
+        btn.setAttribute('aria-label', willOpen ? 'Close Menu' : 'Open Menu');
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!menu.classList.contains('open')) return;
+        if (menu.contains(event.target) || btn.contains(event.target)) return;
+        menu.classList.remove('open');
+        menu.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open Menu');
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape' || !menu.classList.contains('open')) return;
+        menu.classList.remove('open');
+        menu.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open Menu');
+        btn.focus();
       });
 
       // Close on link click
@@ -1150,5 +1593,10 @@
       setupGalleryCTA();
     });
   </script>
+  <script src="unified-pages.js?v=20260722footer2"></script>
 </body>
 </html>
+
+
+
+

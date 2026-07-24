@@ -1,0 +1,505 @@
+﻿/* Final gallery mobile fit pass. Loaded after the shared Home navbar on purpose. */
+@media (max-width: 767px) {
+  body {
+    background: #030303 !important;
+  }
+
+  .site-header .header-inner {
+    width: calc(100% - 18px) !important;
+    max-width: none !important;
+    padding-inline: 0 !important;
+  }
+
+  .gallery-reference {
+    width: calc(100% - 18px) !important;
+    max-width: none !important;
+    margin-inline: auto !important;
+    padding-inline: 0 !important;
+  }
+
+  .gallery-hero {
+    position: relative !important;
+    height: clamp(350px, 58vw, 430px) !important;
+    min-height: 0 !important;
+    display: block !important;
+    padding: 22px 14px 0 !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(255, 181, 207, .1) !important;
+    border-top: 0 !important;
+    border-radius: 0 0 18px 18px !important;
+    background:
+      radial-gradient(circle at 0 46%, rgba(255, 181, 207, .26), transparent 160px),
+      linear-gradient(145deg, rgba(18, 8, 12, .35), rgba(2, 2, 2, .95) 58%) !important;
+  }
+
+  .gallery-hero::before {
+    inset: auto auto 18px -74px !important;
+    width: 190px !important;
+    height: 190px !important;
+    opacity: .8 !important;
+  }
+
+  .hero-copy {
+    position: relative !important;
+    z-index: 5 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+  }
+
+  .script-title {
+    font-size: clamp(44px, 10.5vw, 70px) !important;
+    line-height: .82 !important;
+    max-width: 92% !important;
+  }
+
+  .hero-copy h1 {
+    margin: 4px 0 8px !important;
+    font-size: clamp(26px, 5.8vw, 42px) !important;
+    line-height: .9 !important;
+  }
+
+  .ornament-line {
+    width: min(160px, 34vw) !important;
+    height: 15px !important;
+    margin: 8px 0 8px !important;
+  }
+
+  .hero-intro {
+    width: min(330px, 57vw) !important;
+    max-width: none !important;
+    font-size: clamp(9px, 1.8vw, 12px) !important;
+    line-height: 1.45 !important;
+  }
+
+  .ghost-script {
+    position: absolute !important;
+    left: 0 !important;
+    top: clamp(128px, 22vw, 158px) !important;
+    margin: 0 !important;
+    max-width: 54% !important;
+    font-size: clamp(36px, 7vw, 58px) !important;
+    line-height: .86 !important;
+    opacity: .72 !important;
+  }
+
+  .hero-collage {
+    position: absolute !important;
+    inset: auto 10px 13px 10px !important;
+    width: auto !important;
+    min-height: clamp(170px, 30vw, 225px) !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  .collage-one {
+    left: 0 !important;
+    top: 40px !important;
+    width: 33% !important;
+    height: clamp(118px, 19vw, 150px) !important;
+    transform: rotate(-8deg) !important;
+  }
+
+  .collage-two {
+    left: 24% !important;
+    top: 58px !important;
+    width: 30% !important;
+    height: clamp(108px, 17vw, 138px) !important;
+    transform: rotate(-2deg) !important;
+  }
+
+  .collage-three {
+    left: auto !important;
+    right: 0 !important;
+    top: 18px !important;
+    width: 48% !important;
+    height: clamp(145px, 24vw, 190px) !important;
+    transform: rotate(6deg) !important;
+  }
+
+  .glow-ring {
+    left: 28% !important;
+    right: -10% !important;
+    top: 74px !important;
+    height: clamp(88px, 16vw, 122px) !important;
+  }
+
+  .spark-one {
+    left: auto !important;
+    right: 22% !important;
+    top: 42% !important;
+  }
+
+  .spark-three {
+    left: auto !important;
+    right: 7% !important;
+    top: 31% !important;
+  }
+
+  .gallery-controls-ref,
+  .look-card,
+  .booking-banner,
+  .gallery-footer {
+    width: 100% !important;
+  }
+
+  .gallery-controls-ref {
+    margin-top: 14px !important;
+    padding: 12px !important;
+    border-radius: 18px !important;
+  }
+
+  .filter-row {
+    gap: 9px !important;
+  }
+
+  .filter-pill,
+  .gallery-search,
+  .sort-pill {
+    min-height: 44px !important;
+  }
+
+  .feature-grid {
+    gap: 12px !important;
+  }
+
+  .look-card,
+  .look-tall,
+  .look-large {
+    min-height: clamp(225px, 42vw, 315px) !important;
+  }
+
+  .look-feature {
+    min-height: clamp(280px, 48vw, 360px) !important;
+  }
+
+  .look-content h2 {
+    max-width: min(310px, 70%) !important;
+    font-size: clamp(30px, 6.2vw, 42px) !important;
+  }
+
+  .look-content h2 em {
+    font-size: clamp(36px, 7vw, 48px) !important;
+  }
+
+  .look-content h3 {
+    max-width: min(350px, 76%) !important;
+    font-size: clamp(21px, 4.4vw, 30px) !important;
+  }
+
+  .look-content p {
+    max-width: min(330px, 74%) !important;
+    font-size: clamp(10px, 2vw, 13px) !important;
+  }
+
+  .booking-banner {
+    margin-top: 14px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .gallery-reference,
+  .site-header .header-inner {
+    width: calc(100% - 14px) !important;
+  }
+
+  .gallery-hero {
+    height: 360px !important;
+    padding-inline: 10px !important;
+  }
+
+  .hero-intro {
+    width: 235px !important;
+  }
+
+  .ghost-script {
+    max-width: 72% !important;
+  }
+}
+
+/* Make the mobile gallery hero full-bleed so no black side gutter appears. */
+@media (max-width: 767px) {
+  .gallery-reference {
+    width: 100% !important;
+  }
+
+  .gallery-hero {
+    width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-radius: 0 0 18px 18px !important;
+  }
+
+  .gallery-controls-ref,
+  .feature-grid,
+  .booking-banner,
+  .gallery-footer,
+  .gallery-copyright {
+    width: calc(100% - 18px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* Compact mobile controls, short footer, and reactive motion. */
+@media (max-width: 767px) {
+  .gallery-controls-ref {
+    padding: 8px !important;
+    border-radius: 14px !important;
+    margin-top: 10px !important;
+  }
+
+  .filter-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+  }
+
+  .filter-pill {
+    min-height: 34px !important;
+    padding: 0 6px !important;
+    gap: 4px !important;
+    font-size: 8px !important;
+    letter-spacing: .03em !important;
+    white-space: nowrap !important;
+  }
+
+  .gallery-search-row {
+    grid-template-columns: 1fr auto !important;
+    gap: 6px !important;
+    margin-top: 7px !important;
+  }
+
+  .gallery-search {
+    min-height: 36px !important;
+    padding: 0 10px !important;
+    gap: 7px !important;
+  }
+
+  .gallery-search input {
+    font-size: 9px !important;
+  }
+
+  .sort-pill {
+    min-width: 112px !important;
+    min-height: 36px !important;
+    padding: 0 10px !important;
+    gap: 5px !important;
+    font-size: 8px !important;
+  }
+
+  .sort-pill span {
+    display: none !important;
+  }
+
+  .gallery-footer {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    padding: 22px 12px 16px !important;
+    border-radius: 16px 16px 0 0 !important;
+    background: linear-gradient(180deg, rgba(16, 7, 11, .72), rgba(2, 2, 2, .98)) !important;
+  }
+
+  .gallery-footer > div:nth-child(2),
+  .gallery-footer > div:nth-child(3) {
+    display: none !important;
+  }
+
+  .gallery-footer > div:nth-child(4) {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px 12px !important;
+    border-top: 1px solid rgba(255, 181, 207, .12) !important;
+    padding-top: 12px !important;
+  }
+
+  .gallery-footer > div:nth-child(4) h3 {
+    grid-column: 1 / -1 !important;
+    margin: 0 !important;
+  }
+
+  .gallery-footer > div:nth-child(4) p {
+    margin: 0 !important;
+  }
+
+  .footer-logo-row img {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .footer-logo-row strong {
+    font-size: 13px !important;
+  }
+
+  .footer-logo-row span {
+    font-size: 6px !important;
+  }
+
+  .footer-brand p {
+    width: auto !important;
+    margin: 12px 0 !important;
+    font-size: 9px !important;
+  }
+
+  .footer-socials {
+    gap: 9px !important;
+  }
+
+  .footer-socials a {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .gallery-copyright {
+    padding: 10px 0 12px !important;
+  }
+
+  .footer-ornament {
+    display: none !important;
+  }
+}
+
+.gallery-motion {
+  opacity: 0;
+  transform: translateY(22px) scale(.985);
+  transition:
+    opacity .62s cubic-bezier(.2, .8, .2, 1),
+    transform .62s cubic-bezier(.2, .8, .2, 1),
+    box-shadow .24s ease,
+    border-color .24s ease;
+  will-change: opacity, transform;
+}
+
+.gallery-motion.gallery-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.look-card.gallery-motion:nth-child(2n) {
+  transform: translateY(22px) scale(.985) rotate(.7deg);
+}
+
+.look-card.gallery-motion:nth-child(2n).gallery-in {
+  transform: translateY(0) scale(1) rotate(0);
+}
+
+.look-card,
+.filter-pill,
+.banner-button,
+.footer-socials a,
+.nav-link,
+.menu-btn {
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease,
+    border-color .22s ease,
+    background .22s ease,
+    color .22s ease;
+}
+
+.look-card:hover,
+.filter-pill:hover,
+.banner-button:hover,
+.footer-socials a:hover {
+  transform: translateY(-2px);
+}
+
+.look-card:active,
+.filter-pill:active,
+.banner-button:active,
+.footer-socials a:active,
+.menu-btn:active {
+  transform: translateY(1px) scale(.99);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-motion,
+  .gallery-motion.gallery-in,
+  .look-card.gallery-motion:nth-child(2n),
+  .look-card.gallery-motion:nth-child(2n).gallery-in,
+  .look-card,
+  .filter-pill,
+  .banner-button,
+  .footer-socials a,
+  .nav-link,
+  .menu-btn {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Hide gallery search and sort controls from the filter panel. */
+.gallery-search-row {
+  display: none !important;
+}
+
+/* Give the mobile navbar logo enough room so the mark does not clip. */
+@media (max-width: 767px) {
+  .site-header .brand-logo {
+    width: 54px !important;
+    height: 54px !important;
+    flex-basis: 54px !important;
+  }
+
+  .site-header .brand-logo img {
+    width: 50px !important;
+    height: 50px !important;
+  }
+}
+
+/* Keep the larger logo frame, but scale the logo artwork down inside it. */
+@media (max-width: 767px) {
+  .site-header .brand-logo img {
+    width: 44px !important;
+    height: 44px !important;
+  }
+}
+
+/* Add vertical breathing room to the mobile navbar. */
+@media (max-width: 767px) {
+  .site-header {
+    height: 76px !important;
+  }
+
+  .site-header .header-inner {
+    height: 76px !important;
+    min-height: 76px !important;
+    padding-top: 9px !important;
+    padding-bottom: 9px !important;
+  }
+
+  .mobile-menu {
+    top: 84px !important;
+  }
+}
+
+/* Final hamburger fix: hide the original text glyph and center one CSS icon. */
+#menuBtn.menu-btn,
+button.menu-btn {
+  position: relative !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: hidden !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-indent: -999px !important;
+}
+
+#menuBtn.menu-btn::before,
+button.menu-btn::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  width: 18px !important;
+  height: 2px !important;
+  margin: 0 !important;
+  border-radius: 999px !important;
+  background: #ffc3dc !important;
+  box-shadow: 0 -6px 0 #ffc3dc, 0 6px 0 #ffc3dc !important;
+  transform: translate(-50%, -50%) !important;
+  text-indent: 0 !important;
+}
