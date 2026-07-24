@@ -311,7 +311,7 @@
 
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Tell us about your interests, questions, or how we can help you..." rows="5"></textarea>
+            <textarea id="message" name="message" placeholder="Tell us about your interests, questions, or how we can help you..." rows="5" required></textarea>
           </div>
 
           <button type="submit" class="submit-btn">Send Message</button>
@@ -428,68 +428,66 @@
     }
 
     // Contact form submission
+    function buildContactMailto(data) {
+      const subject = encodeURIComponent('Nails By Sally contact request');
+      const body = encodeURIComponent(
+        `Name: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone || 'Not provided'}\n\nMessage:\n${data.message}`
+      );
+      return `mailto:NailsBySxlly@gmail.com?subject=${subject}&body=${body}`;
+    }
+
     document.getElementById('contactForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const button = this.querySelector('.submit-btn');
       const originalText = button.textContent;
+      const formData = {
+        name: document.getElementById('firstName').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        subject: 'Nails By Sally contact request',
+        message: document.getElementById('message').value.trim()
+      };
+
+      if (!formData.name || !formData.email || !formData.message) {
+        button.textContent = 'Add Your Message';
+        button.style.background = 'linear-gradient(90deg, #ef4444, #dc2626)';
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.style.background = '';
+        }, 2200);
+        return;
+      }
+
       button.textContent = 'Sending...';
       button.disabled = true;
 
       try {
-        // Get form data
-        const formData = {
-          name: document.getElementById('firstName').value,
-          email: document.getElementById('email').value,
-          phone: document.getElementById('phone').value || '',
-          subject: '', // No subject field in this form
-          message: document.getElementById('message').value
-        };
-
-        // Send to server - uses the same domain (works with Cloudflare tunnel)
-        const serverURL = window.location.origin + '/api/contact';
-        // This will be: https://nailsbysally.cc/api/contact
-        
-        console.log('Sending to:', serverURL);
-        
-        const response = await fetch(serverURL, {
+        const response = await fetch(window.location.origin + '/api/contact', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
         });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(result.error || 'Message endpoint unavailable');
 
-        const result = await response.json();
-
-        if (response.ok) {
-          button.textContent = 'Message Sent!';
-          button.style.background = 'linear-gradient(90deg, #10b981, #059669)';
-          setTimeout(() => {
-            button.textContent = originalText;
-            button.disabled = false;
-            button.style.background = '';
-            this.reset();
-          }, 2000);
-        } else {
-          throw new Error(result.error || 'Failed to send message');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        
-        // Show helpful error message
-        let errorMsg = 'Failed to Send';
-        if (error.message.includes('Failed to fetch')) {
-          errorMsg = 'Server Not Running';
-          console.error('Make sure your server is running on port 4000');
-        }
-        
-        button.textContent = errorMsg;
-        button.style.background = 'linear-gradient(90deg, #ef4444, #dc2626)';
+        button.textContent = 'Message Sent!';
+        button.style.background = 'linear-gradient(90deg, #10b981, #059669)';
         setTimeout(() => {
           button.textContent = originalText;
           button.disabled = false;
           button.style.background = '';
-        }, 3000);
+          this.reset();
+        }, 2000);
+      } catch (error) {
+        console.warn('[CONTACT] Falling back to email link:', error);
+        button.textContent = 'Opening Email...';
+        button.style.background = 'linear-gradient(90deg, #f9a8d4, #f472b6)';
+        window.location.href = buildContactMailto(formData);
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.disabled = false;
+          button.style.background = '';
+        }, 2200);
       }
     });
 

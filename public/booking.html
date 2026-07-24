@@ -103,7 +103,7 @@
 
         /* Service Cards */
         .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 16px; }
-        .service-card { background: rgba(255,255,255,.06); border: 2px solid rgba(255,255,255,.1); border-radius: 16px; padding: 20px; cursor: pointer; transition: all .2s ease; position: relative; overflow: hidden; }
+        .service-card { width: 100%; text-align: left; font: inherit; color: inherit; background: rgba(255,255,255,.06); border: 2px solid rgba(255,255,255,.1); border-radius: 16px; padding: 20px; cursor: pointer; transition: all .2s ease; position: relative; overflow: hidden; }
         .service-card::before { content: ''; position: absolute; inset: 0; background: var(--grad); opacity: 0; transition: opacity .2s ease; }
         .service-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.3); }
         .service-card.selected { border-color: var(--pink); background: rgba(241,74,166,.1); }
@@ -118,7 +118,7 @@
         /* Date/Time */
         .date-time-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .time-slots { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin-top: 12px; }
-        .time-slot { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.2); border-radius: 8px; padding: 10px 16px; text-align: center; cursor: pointer; color: #e2e8f0; font-weight: 600; transition: all .2s ease; }
+        .time-slot { font: inherit; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.2); border-radius: 8px; padding: 10px 16px; text-align: center; cursor: pointer; color: #e2e8f0; font-weight: 600; transition: all .2s ease; }
         .time-slot:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.4); }
         .time-slot.selected { background: var(--grad); border-color: var(--pink); color: white; }
         .time-slot.unavailable { opacity: .4; cursor: not-allowed; text-decoration: line-through; }
@@ -320,54 +320,47 @@
 
 <script>
   const API_BASE = window.location.origin + '/api';
+  const FALLBACK_SERVICES = [
+    { id: 'classic-manicure', name: 'Classic Manicure', description: 'Nail shaping, cuticle care, exfoliation, massage, and polish.', durationMin: 45, price: 45 },
+    { id: 'classic-pedicure', name: 'Pedicure', description: 'Relaxing foot soak, exfoliation, callus care, massage, and polish.', durationMin: 60, price: 55 },
+    { id: 'gel-extensions', name: 'Gel Extensions', description: 'Lightweight, durable extensions with a glossy gel finish.', durationMin: 120, price: 70 },
+    { id: 'custom-nail-art', name: 'Custom Nail Art', description: 'Bespoke nail art designs tailored to your style.', durationMin: 60, price: 15 },
+    { id: 'acrylic-extensions', name: 'Acrylic Extensions', description: 'Strong and stylish acrylic extensions in any shape you love.', durationMin: 120, price: 65 },
+    { id: 'dip-powder', name: 'Dip Powder', description: 'Long-lasting, chip-resistant dip powder with a smooth finish.', durationMin: 60, price: 50 },
+    { id: 'strength-treatment', name: 'Strength Treatment', description: 'Nourishing treatment to strengthen, restore, and protect natural nails.', durationMin: 30, price: 40 }
+  ];
+
   let selectedServiceId = '';
   let currentService = null;
   let paypalClientId = '';
+  let paypalReady = false;
+  let paypalStatusMessage = 'Online deposit is not configured yet. Please contact Sally to finish booking this appointment.';
 
-  // Load PayPal client ID and SDK
-  async function loadPayPalConfig() {
-    try {
-      const res = await fetch(API_BASE + '/paypal-client-id');
-      if (!res.ok) throw new Error('PayPal not configured');
-      const data = await res.json();
-      paypalClientId = data.clientId;
-      
-      console.log('[PAYPAL] Client ID loaded:', paypalClientId.substring(0, 10) + '...');
-      
-      // Load PayPal SDK dynamically
-      return new Promise((resolve, reject) => {
-        // Check if already loaded
-        if (window.paypal) {
-          console.log('[PAYPAL] SDK already loaded');
-          return resolve(true);
-        }
+  const params = new URLSearchParams(window.location.search);
+  const requestedServiceId = params.get('service') || '';
 
-        // Create script element
-        const script = document.createElement('script');
-        script.src = `https://www.paypal.com/sdk/js?client-id=${paypalClientId}&currency=CAD&components=buttons,funding-eligibility&enable-funding=venmo,paylater`;
-        script.async = true;
-        
-        script.onload = () => {
-          console.log('[PAYPAL] SDK loaded successfully');
-          resolve(true);
-        };
-        
-        script.onerror = () => {
-          console.error('[PAYPAL] Failed to load SDK');
-          reject(new Error('Failed to load PayPal SDK'));
-        };
-        
-        document.head.appendChild(script);
-      });
-      
-    } catch (error) {
-      console.error('[PAYPAL] Config error:', error);
-      return false;
-    }
+  function $(id) {
+    return document.getElementById(id);
   }
 
   function clearChildren(el) {
-    while (el.firstChild) el.removeChild(el.firstChild);
+    while (el && el.firstChild) el.removeChild(el.firstChild);
+  }
+
+  function escapeHTML(value) {
+    return String(value || '').replace(/[&<>"]/g, function (char) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[char];
+    });
+  }
+
+  function normalizeService(service) {
+    return {
+      id: String(service.id || service.name || '').trim(),
+      name: String(service.name || 'Nail Service').trim(),
+      description: String(service.description || '').trim(),
+      durationMin: Number(service.durationMin || service.duration || 60),
+      price: Number(service.price || 0)
+    };
   }
 
   function setMinDate() {
@@ -376,30 +369,80 @@
     const yyyy = today.getFullYear();
     const mm = String(today.getMonth() + 1).padStart(2, '0');
     const dd = String(today.getDate()).padStart(2, '0');
-    document.getElementById('preferredDate').setAttribute('min', `${yyyy}-${mm}-${dd}`);
+    $('preferredDate').setAttribute('min', `${yyyy}-${mm}-${dd}`);
   }
 
-  function buildFullDayLabels() {
+  function labelFromMinutes(minutes) {
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    const hh = h % 12 || 12;
+    const mm = String(m).padStart(2, '0');
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    return `${hh}:${mm} ${ampm}`;
+  }
+
+  function buildSlotLabels(durationMin) {
     const slots = [];
-    for (let h = 9; h < 18; h++) {
-      for (let m = 0; m < 60; m += 30) {
-        const hh = h % 12 || 12;
-        const mm = String(m).padStart(2, '0');
-        const ampm = h >= 12 ? 'PM' : 'AM';
-        slots.push(`${hh}:${mm} ${ampm}`);
-      }
+    const open = 9 * 60;
+    const close = 18 * 60;
+    const duration = Number(durationMin || 60);
+    for (let m = open; m + duration <= close; m += 30) {
+      slots.push(labelFromMinutes(m));
     }
     return slots;
   }
 
-  function validateForm() {
-    const fullName = document.getElementById('fullName').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const date = document.getElementById('preferredDate').value;
-    const time = document.getElementById('selectedTime').value;
-    const service = document.getElementById('selectedService').value;
+  function resetPaymentStep() {
+    $('paymentSection').style.display = 'none';
+    $('reviewSection').style.display = 'block';
+    clearChildren($('paypal-button-container'));
+    const error = $('paymentError');
+    error.textContent = '';
+    error.style.display = 'none';
+  }
 
-    return fullName && email && date && time && service;
+  function selectService(service, card) {
+    document.querySelectorAll('.service-card').forEach(function (c) { c.classList.remove('selected'); });
+    if (card) card.classList.add('selected');
+
+    selectedServiceId = service.id;
+    currentService = service;
+    $('selectedService').value = selectedServiceId;
+    $('selectedTime').value = '';
+    updatePaymentSummary();
+    resetPaymentStep();
+    refreshAvailability();
+  }
+
+  function renderServices(services) {
+    const grid = $('serviceGrid');
+    clearChildren(grid);
+
+    const safeServices = (services && services.length ? services : FALLBACK_SERVICES).map(normalizeService);
+    safeServices.forEach(function (service) {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'service-card';
+      card.dataset.serviceId = service.id;
+      card.innerHTML = `
+        <div class="service-content">
+          <div class="service-name">${escapeHTML(service.name)}</div>
+          <div class="service-desc">${escapeHTML(service.description)}</div>
+          <div class="service-meta">
+            <span class="service-duration">${service.durationMin} min</span>
+            <span class="service-price">$${service.price.toFixed(2)}</span>
+          </div>
+        </div>
+      `;
+      card.addEventListener('click', function () { selectService(service, card); });
+      grid.appendChild(card);
+    });
+
+    const serviceToSelect = safeServices.find(s => s.id === requestedServiceId);
+    if (serviceToSelect) {
+      const selectedCard = Array.from(grid.querySelectorAll('.service-card')).find(function (card) { return card.dataset.serviceId === serviceToSelect.id; });
+      selectService(serviceToSelect, selectedCard);
+    }
   }
 
   async function populateServices() {
@@ -407,188 +450,168 @@
       const res = await fetch(API_BASE + '/services');
       if (!res.ok) throw new Error('Failed to fetch services');
       const data = await res.json();
-      const services = data.services || [];
-
-      const grid = document.getElementById('serviceGrid');
-      clearChildren(grid);
-
-      services.forEach(function (s) {
-        const card = document.createElement('div');
-        card.className = 'service-card';
-        card.innerHTML = `
-          <div class="service-content">
-            <div class="service-name">${s.name}</div>
-            <div class="service-desc">${s.description || ''}</div>
-            <div class="service-meta">
-              <span class="service-duration">${s.durationMin} min</span>
-              <span class="service-price">$${s.price.toFixed(2)}</span>
-            </div>
-          </div>
-        `;
-        card.addEventListener('click', function () {
-          document.querySelectorAll('.service-card').forEach(function (c) { c.classList.remove('selected'); });
-          card.classList.add('selected');
-          selectedServiceId = s.id;
-          currentService = s;
-          document.getElementById('selectedService').value = selectedServiceId;
-          updatePaymentSummary();
-          refreshAvailability();
-        });
-        grid.appendChild(card);
-      });
-    } catch (e) {
-      console.error(e);
-      alert('Failed to load services. Please check the console and your API.');
+      renderServices(data.services || []);
+    } catch (error) {
+      console.warn('[BOOKING] Using local service fallback:', error);
+      renderServices(FALLBACK_SERVICES);
     }
   }
 
   function updatePaymentSummary() {
     if (!currentService) return;
-    
-    const total = currentService.price;
-    const deposit = (total * 0.25).toFixed(2);
-    const remaining = (total - deposit).toFixed(2);
+    const total = Number(currentService.price || 0);
+    const deposit = Number((total * 0.25).toFixed(2));
+    const remaining = Number((total - deposit).toFixed(2));
 
-    document.getElementById('totalPrice').textContent = `$${total.toFixed(2)}`;
-    document.getElementById('depositAmount').textContent = `$${deposit}`;
-    document.getElementById('remainingAmount').textContent = `$${remaining}`;
+    $('totalPrice').textContent = '$' + total.toFixed(2);
+    $('depositAmount').textContent = '$' + deposit.toFixed(2);
+    $('remainingAmount').textContent = '$' + remaining.toFixed(2);
+  }
+
+  function renderTimeSlots(labels, isFallback) {
+    const container = $('timeSlots');
+    clearChildren(container);
+    $('selectedTime').value = '';
+
+    if (!labels.length) {
+      container.innerHTML = '<div class="time-slot unavailable">No times available for this service</div>';
+      return;
+    }
+
+    labels.forEach(function (label) {
+      const el = document.createElement('button');
+      el.type = 'button';
+      el.className = 'time-slot';
+      el.textContent = label;
+      el.setAttribute('data-time', label);
+      if (isFallback) el.title = 'Final availability is confirmed during payment.';
+      el.addEventListener('click', function () {
+        document.querySelectorAll('.time-slot').forEach(function (slot) { slot.classList.remove('selected'); });
+        el.classList.add('selected');
+        $('selectedTime').value = label;
+        resetPaymentStep();
+      });
+      container.appendChild(el);
+    });
   }
 
   async function refreshAvailability() {
-    const date = document.getElementById('preferredDate').value;
-    const container = document.getElementById('timeSlots');
+    const date = $('preferredDate').value;
+    const container = $('timeSlots');
     clearChildren(container);
+    $('selectedTime').value = '';
+    resetPaymentStep();
 
     if (!selectedServiceId || !date) {
-      const msg = document.createElement('div');
-      msg.className = 'time-slot unavailable';
-      msg.textContent = 'Select a service and date to see times';
-      container.appendChild(msg);
+      container.innerHTML = '<div class="time-slot unavailable">Select a service and date to see times</div>';
       return;
     }
 
-    const loading = document.createElement('div');
-    loading.className = 'time-slot';
-    loading.textContent = 'Loading...';
-    container.appendChild(loading);
+    container.innerHTML = '<div class="time-slot unavailable">Loading times...</div>';
 
     try {
-      const url = API_BASE + "/availability?date=" + encodeURIComponent(date) + "&serviceId=" + encodeURIComponent(selectedServiceId);
+      const url = API_BASE + '/availability?date=' + encodeURIComponent(date) + '&serviceId=' + encodeURIComponent(selectedServiceId);
       const res = await fetch(url);
-      if (!res.ok) { container.innerHTML = '<div class="time-slot unavailable">Error loading slots</div>'; return; }
+      if (!res.ok) throw new Error('Availability unavailable');
       const data = await res.json();
-      const available = new Set(Array.isArray(data.slots) ? data.slots : []);
-
-      clearChildren(container);
-      const allLabels = buildFullDayLabels();
-
-      allLabels.forEach(function (label) {
-        const el = document.createElement('div');
-        const isAvailable = available.has(label);
-
-        el.className = 'time-slot' + (isAvailable ? '' : ' unavailable');
-        el.textContent = label;
-
-        if (isAvailable) {
-          el.setAttribute('data-time', label);
-          el.addEventListener('click', function () {
-            document.querySelectorAll('.time-slot').forEach(function (n) { n.classList.remove('selected'); });
-            el.classList.add('selected');
-            document.getElementById('selectedTime').value = label;
-          });
-        } else {
-          el.style.pointerEvents = 'none';
-        }
-        container.appendChild(el);
-      });
-    } catch (e) {
-      console.error(e);
-      container.innerHTML = '<div class="time-slot unavailable">Error loading slots</div>';
+      renderTimeSlots(Array.isArray(data.slots) ? data.slots : [], false);
+    } catch (error) {
+      console.warn('[BOOKING] Using local availability fallback:', error);
+      renderTimeSlots(buildSlotLabels(currentService?.durationMin || 60), true);
     }
   }
 
-  // Review button - shows payment section
-  document.getElementById('reviewBtn').addEventListener('click', async function() {
-    if (!validateForm()) {
-      alert('Please fill all required fields and choose a time.');
-      return;
+  function validateForm() {
+    return $('fullName').value.trim() && $('email').value.trim() && $('preferredDate').value && $('selectedTime').value && $('selectedService').value;
+  }
+
+  async function loadPayPalConfig() {
+    if (window.paypal) {
+      paypalReady = true;
+      return true;
     }
 
-    // Check if PayPal SDK is ready
-    if (!window.paypal) {
-      console.warn('[PAYPAL] SDK not ready, attempting to load...');
-      const loaded = await loadPayPalConfig();
-      
-      if (!loaded || !window.paypal) {
-        alert('Payment system is still loading. Please wait a moment and try again.');
-        return;
-      }
+    try {
+      const res = await fetch(API_BASE + '/paypal-client-id');
+      if (!res.ok) throw new Error('PayPal is not configured');
+      const data = await res.json();
+      if (!data.clientId) throw new Error('Missing PayPal client id');
+      paypalClientId = data.clientId;
+
+      await new Promise((resolve, reject) => {
+        const existing = document.querySelector('script[data-paypal-sdk="true"]');
+        if (existing) {
+          existing.addEventListener('load', resolve, { once: true });
+          existing.addEventListener('error', reject, { once: true });
+          return;
+        }
+
+        const script = document.createElement('script');
+        script.dataset.paypalSdk = 'true';
+        script.src = `https://www.paypal.com/sdk/js?client-id=${paypalClientId}&currency=CAD&components=buttons,funding-eligibility&enable-funding=venmo,paylater`;
+        script.async = true;
+        script.onload = resolve;
+        script.onerror = function () { reject(new Error('Failed to load PayPal SDK')); };
+        document.head.appendChild(script);
+      });
+
+      paypalReady = Boolean(window.paypal);
+      return paypalReady;
+    } catch (error) {
+      paypalReady = false;
+      paypalStatusMessage = error.message || paypalStatusMessage;
+      console.warn('[PAYPAL] Not ready:', error);
+      return false;
     }
+  }
 
-    // Show payment section and hide review button
-    document.getElementById('paymentSection').style.display = 'block';
-    document.getElementById('reviewSection').style.display = 'none';
-    
-    // Scroll to payment section
-    document.getElementById('paymentSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  function renderPaymentUnavailable(message) {
+    const container = $('paypal-button-container');
+    container.innerHTML = `
+      <div style="text-align:center;padding:22px;color:#fce7f3;border:1px solid rgba(255,195,220,.35);border-radius:14px;background:rgba(255,195,220,.08);">
+        <strong style="display:block;margin-bottom:8px;color:#ffc3dc;">Deposit checkout is not available right now.</strong>
+        <span style="display:block;margin-bottom:14px;">${escapeHTML(message || paypalStatusMessage)}</span>
+        <a href="contact.html" style="display:inline-flex;padding:10px 18px;border-radius:999px;background:#ffc3dc;color:#050505;font-weight:900;text-decoration:none;">Contact Sally</a>
+      </div>
+    `;
+    showError(message || paypalStatusMessage, 8000);
+  }
 
-    // Initialize PayPal buttons
-    initPayPalButtons();
-  });
+  function showError(message, timeout) {
+    const errorEl = $('paymentError');
+    errorEl.textContent = message;
+    errorEl.style.display = 'block';
+    if (timeout !== 0) {
+      setTimeout(function () { errorEl.style.display = 'none'; }, timeout || 5000);
+    }
+  }
 
   function initPayPalButtons() {
-    const container = document.getElementById('paypal-button-container');
+    const container = $('paypal-button-container');
     clearChildren(container);
 
-    // Check if PayPal SDK is loaded
     if (!window.paypal) {
-      console.error('[PAYPAL] SDK not loaded yet, retrying...');
-      
-      // Show loading message
-      container.innerHTML = '<div style="text-align: center; padding: 20px; color: #cbd5e1;">Loading payment methods...</div>';
-      
-      // Retry after a short delay
-      setTimeout(() => {
-        if (window.paypal) {
-          initPayPalButtons();
-        } else {
-          container.innerHTML = '<p style="color: #fecaca; text-align: center; padding: 20px;">PayPal SDK not loaded. Please refresh the page or check your internet connection.</p>';
-        }
-      }, 2000);
+      renderPaymentUnavailable('Payment system is not loaded yet. Please refresh or contact Sally to book directly.');
       return;
     }
 
-    console.log('[PAYPAL] Initializing payment buttons...');
-
     const bookingData = {
-      fullName: document.getElementById('fullName').value.trim(),
-      email: document.getElementById('email').value.trim(),
-      phone: document.getElementById('phone').value.trim(),
-      notes: document.getElementById('notes').value.trim(),
-      date: document.getElementById('preferredDate').value,
-      timeLabel: document.getElementById('selectedTime').value,
-      serviceId: document.getElementById('selectedService').value
+      fullName: $('fullName').value.trim(),
+      email: $('email').value.trim(),
+      phone: $('phone').value.trim(),
+      notes: $('notes').value.trim(),
+      date: $('preferredDate').value,
+      timeLabel: $('selectedTime').value,
+      serviceId: $('selectedService').value
     };
 
-    // Wrap everything in try-catch to prevent crashes
     try {
-      // Render buttons for each available funding source (Apple Pay, Google Pay, etc.)
-      const fundingSources = [
-        window.paypal.FUNDING.PAYPAL,
-        window.paypal.FUNDING.PAYLATER,
-        window.paypal.FUNDING.VENMO
-      ];
-
-      fundingSources.forEach(function(fundingSource) {
+      [window.paypal.FUNDING.PAYPAL, window.paypal.FUNDING.PAYLATER, window.paypal.FUNDING.VENMO].forEach(function (fundingSource) {
         try {
-          // Check if funding source is available for this customer
-          if (window.paypal.isFundingEligible && !window.paypal.isFundingEligible(fundingSource)) {
-            return;
-          }
+          if (window.paypal.isFundingEligible && !window.paypal.isFundingEligible(fundingSource)) return;
 
           window.paypal.Buttons({
             fundingSource: fundingSource,
-            
             style: {
               layout: 'vertical',
               height: 55,
@@ -596,202 +619,90 @@
               shape: 'rect',
               color: fundingSource === window.paypal.FUNDING.PAYPAL ? 'blue' : 'black'
             },
-
-            createOrder: async function() {
+            createOrder: async function () {
               try {
-                console.log('[PAYPAL] Creating order with data:', bookingData);
-                
                 const response = await fetch(API_BASE + '/create-paypal-order', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify(bookingData)
                 });
-
-                console.log('[PAYPAL] Create order response status:', response.status);
-
-                if (!response.ok) {
-                  const errorText = await response.text();
-                  console.error('[PAYPAL] Create order failed:', errorText);
-                  
-                  let errorMessage;
-                  try {
-                    const error = JSON.parse(errorText);
-                    errorMessage = error.error || 'Failed to create order';
-                  } catch (e) {
-                    errorMessage = errorText || 'Failed to create order';
-                  }
-                  
-                  throw new Error(errorMessage);
-                }
-
-                const data = await response.json();
-                console.log('[PAYPAL] Order created successfully:', data);
-                
-                if (!data.orderId) {
-                  throw new Error('No order ID received from server');
-                }
-                
-                return data.orderId;
+                const payloadText = await response.text();
+                const payload = payloadText ? JSON.parse(payloadText) : {};
+                if (!response.ok || !payload.orderId) throw new Error(payload.error || 'Failed to create payment order');
+                return payload.orderId;
               } catch (error) {
-                console.error('[PAYPAL] Create order error:', error);
-                showError('Failed to create payment order: ' + error.message);
+                showError('Failed to create payment order: ' + error.message, 8000);
                 throw error;
               }
             },
-
-            onApprove: async function(data) {
+            onApprove: async function (data) {
               try {
-                console.log('[PAYPAL] Payment approved by user, order ID:', data.orderID);
-                
-                // Show processing state
-                const container = document.getElementById('paypal-button-container');
-                container.innerHTML = '<div style="text-align: center; padding: 20px; color: #cbd5e1;"><div class="spinner"></div> Processing payment, please wait...</div>';
-                
-                console.log('[PAYPAL] Calling capture endpoint...');
-                
+                container.innerHTML = '<div style="text-align:center;padding:20px;color:#cbd5e1;">Processing payment, please wait...</div>';
                 const response = await fetch(API_BASE + '/capture-paypal-order', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ orderId: data.orderID })
                 });
-
-                console.log('[PAYPAL] Capture response status:', response.status);
-
-                if (!response.ok) {
-                  const errorText = await response.text();
-                  console.error('[PAYPAL] Capture failed:', errorText);
-                  
-                  let errorMessage;
-                  try {
-                    const error = JSON.parse(errorText);
-                    errorMessage = error.error || 'Payment capture failed';
-                  } catch (e) {
-                    errorMessage = errorText || 'Payment capture failed';
-                  }
-                  
-                  throw new Error(errorMessage);
-                }
-
-                const result = await response.json();
-                console.log('[PAYPAL] Payment successful!', result);
-                
-                // Only show success if we got a valid response with appointmentId
-                if (!result.appointmentId) {
-                  throw new Error('Payment processed but appointment not created');
-                }
-                
-                console.log('[PAYPAL] Showing success message...');
-                
-                // Show success message - NO REDIRECT OR RELOAD
-                document.getElementById('bookingForm').style.display = 'none';
-                const success = document.getElementById('successMessage');
+                const payloadText = await response.text();
+                const result = payloadText ? JSON.parse(payloadText) : {};
+                if (!response.ok || !result.appointmentId) throw new Error(result.error || 'Payment processed but appointment was not created');
+                $('bookingForm').style.display = 'none';
+                const success = $('successMessage');
                 success.style.display = 'block';
                 success.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                
-                console.log('[PAYPAL] Complete!');
-                
               } catch (error) {
-                console.error('[PAYPAL] Capture error:', error);
-                showError('Payment processing failed: ' + error.message);
-                
-                // Re-initialize buttons to try again
-                setTimeout(() => {
-                  try {
-                    initPayPalButtons();
-                  } catch (e) {
-                    console.error('[PAYPAL] Failed to re-init buttons:', e);
-                  }
-                }, 3000);
+                showError('Payment processing failed: ' + error.message, 8000);
+                setTimeout(initPayPalButtons, 3000);
               }
             },
-
-            onError: function(err) {
-              try {
-                console.error('[PAYPAL] Payment error:', err);
-                console.error('[PAYPAL] Error details:', JSON.stringify(err, null, 2));
-                showError('Payment error occurred. Please try again or contact support.');
-                
-                // Re-initialize buttons
-                setTimeout(() => {
-                  try {
-                    initPayPalButtons();
-                  } catch (e) {
-                    console.error('[PAYPAL] Failed to re-init buttons:', e);
-                  }
-                }, 3000);
-              } catch (e) {
-                console.error('[PAYPAL] Error in onError handler:', e);
-              }
+            onError: function () {
+              showError('Payment error occurred. Please try again or contact support.', 8000);
+              setTimeout(initPayPalButtons, 3000);
             },
-
-            onCancel: function(data) {
-              try {
-                console.log('[PAYPAL] Payment cancelled by user');
-                console.log('[PAYPAL] Cancelled order ID:', data.orderID);
-                showError('Payment cancelled. Your appointment was not created. You can try again when ready.');
-                
-                // Re-initialize buttons
-                setTimeout(() => {
-                  try {
-                    initPayPalButtons();
-                  } catch (e) {
-                    console.error('[PAYPAL] Failed to re-init buttons:', e);
-                  }
-                }, 2000);
-              } catch (e) {
-                console.error('[PAYPAL] Error in onCancel handler:', e);
-              }
+            onCancel: function () {
+              showError('Payment cancelled. Your appointment was not created.', 6000);
+              setTimeout(initPayPalButtons, 2000);
             }
-          }).render('#paypal-button-container').catch(function(renderError) {
+          }).render('#paypal-button-container').catch(function (renderError) {
             console.error('[PAYPAL] Failed to render button:', renderError);
           });
-          
         } catch (buttonError) {
-          console.error('[PAYPAL] Error creating button for funding source:', fundingSource, buttonError);
+          console.error('[PAYPAL] Button setup error:', buttonError);
         }
       });
-
-      console.log('[PAYPAL] Payment buttons rendered');
-      
     } catch (error) {
-      console.error('[PAYPAL] Fatal error in initPayPalButtons:', error);
-      container.innerHTML = '<p style="color: #fecaca; text-align: center; padding: 20px;">Failed to load payment buttons. Please refresh the page.</p>';
+      console.error('[PAYPAL] Fatal button error:', error);
+      renderPaymentUnavailable('Failed to load payment buttons. Please refresh or contact Sally.');
     }
   }
 
-  function showError(message) {
-    const errorEl = document.getElementById('paymentError');
-    errorEl.textContent = message;
-    errorEl.style.display = 'block';
-    
-    setTimeout(() => {
-      errorEl.style.display = 'none';
-    }, 5000);
-  }
-
-  // Initialize
-  document.addEventListener('DOMContentLoaded', async function () {
-    console.log('[APP] Initializing booking system...');
-    setMinDate();
-    
-    // Load PayPal SDK first
-    console.log('[APP] Loading PayPal configuration...');
-    const paypalLoaded = await loadPayPalConfig();
-    
-    if (paypalLoaded) {
-      console.log('[APP] PayPal ready');
-    } else {
-      console.warn('[APP] PayPal not configured - payments may not work');
+  $('reviewBtn').addEventListener('click', async function () {
+    if (!validateForm()) {
+      alert('Please fill all required fields and choose a time.');
+      return;
     }
-    
-    // Load services
-    populateServices();
-    console.log('[APP] Booking system ready');
+
+    $('paymentSection').style.display = 'block';
+    $('reviewSection').style.display = 'none';
+    $('paymentSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    const loaded = paypalReady || await loadPayPalConfig();
+    if (!loaded || !window.paypal) {
+      renderPaymentUnavailable(paypalStatusMessage);
+      return;
+    }
+
+    initPayPalButtons();
   });
 
-  document.getElementById('preferredDate').addEventListener('change', refreshAvailability);
+  document.addEventListener('DOMContentLoaded', async function () {
+    setMinDate();
+    populateServices();
+    loadPayPalConfig();
+  });
 
-  // Animation observer
+  $('preferredDate').addEventListener('change', refreshAvailability);
+
   const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
   const observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
@@ -805,12 +716,10 @@
   document.querySelectorAll('.form-section').forEach(function (section, index) {
     section.style.opacity = '0';
     section.style.transform = 'translateY(20px)';
-    section.style.transition =
-      'opacity 0.6s ease ' + (index * 0.1) + 's, transform 0.6s ease ' + (index * 0.1) + 's';
+    section.style.transition = 'opacity 0.6s ease ' + (index * 0.1) + 's, transform 0.6s ease ' + (index * 0.1) + 's';
     observer.observe(section);
   });
 </script>
-
 <script src="unified-pages.js?v=20260722footer2"></script>
 </body>
 </html>

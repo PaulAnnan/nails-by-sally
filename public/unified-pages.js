@@ -42,6 +42,7 @@
       button.setAttribute('aria-label', 'Open Menu');
       headerInner.appendChild(button);
     }
+    button.type = 'button';
 
     let menu = document.getElementById('mobileMenu');
     if (!menu) {
