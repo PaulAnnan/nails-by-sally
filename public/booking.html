@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Book Your Appointment - Nails By Sally</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+
     <style>
         /* Theme Variables */
         :root {
@@ -171,8 +171,8 @@
     <link rel="stylesheet" href="booking-mobile-fixes.css">
   <link rel="stylesheet" href="navbar-logo-consistency.css">
   <link rel="stylesheet" href="navbar-unified-behavior.css?v=20260722navfix1">
-  <link rel="stylesheet" href="no-footers.css?v=20260722footer3">
-  <link rel="stylesheet" href="premium-typography-cleanup.css?v=20260722type1">
+  <link rel="stylesheet" href="no-footers.css?v=20260722footer5">
+  <link rel="stylesheet" href="premium-typography-cleanup.css?v=20260722type4">
   <link rel="stylesheet" href="booking-contact-desktop.css?v=20260722desktop1">
 </head>
 <body>
@@ -196,7 +196,7 @@
 <div class="container">
     <div class="page-title">
         <h1>Book Your <span class="accent">Perfect Look</span></h1>
-        <p>Choose your service, pick a time, and complete your booking with a secure deposit</p>
+        <p id="bookingIntro">Choose your service, pick a time, and confirm your appointment</p>
     </div>
 
     <form id="bookingForm">
@@ -271,21 +271,21 @@
                 </svg>
                 <h2 class="section-title">Secure Your Appointment</h2>
             </div>
-            
+
             <div class="payment-summary">
                 <div class="payment-row">
                     <span class="payment-label">Service Total:</span>
                     <span class="payment-value" id="totalPrice">$0.00</span>
                 </div>
-                <div class="payment-row">
+                <div class="payment-row" data-deposit-only>
                     <span class="payment-label">Deposit Required (25%):</span>
                     <span class="payment-value" id="depositAmount">$0.00</span>
                 </div>
-                <div class="payment-row total">
+                <div class="payment-row total" data-deposit-only>
                     <span class="payment-label">Due at Appointment:</span>
                     <span class="payment-value" id="remainingAmount">$0.00</span>
                 </div>
-                <p class="payment-note">Deposit: A 25% deposit is required to secure your appointment. The remaining balance will be collected when you arrive for your service.
+                <p class="payment-note" data-deposit-only>Deposit: A 25% deposit is required to secure your appointment. The remaining balance will be collected when you arrive for your service.
                 </p>
                 <div class="payment-methods">
                     <div class="payment-methods-title">Accepted Payment Methods:</div>
@@ -314,7 +314,7 @@
     <div class="success-message" id="successMessage">
         <div class="success-icon">&#10003;</div>
         <h2>Appointment Confirmed!</h2>
-        <p>Your deposit has been received and your appointment is confirmed. Check your email for details.</p>
+        <p id="successNote">Your appointment is confirmed. Check your email for details.</p>
     </div>
 </div>
 
@@ -335,6 +335,8 @@
   let paypalClientId = '';
   let paypalReady = false;
   let paypalStatusMessage = 'Online deposit is not configured yet. Please contact Sally to finish booking this appointment.';
+  // Deposit is off by default; the server's /api/booking-config is the source of truth.
+  let depositEnabled = false;
 
   const params = new URLSearchParams(window.location.search);
   const requestedServiceId = params.get('service') || '';
@@ -676,9 +678,85 @@
     }
   }
 
+  async function loadBookingConfig() {
+    try {
+      const res = await fetch(API_BASE + '/booking-config');
+      if (res.ok) {
+        const cfg = await res.json();
+        depositEnabled = Boolean(cfg.depositEnabled);
+      }
+    } catch (error) {
+      console.warn('[BOOKING] Could not load booking config; defaulting to no deposit.', error);
+    }
+    applyDepositMode();
+  }
+
+  // Show/hide the deposit-specific UI and switch the flow based on the flag.
+  function applyDepositMode() {
+    document.querySelectorAll('[data-deposit-only]').forEach(function (el) {
+      el.style.display = depositEnabled ? '' : 'none';
+    });
+
+    const btnText = document.querySelector('#reviewBtn .btn-text');
+    if (btnText) btnText.textContent = depositEnabled ? 'Review & Pay Deposit' : 'Confirm Booking';
+
+    const intro = $('bookingIntro');
+    if (intro) {
+      intro.textContent = depositEnabled
+        ? 'Choose your service, pick a time, and complete your booking with a secure deposit'
+        : 'Choose your service, pick a time, and confirm your appointment';
+    }
+  }
+
+  // No-deposit flow: create the appointment directly, no online payment.
+  async function submitBookingNoDeposit() {
+    const btn = $('reviewBtn');
+    const btnText = btn.querySelector('.btn-text');
+    const previousLabel = btnText ? btnText.textContent : '';
+    btn.disabled = true;
+    if (btnText) btnText.textContent = 'Booking...';
+
+    try {
+      const response = await fetch(API_BASE + '/appointments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: $('fullName').value.trim(),
+          email: $('email').value.trim(),
+          phone: $('phone').value.trim(),
+          notes: $('notes').value.trim(),
+          date: $('preferredDate').value,
+          timeLabel: $('selectedTime').value,
+          serviceId: $('selectedService').value,
+          status: 'confirmed'
+        })
+      });
+      const payloadText = await response.text();
+      const payload = payloadText ? JSON.parse(payloadText) : {};
+      if (!response.ok || !payload.appointmentId) {
+        throw new Error(payload.error || 'Booking could not be completed');
+      }
+
+      $('bookingForm').style.display = 'none';
+      const success = $('successMessage');
+      success.style.display = 'block';
+      success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch (error) {
+      alert('Sorry, we could not complete your booking: ' + error.message + '. Please try again or contact Sally.');
+      btn.disabled = false;
+      if (btnText) btnText.textContent = previousLabel;
+    }
+  }
+
   $('reviewBtn').addEventListener('click', async function () {
     if (!validateForm()) {
       alert('Please fill all required fields and choose a time.');
+      return;
+    }
+
+    // Deposit disabled: book straight away, skip the payment step entirely.
+    if (!depositEnabled) {
+      submitBookingNoDeposit();
       return;
     }
 
@@ -698,7 +776,8 @@
   document.addEventListener('DOMContentLoaded', async function () {
     setMinDate();
     populateServices();
-    loadPayPalConfig();
+    await loadBookingConfig();
+    if (depositEnabled) loadPayPalConfig();
   });
 
   $('preferredDate').addEventListener('change', refreshAvailability);
@@ -720,6 +799,6 @@
     observer.observe(section);
   });
 </script>
-<script src="unified-pages.js?v=20260722footer2"></script>
+<script src="unified-pages.js?v=20260722footer5"></script>
 </body>
 </html>

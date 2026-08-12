@@ -61,7 +61,11 @@ const {
   PAYPAL_CLIENT_SECRET,
   PAYPAL_MODE = "sandbox", // "sandbox" or "live"
   DEPOSIT_PERCENTAGE = "25", // Default 25% deposit
-  
+  // Master switch for the booking deposit. Leave unset/"false" to let clients
+  // book without paying an online deposit. Set DEPOSIT_ENABLED="true" in .env to
+  // require the deposit again — all the deposit/PayPal code below is preserved.
+  DEPOSIT_ENABLED = "false",
+
   // Email
   EMAIL_USER,
   EMAIL_PASSWORD,
@@ -93,6 +97,10 @@ function getPayPalClient() {
 }
 
 const paypalClient = PAYPAL_CLIENT_ID && PAYPAL_CLIENT_SECRET ? getPayPalClient() : null;
+
+// Resolved once at boot: is the booking deposit currently required?
+const DEPOSIT_ENABLED_BOOL = String(DEPOSIT_ENABLED).toLowerCase() === "true";
+console.log(`[BOOKING] Deposit requirement: ${DEPOSIT_ENABLED_BOOL ? "ENABLED" : "DISABLED"}`);
 
 
 /* ========= EMAIL SETUP ========= */
@@ -508,6 +516,7 @@ async function sendConfirmationEmail(appointmentData) {
               ` : ''}
             </div>
 
+            ${depositPaid > 0 ? `
             <div class="payment-box">
               <h3>💰 Payment Summary</h3>
               <div class="payment-detail">Deposit Paid</div>
@@ -517,6 +526,14 @@ async function sendConfirmationEmail(appointmentData) {
               <div class="payment-amount" style="font-size: 24px;">$${remainingAmount.toFixed(2)} CAD</div>
               <div class="payment-detail" style="margin-top: 10px;">Total: $${totalPrice.toFixed(2)} CAD</div>
             </div>
+            ` : `
+            <div class="payment-box">
+              <h3>💰 Payment Summary</h3>
+              <div class="payment-detail">Total Due at Appointment</div>
+              <div class="payment-amount">$${totalPrice.toFixed(2)} CAD</div>
+              <div class="payment-detail" style="margin-top: 10px;">No deposit required — pay in full at your appointment.</div>
+            </div>
+            `}
 
             ${notes ? `
             <div class="notes-box">
@@ -537,7 +554,7 @@ async function sendConfirmationEmail(appointmentData) {
             <h3 style="color: #f14aa6; font-size: 18px; margin-top: 25px;">Important Information</h3>
             <ul style="color: #6b7280; line-height: 1.8;">
               <li>Please arrive 5-10 minutes before your appointment</li>
-              <li>Bring your remaining balance of $${remainingAmount.toFixed(2)} CAD</li>
+              <li>${depositPaid > 0 ? `Bring your remaining balance of $${remainingAmount.toFixed(2)} CAD` : `Please bring your payment of $${totalPrice.toFixed(2)} CAD`}</li>
               <li>We accept cash, debit, and credit cards</li>
               <li>Cancellations require 24 hours notice</li>
             </ul>
@@ -589,6 +606,14 @@ app.get("/api/paypal-client-id", (req, res) => {
     return res.status(503).json({ error: "PayPal not configured" });
   }
   res.json({ clientId: PAYPAL_CLIENT_ID });
+});
+
+// GET /api/booking-config — public booking settings the frontend reads on load.
+app.get("/api/booking-config", (req, res) => {
+  res.json({
+    depositEnabled: DEPOSIT_ENABLED_BOOL,
+    depositPercentage: Number(DEPOSIT_PERCENTAGE) || 0,
+  });
 });
 
 /* ========= TIME HELPERS ========= */
@@ -816,7 +841,12 @@ app.get("/api/availability", async (req, res) => {
 app.post("/api/create-paypal-order", async (req, res) => {
   try {
     console.log('[PAYPAL] Received create order request');
-    
+
+    if (!DEPOSIT_ENABLED_BOOL) {
+      console.warn('[PAYPAL] Deposit is disabled — rejecting create order request');
+      return res.status(403).json({ error: "Online deposits are currently disabled." });
+    }
+
     if (!paypalClient) {
       console.error('[PAYPAL] PayPal client not initialized');
       return res.status(503).json({ error: "PayPal not configured" });
@@ -1225,6 +1255,25 @@ app.post("/api/appointments", async (req, res) => {
       requireInteraction: true,
       vibrate: [200, 100, 200]
     });
+
+    // Confirmation email — no deposit taken, so the full price is due at the visit.
+    try {
+      await sendConfirmationEmail({
+        fullName,
+        email,
+        phone,
+        serviceName: svc.name,
+        date,
+        timeLabel,
+        durationMin: svc.durationMin,
+        depositPaid: 0,
+        remainingAmount: svc.price,
+        totalPrice: svc.price,
+        notes,
+      });
+    } catch (mailErr) {
+      console.error("[EMAIL] Confirmation email failed:", mailErr);
+    }
 
     res.json({ ok: true, appointmentId: id });
   } catch (err) {
