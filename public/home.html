@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Nails By Sally - Nail Studio</title>
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,7 +49,7 @@
     .center{text-align:center}
     .max-640{max-width:640px;margin-inline:auto}
     .section, .site-footer, #services, #reels, #about{
-      content-visibility:auto; 
+      content-visibility:auto;
       contain-intrinsic-size: 0 300px;
     }
 
@@ -283,7 +283,7 @@
       .gallery-cta{flex-direction:column; align-items:flex-start}
       .gallery-cta .right{align-self:stretch}
     }
-    
+
     @media (max-width:780px){
       /* Header improvements */
       .site-header{backdrop-filter:none}
@@ -294,78 +294,78 @@
       .brand-sep{display:none}
       .nav{display:none}
       .menu-btn{display:block}
-      
+
       /* Hero section mobile optimization */
       .hero{
         padding: 28px 0 24px;
         gap: 24px;
       }
-      
+
       .hero__left{
         order: 1;
       }
-      
+
       .hero__right{
         order: 2;
         margin-bottom: 20px;
       }
-      
+
       .h1{
         font-size: 36px;
         line-height: 1.1;
         margin-bottom: 12px;
       }
-      
+
       .lead{
         font-size: 15px;
         line-height: 1.5;
         margin-bottom: 8px;
       }
-      
+
       .badges{
         gap: 8px;
         margin-bottom: 12px;
       }
-      
+
       .badge{
         font-size: 11px;
         padding: 5px 9px;
       }
-      
+
       .actions{
         gap: 10px;
         margin-top: 18px;
       }
-      
+
       .btn{
         padding: 11px 16px;
         font-size: 13px;
       }
-      
+
       /* Hero card mobile sizing */
       .hero-card{
         height: 420px;
         border-radius: 22px;
       }
-      
+
       .card-overlay{
         inset: auto 12px 12px 12px;
         border-radius: 16px;
       }
-      
+
       .overlay-content{
         padding: 12px 14px;
       }
-      
+
       .overlay-content h3{
         font-size: 16px;
         margin-bottom: 4px;
       }
-      
+
       .overlay-content p{
         font-size: 13px;
       }
-      
+
       .rating-chip{
         position: static;
         width: 100%;
@@ -375,11 +375,11 @@
         align-items: center;
         padding: 12px 14px;
       }
-      
+
       .chip-note{
         text-align: right;
       }
-      
+
       /* Gallery CTA mobile improvements */
       .gallery-cta{
         padding: 14px;
@@ -387,268 +387,268 @@
         border-radius: 18px;
         margin: 20px auto 16px;
       }
-      
+
       .gallery-cta .left{
         width: 100%;
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
       }
-      
+
       .gallery-cta .title{
         font-size: 16px;
       }
-      
+
       .thumbs{
         width: 100%;
       }
-      
+
       .gallery-cta .right{
         width: 100%;
       }
-      
+
       .gallery-cta .right .btn{
         width: 100%;
         justify-content: center;
         padding: 11px 14px;
       }
-      
+
       /* Social section mobile */
       .social-section{
         padding: 40px 20px;
       }
-      
+
       .social-section h2{
         font-size: 24px;
         margin-bottom: 16px;
       }
-      
+
       .social-links{
         gap: 14px;
       }
-      
+
       .social-links a{
         width: 52px;
         height: 52px;
       }
-      
+
       .social-links img{
         width: 26px;
         height: 26px;
       }
-      
+
       /* Section spacing mobile */
       .section{
         padding: 40px 0;
       }
-      
+
       .h2{
         font-size: 26px;
         margin-bottom: 10px;
       }
-      
+
       .h3{
         font-size: 22px;
       }
-      
+
       /* Feature cards mobile */
       .feature{
         padding: 18px;
         border-radius: 18px;
       }
-      
+
       .feature-icon{
         width: 46px;
         height: 46px;
         margin-bottom: 8px;
       }
-      
+
       /* Service cards mobile */
       .cards{
         gap: 18px;
       }
-      
+
       .card{
         border-radius: 18px;
       }
-      
+
       .card img{
         height: 180px;
       }
-      
+
       .card-body{
         padding: 12px;
       }
-      
+
       /* Reels mobile optimization */
       .reels{
         padding: 40px 0;
       }
-      
+
       .reels-sub{
         font-size: 14px;
         margin-bottom: 14px;
       }
-      
+
       .reels-viewport{
         border-radius: 22px;
       }
-      
+
       .reel{
         border-radius: 18px;
       }
-      
+
       .nav-btn{
         width: 40px;
         height: 40px;
       }
-      
+
       .nav-btn svg{
         width: 16px;
         height: 16px;
       }
-      
+
       /* CTA mobile */
       .cta{
         margin: 0 18px 36px 18px;
         padding: 28px 20px;
         border-radius: 22px;
       }
-      
+
       .cta .h2{
         font-size: 24px;
       }
-      
+
       .cta-sub{
         font-size: 13px;
       }
-      
+
       /* Footer mobile improvements */
       .footer-grid{
         grid-template-columns: 1fr;
         gap: 28px;
         padding: 28px 0;
       }
-      
+
       .footer-brand{
         padding-bottom: 12px;
         border-bottom: 1px solid rgba(255,255,255,.12);
       }
-      
+
       .brand-row .brand-logo{
         width: 52px;
         height: 52px;
       }
-      
+
       .brand-row .brand-logo img{
         width: 38px;
         height: 38px;
       }
-      
+
       .foot-title{
         font-size: 16px;
         margin-bottom: 10px;
       }
-      
+
       .foot-list li{
         font-size: 14px;
         margin: 8px 0;
       }
-      
+
       .copy-row{
         padding: 16px 0;
         font-size: 13px;
         text-align: center;
       }
-      
+
       /* Marquee mobile */
       .tick{
         font-size: 13px;
         padding: 10px 0;
       }
     }
-    
+
     @media (max-width:640px){
       /* Extra small mobile optimizations */
       .container{
         padding-inline: 18px;
       }
-      
+
       .grid-3{
         grid-template-columns: 1fr;
         gap: 16px;
       }
-      
+
       .h1{
         font-size: 32px;
       }
-      
+
       .lead{
         font-size: 14px;
       }
-      
+
       .hero-card{
         height: 380px;
       }
-      
+
       .rating-chip{
         flex-direction: column;
         align-items: flex-start;
         gap: 4px;
       }
-      
+
       .chip-note{
         text-align: left;
       }
-      
+
       .reel{
         flex-basis: 72vw;
       }
-      
+
       .blob{
         opacity: .15;
       }
-      
+
       .thumb{
         width: 42px;
         height: 52px;
       }
-      
+
       .gallery-cta .title{
         font-size: 15px;
       }
-      
+
       .actions{
         flex-direction: column;
         width: 100%;
       }
-      
+
       .actions .btn{
         width: 100%;
         justify-content: center;
       }
-      
+
       .cards{
         gap: 16px;
       }
-      
+
       .card img{
         height: 160px;
       }
-      
+
       .social-section{
         padding: 32px 18px;
       }
-      
+
       .social-section h2{
         font-size: 22px;
       }
-      
+
       .social-links a{
         width: 48px;
         height: 48px;
       }
-      
+
       .social-links img{
         width: 24px;
         height: 24px;
@@ -660,8 +660,8 @@
   <link rel="stylesheet" href="home-navbar.css?v=20260722a">
   <link rel="stylesheet" href="navbar-logo-consistency.css">
   <link rel="stylesheet" href="navbar-unified-behavior.css?v=20260722navfix1">
-  <link rel="stylesheet" href="no-footers.css?v=20260722footer3">
-  <link rel="stylesheet" href="premium-typography-cleanup.css?v=20260722type1">
+  <link rel="stylesheet" href="no-footers.css?v=20260722footer5">
+  <link rel="stylesheet" href="premium-typography-cleanup.css?v=20260722type4">
 </head>
 <body>
   <div class="bg" id="bg">
@@ -922,7 +922,7 @@
           <div class="policy-card-copy"><h3>Appointments</h3>
           <p>Please book at least 5 days in advance. Rush and after-hours appointments may include an extra fee.</p></div>
         </article>
-        <article>
+        <article data-deposit-only style="display:none;">
           <div class="policy-icon">$</div>
           <div class="policy-card-copy"><h3>Deposit</h3>
           <p>A 25% deposit secures your appointment and goes toward your service total.</p></div>
@@ -1047,19 +1047,19 @@
           <span>01</span>
           <h3>Classic gel polish</h3>
           <p>A clean, glossy set for clients who want a simple finish that still feels done.</p>
-          <a href="booking.html">Book gel polish</a>
+          <a href="booking.html?service=classic-manicure">Book gel polish</a>
         </article>
         <article>
           <span>02</span>
           <h3>Acrylic nails</h3>
           <p>Longer structure, stronger shape, and more room for detailed art or chrome.</p>
-          <a href="booking.html">Book acrylics</a>
+          <a href="booking.html?service=acrylic-extensions">Book acrylics</a>
         </article>
         <article>
           <span>03</span>
           <h3>Gel X</h3>
           <p>Lightweight extensions with a polished look and a softer feel on the nail.</p>
-          <a href="booking.html">Book Gel X</a>
+          <a href="booking.html?service=gel-extensions">Book Gel X</a>
         </article>
       </div>
     </section>
@@ -1084,7 +1084,7 @@
         <p class="studio-kicker">Appointments</p>
         <h2 class="section-title">Reserve a set that fits your day.</h2>
       </div>
-      <p class="section-lead">Choose your service, pick a time, and secure the appointment with a deposit.</p>
+      <p class="section-lead" id="appointmentsLead">Choose your service, pick a time, and confirm your appointment.</p>
       <a href="booking.html" class="btn btn-primary">Book now <span class="arr">&rarr;</span></a>
     </section>
   </main>
@@ -1582,6 +1582,21 @@
     }
 
     /* ---------- Init ---------- */
+    // Reveal deposit-specific copy only when the deposit is enabled server-side.
+    async function applyDepositCopy() {
+      try {
+        const res = await fetch(window.location.origin + '/api/booking-config');
+        if (!res.ok) return;
+        const cfg = await res.json();
+        if (!cfg.depositEnabled) return;
+        document.querySelectorAll('[data-deposit-only]').forEach((el) => { el.style.display = ''; });
+        const lead = document.getElementById('appointmentsLead');
+        if (lead) lead.textContent = 'Choose your service, pick a time, and secure the appointment with a deposit.';
+      } catch (error) {
+        /* Deposit off / offline: keep the no-deposit copy. */
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       setYear();
       renderPopular();
@@ -1591,9 +1606,10 @@
       setupReels();
       setupReveals();
       setupGalleryCTA();
+      applyDepositCopy();
     });
   </script>
-  <script src="unified-pages.js?v=20260722footer2"></script>
+  <script src="unified-pages.js?v=20260722footer5"></script>
 </body>
 </html>
 

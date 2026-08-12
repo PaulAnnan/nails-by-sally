@@ -812,9 +812,9 @@ body::after{
   margin:4px -20px 0;
   color:#ffc3dc;
   font-family:Arial Black,Impact,sans-serif;
-  font-size:clamp(118px,34vw,154px);
+  font-size:clamp(104px,23vw,150px);
   line-height:.66;
-  letter-spacing:-.086em;
+  letter-spacing:.02em;
   text-align:center;
   text-shadow:
     0 0 8px rgba(255,195,220,.86),
@@ -1598,7 +1598,7 @@ body::after{
   }
 
   .poster-title{
-    font-size:136px;
+    font-size:104px;
   }
 
   .header-inner{
@@ -2206,7 +2206,7 @@ body::after{
     position:absolute;top:24px;left:40%;width:49%;font-size:13px;letter-spacing:.58em;text-align:center
   }
   .poster-title{
-    position:absolute;top:39px;left:39%;width:51%;margin:0;font-size:167px;line-height:.95;letter-spacing:-.065em;text-align:center
+    position:absolute;top:39px;left:39%;width:51%;margin:0;font-size:167px;line-height:.95;letter-spacing:-.01em;text-align:center
   }
   .poster-intro{position:static;min-height:0;margin:0}
   .stylist-card{

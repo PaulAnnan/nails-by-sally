@@ -1769,3 +1769,110 @@
     height: 310px !important;
   }
 }
+/* Final About no-inner-scroll and living-glow polish. */
+.about-poster-page,
+.about-poster-page > .section,
+.about-poster-page > .section > .container,
+.about-home-hero,
+.about-home-intro,
+.about-home-service-row,
+.story-section,
+.stats-section,
+.values-grid,
+.artist-section,
+.artist-profile {
+  scrollbar-width: none !important;
+}
+
+.about-poster-page::-webkit-scrollbar,
+.about-poster-page > .section::-webkit-scrollbar,
+.about-poster-page > .section > .container::-webkit-scrollbar,
+.about-home-hero::-webkit-scrollbar,
+.about-home-intro::-webkit-scrollbar,
+.about-home-service-row::-webkit-scrollbar,
+.story-section::-webkit-scrollbar,
+.stats-section::-webkit-scrollbar,
+.values-grid::-webkit-scrollbar,
+.artist-section::-webkit-scrollbar,
+.artist-profile::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.about-home-service-row {
+  overflow: visible !important;
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+  max-height: none !important;
+}
+
+.about-home-hero {
+  overflow: visible !important;
+  clip-path: none !important;
+}
+
+.about-home-title {
+  animation: aboutTitleBreathingGlow 5.8s ease-in-out infinite !important;
+  will-change: opacity, filter, text-shadow;
+}
+
+.about-home-hero::before {
+  animation: aboutBlobDrift 9.5s ease-in-out infinite !important;
+  will-change: transform, opacity, filter;
+}
+
+@keyframes aboutTitleBreathingGlow {
+  0%, 100% {
+    opacity: .88;
+    filter: brightness(.96);
+    text-shadow: 0 0 12px rgba(255, 160, 198, .52), 0 0 28px rgba(255, 116, 175, .22);
+  }
+  45% {
+    opacity: 1;
+    filter: brightness(1.08);
+    text-shadow: 0 0 18px rgba(255, 195, 220, .82), 0 0 46px rgba(255, 116, 175, .48), 0 0 78px rgba(255, 177, 207, .22);
+  }
+  68% {
+    opacity: .94;
+    filter: brightness(1.01);
+    text-shadow: 0 0 10px rgba(255, 160, 198, .48), 0 0 34px rgba(255, 116, 175, .30);
+  }
+}
+
+@keyframes aboutBlobDrift {
+  0%, 100% {
+    opacity: .74;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(.4px);
+  }
+  35% {
+    opacity: .92;
+    transform: translate3d(22px, -14px, 0) scale(1.06);
+    filter: blur(.7px);
+  }
+  70% {
+    opacity: .68;
+    transform: translate3d(-12px, 16px, 0) scale(.97);
+    filter: blur(.2px);
+  }
+}
+
+@media (max-width: 767px) {
+  .about-home-service-row {
+    overflow: visible !important;
+    overflow-x: clip !important;
+    overflow-y: visible !important;
+    max-height: none !important;
+  }
+
+  .about-home-hero::before {
+    animation-duration: 8s !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-home-title,
+  .about-home-hero::before {
+    animation: none !important;
+  }
+}

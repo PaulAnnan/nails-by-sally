@@ -352,3 +352,72 @@ body:has(#contactForm) .contact-booking-card {
 .mini-site-footer {
   margin-top: clamp(10px, 1.1vw, 18px) !important;
 }
+/* Final footer visibility repair: never let the compact footer grid clip its content. */
+.mini-site-footer {
+  min-height: 0 !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.mini-footer-grid {
+  display: grid !important;
+  grid-template-columns: minmax(210px, .95fr) minmax(220px, 1.15fr) minmax(190px, .8fr) minmax(110px, auto) !important;
+  align-items: center !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+}
+
+.mini-footer-brand,
+.mini-footer-wordmark,
+.mini-footer-meta,
+.mini-footer-links,
+.mini-footer-socials,
+.mini-footer-bottom {
+  min-width: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.mini-footer-wordmark,
+.mini-footer-wordmark.brand-text {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.mini-footer-meta,
+.mini-footer-links,
+.mini-footer-socials {
+  max-width: 100% !important;
+}
+
+@media (max-width: 1180px) {
+  .mini-footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .mini-footer-brand,
+  .mini-footer-meta,
+  .mini-footer-links,
+  .mini-footer-socials,
+  .mini-footer-bottom {
+    width: 100% !important;
+    justify-content: flex-start !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .mini-footer-grid {
+    gap: 12px !important;
+  }
+
+  .mini-footer-meta,
+  .mini-footer-links {
+    grid-template-columns: 1fr !important;
+  }
+
+  .mini-footer-bottom {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+}

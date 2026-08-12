@@ -96,3 +96,301 @@ body :is(.value-title, .stat-number, .service-card h3, .svc-card h3, .gallery-ca
     text-shadow: none !important;
   }
 }
+
+/* Final no-inner-scrollbar polish: keep page scrolling native, not inside cards/sections. */
+:where(main, section, article, .container, .page-container, .poster-shell, .gallery-shell, .services-shell, .contact-shell, .booking-shell, .footer-shell) {
+  scrollbar-width: none;
+}
+
+:where(main, section, article, .container, .page-container, .poster-shell, .gallery-shell, .services-shell, .contact-shell, .booking-shell, .footer-shell)::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+:where(.svc-grid, .gallery-grid, .contact-grid, .booking-form, .poster-actions, .services-menu-shell) {
+  overflow-y: visible !important;
+}
+
+/* iPhone/WebKit real-device layout guardrails.
+   Chrome and Google on iPhone use the same WebKit engine as Safari, so the
+   homepage poster needs narrow-device rules that do not depend on simulator width. */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (max-width: 767px) {
+  html,
+  body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  body {
+    min-width: 0 !important;
+  }
+}
+
+@media (max-width: 520px) {
+  body:has(.poster-home) .poster-home,
+  body:has(.poster-home) .poster-shell,
+  body:has(.poster-home) .poster-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  body:has(.poster-home) .poster-shell {
+    overflow-x: clip !important;
+  }
+
+  body:has(.poster-home) .poster-hero {
+    height: auto !important;
+    min-height: 0 !important;
+    padding-top: 8px !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+  }
+
+  body:has(.poster-home) .poster-eyebrow {
+    padding-inline: 14px !important;
+    font-size: 9px !important;
+    letter-spacing: .48em !important;
+    white-space: nowrap !important;
+  }
+
+  body:has(.poster-home) .poster-title {
+    margin: 6px -34px 0 !important;
+    font-size: clamp(88px, 25vw, 124px) !important;
+    line-height: .7 !important;
+    letter-spacing: .02em !important;
+  }
+
+  body:has(.poster-home) .poster-intro {
+    min-height: clamp(356px, 91vw, 394px) !important;
+    margin-top: -4px !important;
+  }
+
+  body:has(.poster-home) .stylist-card {
+    left: clamp(14px, 4vw, 22px) !important;
+    top: clamp(42px, 11vw, 54px) !important;
+    width: min(45vw, 188px) !important;
+    height: clamp(286px, 74vw, 326px) !important;
+    z-index: 4 !important;
+    transform: rotate(-4deg) !important;
+    transform-origin: center !important;
+  }
+
+  body:has(.poster-home) .intro-copy {
+    left: 48.5% !important;
+    top: clamp(78px, 21vw, 96px) !important;
+    width: min(45vw, 190px) !important;
+    right: auto !important;
+    z-index: 5 !important;
+  }
+
+  body:has(.poster-home) .script-name {
+    font-size: clamp(44px, 13vw, 58px) !important;
+    line-height: .82 !important;
+    white-space: nowrap !important;
+  }
+
+  body:has(.poster-home) .intro-copy h2 {
+    font-size: clamp(40px, 10.5vw, 48px) !important;
+    line-height: .85 !important;
+  }
+
+  body:has(.poster-home) .intro-copy p:not(.script-name) {
+    max-width: 100% !important;
+    font-size: clamp(14px, 3.45vw, 16px) !important;
+    line-height: 1.13 !important;
+  }
+
+  body:has(.poster-home) .heart-mark {
+    right: clamp(2px, 1.5vw, 12px) !important;
+    bottom: clamp(58px, 15vw, 70px) !important;
+    font-size: clamp(34px, 9vw, 42px) !important;
+    z-index: 6 !important;
+  }
+
+  body:has(.poster-home) .location-bar {
+    left: auto !important;
+    right: -8px !important;
+    bottom: 8px !important;
+    width: min(63%, 282px) !important;
+    padding: 10px 12px 11px !important;
+    font-size: clamp(11px, 2.9vw, 13px) !important;
+    letter-spacing: .31em !important;
+    transform: rotate(-3deg) translateZ(0) !important;
+    z-index: 8 !important;
+  }
+
+  body:has(.poster-home) .service-photo-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+    padding: 22px 10px 16px !important;
+    margin-top: 0 !important;
+    overflow: visible !important;
+  }
+
+  body:has(.poster-home) .service-photo {
+    min-height: clamp(190px, 52vw, 228px) !important;
+    border-radius: 14px !important;
+  }
+
+  body:has(.poster-home) .service-photo-main {
+    transform: translateY(-17px) scale(1.06) rotate(.4deg) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  body:has(.poster-home) .poster-title {
+    font-size: clamp(78px, 23vw, 104px) !important;
+  }
+
+  body:has(.poster-home) .stylist-card {
+    width: 44vw !important;
+    height: 280px !important;
+  }
+
+  body:has(.poster-home) .intro-copy {
+    top: 76px !important;
+  }
+
+  body:has(.poster-home) .intro-copy p:not(.script-name) {
+    font-size: 13px !important;
+  }
+}
+
+/* Fallback for older iOS WebKit engines that ignore :has(). */
+@media (max-width: 520px) {
+  .poster-home,
+  .poster-shell,
+  .poster-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .poster-shell {
+    overflow-x: clip !important;
+  }
+
+  .poster-hero {
+    height: auto !important;
+    min-height: 0 !important;
+    padding-top: 8px !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+  }
+
+  .poster-eyebrow {
+    padding-inline: 14px !important;
+    font-size: 9px !important;
+    letter-spacing: .48em !important;
+    white-space: nowrap !important;
+  }
+
+  .poster-title {
+    margin: 6px -34px 0 !important;
+    font-size: clamp(88px, 25vw, 124px) !important;
+    line-height: .7 !important;
+    letter-spacing: .02em !important;
+  }
+
+  .poster-intro {
+    min-height: clamp(356px, 91vw, 394px) !important;
+    margin-top: -4px !important;
+  }
+
+  .stylist-card {
+    left: clamp(14px, 4vw, 22px) !important;
+    top: clamp(42px, 11vw, 54px) !important;
+    width: min(45vw, 188px) !important;
+    height: clamp(286px, 74vw, 326px) !important;
+    z-index: 4 !important;
+    transform: rotate(-4deg) !important;
+    transform-origin: center !important;
+  }
+
+  .intro-copy {
+    left: 48.5% !important;
+    top: clamp(78px, 21vw, 96px) !important;
+    width: min(45vw, 190px) !important;
+    right: auto !important;
+    z-index: 5 !important;
+  }
+
+  .script-name {
+    font-size: clamp(44px, 13vw, 58px) !important;
+    line-height: .82 !important;
+    white-space: nowrap !important;
+  }
+
+  .intro-copy h2 {
+    font-size: clamp(40px, 10.5vw, 48px) !important;
+    line-height: .85 !important;
+  }
+
+  .intro-copy p:not(.script-name) {
+    max-width: 100% !important;
+    font-size: clamp(14px, 3.45vw, 16px) !important;
+    line-height: 1.13 !important;
+  }
+
+  .heart-mark {
+    right: clamp(2px, 1.5vw, 12px) !important;
+    bottom: clamp(58px, 15vw, 70px) !important;
+    font-size: clamp(34px, 9vw, 42px) !important;
+    z-index: 6 !important;
+  }
+
+  .location-bar {
+    left: auto !important;
+    right: -8px !important;
+    bottom: 8px !important;
+    width: min(63%, 282px) !important;
+    padding: 10px 12px 11px !important;
+    font-size: clamp(11px, 2.9vw, 13px) !important;
+    letter-spacing: .31em !important;
+    transform: rotate(-3deg) translateZ(0) !important;
+    z-index: 8 !important;
+  }
+
+  .service-photo-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+    padding: 22px 10px 16px !important;
+    margin-top: 0 !important;
+    overflow: visible !important;
+  }
+
+  .service-photo {
+    min-height: clamp(190px, 52vw, 228px) !important;
+    border-radius: 14px !important;
+  }
+
+  .service-photo-main {
+    transform: translateY(-17px) scale(1.06) rotate(.4deg) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .poster-title {
+    font-size: clamp(78px, 23vw, 104px) !important;
+  }
+
+  .stylist-card {
+    width: 44vw !important;
+    height: 280px !important;
+  }
+
+  .intro-copy {
+    top: 76px !important;
+  }
+
+  .intro-copy p:not(.script-name) {
+    font-size: 13px !important;
+  }
+}

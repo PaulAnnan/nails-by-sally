@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Nails By Sally - Admin Login</title>
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -137,7 +137,7 @@
       .title{font-size:24px}
       .foot{flex-direction:column; align-items:stretch}
     }
-  
+
     /* ===== IMPROVED MOBILE LAYOUT ===== */
     @media (max-width:980px){
       .main-grid, .booking-grid{grid-template-columns:1fr;gap:24px}
@@ -145,7 +145,7 @@
       .story-section{grid-template-columns:1fr;gap:32px}
       .artist-profile{flex-direction:column;text-align:center}
     }
-    
+
     @media (max-width:780px){
       /* Header */
       .site-header{backdrop-filter:none}
@@ -156,46 +156,46 @@
       .brand-text small, .brand-sep{display:none}
       .nav{display:none}
       .menu-btn{display:block}
-      
+
       /* Layout */
       .container{padding-inline:18px}
       .section{padding:24px 0}
       .hero-section, .page-header{padding:28px 0 20px}
-      
+
       /* Typography */
       .h1, .page-title{font-size:28px;margin-bottom:14px}
       .h2, .form-title, .section-title{font-size:24px;margin-bottom:16px}
       .h3{font-size:20px}
       .lead, .page-subtitle{font-size:15px;line-height:1.5}
-      
+
       /* Forms */
       .form-row{grid-template-columns:1fr;gap:12px}
       .contact-form, .booking-form{padding:24px;border-radius:18px}
       input, textarea, select{padding:11px 14px;font-size:14px;border-radius:10px}
       .submit-btn, .btn{padding:12px 20px;font-size:14px}
-      
+
       /* Cards & Grids */
       .contact-sidebar, .services-grid, .gallery-grid, .values-grid{grid-template-columns:1fr;gap:14px}
       .info-card, .service-card, .gallery-item, .value-card, .stat-card{padding:20px;border-radius:18px}
       .info-icon, .service-icon{width:36px;height:36px;font-size:14px}
       .stat-icon{width:44px;height:44px;font-size:22px}
-      
+
       /* Story & Images */
       .story-image{border-radius:22px}
       .story-image img, .gallery-item img{height:auto;max-height:320px}
       .experience-badge{position:static;margin-top:16px;display:inline-block}
-      
+
       /* Stats */
       .stats-section{grid-template-columns:1fr 1fr;gap:14px}
       .stat-card{padding:20px 16px}
       .stat-number{font-size:26px}
       .stat-label{font-size:13px}
-      
+
       /* Artist section */
       .artist-section{padding:32px 20px;border-radius:22px}
       .artist-profile{padding:24px 20px;gap:20px}
       .artist-photo{width:100px;height:100px}
-      
+
       /* Booking */
       .booking-content{padding:24px;border-radius:22px}
       .calendar-grid{grid-template-columns:repeat(auto-fill, minmax(120px, 1fr))}
@@ -205,7 +205,7 @@
   </style>
   <link rel="stylesheet" href="poster-pages.css">
   <link rel="stylesheet" href="navbar-logo-consistency.css">
-  <link rel="stylesheet" href="no-footers.css?v=20260722footer3">
+  <link rel="stylesheet" href="no-footers.css?v=20260722footer5">
 </head>
 <body>
   <!-- background -->
@@ -279,7 +279,7 @@
 
       <div class="foot">
         <span class="mini">Tip: For security, ensure you're on your own device.</span>
-        <a class="mini link" href="index.html">â† Back to website</a>
+        <a class="mini link" href="home.html">&larr; Back to website</a>
       </div>
     </section>
   </main>
@@ -328,7 +328,7 @@
     }
 
     function isLoggedIn() {
-      return localStorage.getItem(AUTH_STORAGE_KEY) === 'true' || 
+      return localStorage.getItem(AUTH_STORAGE_KEY) === 'true' ||
              sessionStorage.getItem(AUTH_STORAGE_KEY) === 'true';
     }
 
@@ -418,36 +418,36 @@
       e.preventDefault();
       errorBox.style.display = "none";
       setLoading(true);
-      
+
       try {
-        const resp = await login({ 
-          email: email.value, 
-          password: password.value 
+        const resp = await login({
+          email: email.value,
+          password: password.value
         });
-        
+
         if (resp.ok) {
           console.log('[Auth] Login successful');
-          
+
           // Save email if remember me is checked
           if (remember.checked) {
             localStorage.setItem(EMAIL_STORAGE_KEY, email.value.toLowerCase().trim());
           } else {
             localStorage.removeItem(EMAIL_STORAGE_KEY);
           }
-          
+
           // Save session
           saveSession(remember.checked);
-          
+
           // Show success toast
           toast.textContent = 'Logged in successfully! Redirecting...';
           toast.style.display = 'block';
           toast.style.animation = 'slideIn 0.3s ease';
-          
+
           // Redirect to appointments page
           setTimeout(() => {
             window.location.href = '/appointments.html';
           }, 500);
-          
+
         } else {
           errorBox.textContent = resp.error || "Login failed";
           errorBox.style.display = "block";
@@ -462,18 +462,18 @@
     });
 
     // ===== ACCESSIBILITY =====
-    email?.addEventListener('keydown', (e)=>{ 
-      if(e.key==='Enter'){ 
-        e.preventDefault(); 
-        password.focus(); 
-      } 
+    email?.addEventListener('keydown', (e)=>{
+      if(e.key==='Enter'){
+        e.preventDefault();
+        password.focus();
+      }
     });
 
     // ===== INITIALIZE ON LOAD =====
     document.addEventListener('DOMContentLoaded', async () => {
       // Check if already logged in
       const alreadyLoggedIn = await checkExistingSession();
-      
+
       if (!alreadyLoggedIn) {
         // Load saved email if exists
         loadSavedEmail();
