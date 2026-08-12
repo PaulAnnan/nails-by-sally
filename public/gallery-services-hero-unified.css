@@ -59,7 +59,7 @@
     font-family: Inter, system-ui, sans-serif;
     font-size: clamp(110px, 11vw, 205px);
     font-weight: 950;
-    letter-spacing: -.08em;
+    letter-spacing: -.02em;
     line-height: 1;
     pointer-events: none;
   }
@@ -86,7 +86,7 @@
     font-family: Inter, system-ui, sans-serif !important;
     font-size: clamp(74px, 7.2vw, 134px) !important;
     font-weight: 950 !important;
-    letter-spacing: -.052em !important;
+    letter-spacing: -.01em !important;
     line-height: .84 !important;
     text-transform: uppercase !important;
     text-shadow: 0 0 28px rgba(255,177,207,.42), 0 15px 46px rgba(0,0,0,.7) !important;
@@ -236,7 +236,7 @@
     font-family: Inter, system-ui, sans-serif;
     font-size: clamp(62px, 18vw, 118px);
     font-weight: 950;
-    letter-spacing: -.08em;
+    letter-spacing: -.02em;
     line-height: 1;
     pointer-events: none;
   }
@@ -247,7 +247,7 @@
     font-family: Inter, system-ui, sans-serif !important;
     font-size: clamp(52px, 16vw, 86px) !important;
     font-weight: 950 !important;
-    letter-spacing: -.055em !important;
+    letter-spacing: -.015em !important;
     line-height: .86 !important;
     text-transform: uppercase !important;
     text-shadow: 0 0 22px rgba(255,177,207,.42), 0 10px 32px rgba(0,0,0,.74) !important;
@@ -467,3 +467,124 @@
   }
 }
 
+
+/* Final shared hero motion: services + gallery breathing title glow and drifting pink blobs. */
+body:has(.gallery-reference) .bg,
+body:has(.services-reference) .bg {
+  display: block !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+body:has(.gallery-reference) .blob,
+body:has(.services-reference) .blob {
+  display: block !important;
+  position: absolute !important;
+  border-radius: 50% !important;
+  opacity: .18 !important;
+  mix-blend-mode: screen !important;
+  filter: blur(.6px) !important;
+  will-change: transform, opacity;
+}
+
+body:has(.gallery-reference) .blob.b1,
+body:has(.services-reference) .blob.b1 {
+  animation: sharedPageBlobDriftOne 12s ease-in-out infinite !important;
+}
+
+body:has(.gallery-reference) .blob.b2,
+body:has(.services-reference) .blob.b2 {
+  animation: sharedPageBlobDriftTwo 14s ease-in-out infinite !important;
+}
+
+.gallery-reference,
+.services-poster.services-reference {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.gallery-hero::before,
+.services-gallery-hero::before {
+  animation: sharedHeroOrbFloat 9s ease-in-out infinite !important;
+  will-change: transform, opacity, filter;
+}
+
+.script-title,
+.service-script-title {
+  animation: sharedHeroTitleGlow 5.8s ease-in-out infinite !important;
+  will-change: opacity, filter, text-shadow;
+}
+
+@keyframes sharedHeroTitleGlow {
+  0%, 100% {
+    opacity: .88;
+    filter: brightness(.96);
+    text-shadow: 0 0 12px rgba(255, 160, 198, .52), 0 0 28px rgba(255, 116, 175, .22), 0 15px 46px rgba(0,0,0,.70);
+  }
+  44% {
+    opacity: 1;
+    filter: brightness(1.08);
+    text-shadow: 0 0 18px rgba(255, 195, 220, .82), 0 0 48px rgba(255, 116, 175, .48), 0 0 78px rgba(255, 177, 207, .22), 0 15px 46px rgba(0,0,0,.70);
+  }
+  70% {
+    opacity: .94;
+    filter: brightness(1.01);
+    text-shadow: 0 0 10px rgba(255, 160, 198, .48), 0 0 34px rgba(255, 116, 175, .30), 0 15px 46px rgba(0,0,0,.70);
+  }
+}
+
+@keyframes sharedHeroOrbFloat {
+  0%, 100% {
+    opacity: .74;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(.6px);
+  }
+  38% {
+    opacity: .9;
+    transform: translate3d(20px, -12px, 0) scale(1.06);
+    filter: blur(.9px);
+  }
+  72% {
+    opacity: .68;
+    transform: translate3d(-10px, 14px, 0) scale(.98);
+    filter: blur(.3px);
+  }
+}
+
+@keyframes sharedPageBlobDriftOne {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: .16; }
+  35% { transform: translate3d(34px, 26px, 0) scale(1.05); opacity: .22; }
+  68% { transform: translate3d(-18px, 42px, 0) scale(.98); opacity: .14; }
+}
+
+@keyframes sharedPageBlobDriftTwo {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: .14; }
+  42% { transform: translate3d(-42px, 24px, 0) scale(1.04); opacity: .20; }
+  76% { transform: translate3d(22px, -18px, 0) scale(.97); opacity: .13; }
+}
+
+@media (max-width: 900px) {
+  body:has(.gallery-reference) .blob,
+  body:has(.services-reference) .blob {
+    opacity: .12 !important;
+  }
+
+  .gallery-hero::before,
+  .services-gallery-hero::before {
+    animation-duration: 8s !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:has(.gallery-reference) .blob,
+  body:has(.services-reference) .blob,
+  .gallery-hero::before,
+  .services-gallery-hero::before,
+  .script-title,
+  .service-script-title {
+    animation: none !important;
+  }
+}

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Contact Us - Nails By Sally</title>
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -201,39 +201,39 @@
       .contact-sidebar{grid-template-columns:1fr}
       .cta-title{font-size:28px}
       .cta-section{padding:32px 24px}
-      
+
       /* Footer mobile improvements */
       .footer-grid{
         grid-template-columns: 1fr;
         gap: 28px;
         padding: 28px 18px;
       }
-      
+
       .footer-brand{
         padding-bottom: 12px;
         border-bottom: 1px solid rgba(255,255,255,.12);
       }
-      
+
       .brand-row .brand-logo{
         width: 52px;
         height: 52px;
       }
-      
+
       .brand-row .brand-logo img{
         width: 38px;
         height: 38px;
       }
-      
+
       .foot-title{
         font-size: 16px;
         margin-bottom: 10px;
       }
-      
+
       .foot-list li{
         font-size: 14px;
         margin: 8px 0;
       }
-      
+
       .copy-row{
         padding: 16px 0;
         font-size: 13px;
@@ -246,8 +246,8 @@
   <link rel="stylesheet" href="contact-mobile-fixes.css">
   <link rel="stylesheet" href="navbar-logo-consistency.css">
   <link rel="stylesheet" href="navbar-unified-behavior.css?v=20260722navfix1">
-  <link rel="stylesheet" href="no-footers.css?v=20260722footer3">
-  <link rel="stylesheet" href="premium-typography-cleanup.css?v=20260722type1">
+  <link rel="stylesheet" href="no-footers.css?v=20260722footer5">
+  <link rel="stylesheet" href="premium-typography-cleanup.css?v=20260722type4">
   <link rel="stylesheet" href="booking-contact-desktop.css?v=20260722desktop3">
 </head>
 <body>
@@ -431,7 +431,7 @@
     function buildContactMailto(data) {
       const subject = encodeURIComponent('Nails By Sally contact request');
       const body = encodeURIComponent(
-        `Name: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone || 'Not provided'}\n\nMessage:\n${data.message}`
+`Name: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone || 'Not provided'}\n\nMessage:\n${data.message}`
       );
       return `mailto:NailsBySxlly@gmail.com?subject=${subject}&body=${body}`;
     }
@@ -491,9 +491,9 @@
       }
     });
 
-    function setYear(){ 
-      const y = document.getElementById('year'); 
-      if(y) y.textContent = new Date().getFullYear(); 
+    function setYear(){
+      const y = document.getElementById('year');
+      if(y) y.textContent = new Date().getFullYear();
     }
     setYear();
     setupReveals();
@@ -540,6 +540,6 @@
       onResize();
     }
   </script>
-  <script src="unified-pages.js?v=20260722footer2"></script>
+  <script src="unified-pages.js?v=20260722footer5"></script>
 </body>
 </html>

@@ -213,7 +213,7 @@ div.page-title::before{
   font-family:Arial Black,Impact,sans-serif;
   font-size:96px;
   line-height:.75;
-  letter-spacing:-.08em;
+  letter-spacing:-.02em;
 }
 
 .page-header h1,
@@ -227,7 +227,7 @@ div.page-title h1,
   font-family:Arial Black,Impact,sans-serif !important;
   font-size:clamp(48px,15vw,72px) !important;
   line-height:.78 !important;
-  letter-spacing:-.06em !important;
+  letter-spacing:-.015em !important;
   text-align:left !important;
   text-transform:uppercase;
   text-shadow:

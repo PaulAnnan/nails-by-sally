@@ -1456,7 +1456,7 @@
     left: 18px !important;
     max-width: calc(100vw - 36px) !important;
     font-size: clamp(74px, 23vw, 98px) !important;
-    letter-spacing: -.065em !important;
+    letter-spacing: -.02em !important;
   }
 
   .about-home-script {

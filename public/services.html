@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Nails By Sally - Services</title>
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,18 +34,18 @@
 
     /* Optimized background - removed expensive operations */
     .bg{
-      position:fixed; 
-      inset:0; 
-      z-index:-2; 
+      position:fixed;
+      inset:0;
+      z-index:-2;
       background:
         radial-gradient(60vw 60vw at -10% -10%, #20123b 0%, transparent 60%),
         radial-gradient(60vw 60vw at 110% 0%, #2a1043 0%, transparent 60%),
         radial-gradient(70vw 70vw at 50% 120%, #1a1735 0%, #0f1020 70%);
-    } 
+    }
 
     /* Simplified blobs - removed expensive animations and blur */
     .blob{
-      position:absolute; 
+      position:absolute;
       border-radius:50%;
       opacity:.3;
       mix-blend-mode:screen;
@@ -54,18 +54,18 @@
     .blob.b1{
       width:54vw;height:54vw;
       background:radial-gradient(circle at 30% 30%, #ff8ac7, transparent 60%);
-      left:-6vw; 
+      left:-6vw;
       top:-10vw;
     }
     .blob.b2{
       width:46vw;height:46vw;
       background:radial-gradient(circle at 40% 40%, #ffd6e8, transparent 55%);
-      right:-10vw; 
+      right:-10vw;
       top:-8vw;
     }
 
     /* Removed grain overlay - expensive pattern */
-    
+
     /* ================ Layout helpers ================ */
     .container{max-width:var(--container);margin:0 auto;padding-inline:24px}
     .container--wide{max-width:var(--container-wide)}
@@ -74,7 +74,7 @@
 
     /* Optimized content-visibility */
     .section, .site-footer{
-      content-visibility:auto; 
+      content-visibility:auto;
       contain-intrinsic-size: 0 400px;
     }
 
@@ -366,14 +366,14 @@
       transform:scale(0.95);
       pointer-events:none;
     }
-  
-    
+
+
     /* ===== IMPROVED MOBILE LAYOUT ===== */
     @media (max-width:980px){
       .services-grid{grid-template-columns:1fr 1fr;gap:20px}
       .hero{grid-template-columns:1fr;gap:32px}
     }
-    
+
     @media (max-width:780px){
       /* Header */
       .site-header{backdrop-filter:none}
@@ -384,17 +384,17 @@
       .brand-text small, .brand-sep{display:none}
       .nav{display:none}
       .menu-btn{display:block}
-      
+
       /* Layout */
       .container{padding-inline:18px}
       .section{padding:32px 0}
       .hero{padding:32px 0 24px}
-      
+
       /* Typography */
       .h1{font-size:32px;margin-bottom:12px}
       .h2{font-size:26px;margin-bottom:16px}
       .lead{font-size:15px;line-height:1.5}
-      
+
       /* Services Grid */
       .services-grid{grid-template-columns:1fr;gap:16px}
       .service-card{padding:24px;border-radius:18px}
@@ -403,17 +403,17 @@
       .service-desc{font-size:14px;margin-bottom:12px}
       .service-details{font-size:13px;gap:12px}
       .badge{padding:5px 10px;font-size:11px}
-      
+
       /* Tabs/Filters */
       .tabs, .filter-tabs{gap:8px;flex-wrap:wrap}
       .tab, .filter-btn{padding:10px 16px;font-size:13px;border-radius:20px}
-      
+
       /* CTA */
       .cta{padding:32px 20px;border-radius:20px;margin:32px auto}
       .cta h2{font-size:24px}
       .cta p{font-size:14px}
       .cta .btn{padding:12px 24px;font-size:14px}
-      
+
       /* Footer */
       .footer-grid{grid-template-columns:1fr;gap:28px;padding:28px 0}
       .footer-brand{padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.12)}
@@ -423,7 +423,7 @@
       .foot-list li{font-size:14px;margin:8px 0}
       .copy-row{padding:16px 0;font-size:13px;text-align:center}
     }
-    
+
     @media (max-width:640px){
       .container{padding-inline:16px}
       .h1{font-size:28px}
@@ -441,10 +441,10 @@
   <link rel="stylesheet" href="home-navbar.css?v=20260722a">
   <link rel="stylesheet" href="navbar-logo-consistency.css">
   <link rel="stylesheet" href="navbar-unified-behavior.css?v=20260722navfix1">
-  <link rel="stylesheet" href="no-footers.css?v=20260722footer3">
-  <link rel="stylesheet" href="premium-typography-cleanup.css?v=20260722type1">
+  <link rel="stylesheet" href="no-footers.css?v=20260722footer5">
+  <link rel="stylesheet" href="premium-typography-cleanup.css?v=20260722type4">
   <link rel="stylesheet" href="services-gallery-style.css?v=20260722hero5">
-  <link rel="stylesheet" href="gallery-services-hero-unified.css?v=20260722d">
+  <link rel="stylesheet" href="gallery-services-hero-unified.css?v=20260722glow1">
 </head>
 <body>
   <div class="bg" id="bg">
@@ -723,11 +723,11 @@
             io.unobserve(entry.target);
           }
         });
-      }, { 
-        threshold: 0.1, 
+      }, {
+        threshold: 0.1,
         rootMargin: '50px'
       });
-      
+
       document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     }
 
@@ -769,18 +769,18 @@
       window.addEventListener('resize', debounce(onResize, 120));
       onResize();
     }
-    
+
     // Footer year
-    function setYear() { 
-      const yearEl = document.getElementById('year'); 
-      if (yearEl) yearEl.textContent = new Date().getFullYear(); 
+    function setYear() {
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
     }
 
     // Optimized service tabs with smooth filtering
     function setupServiceTabs(){
       const tabs = document.querySelectorAll('.svc-tab');
       const cards = document.querySelectorAll('.svc-card');
-      
+
       tabs.forEach(btn => {
         btn.addEventListener('click', () => {
           // Update active tab
@@ -790,14 +790,14 @@
           });
           btn.classList.add('active');
           btn.setAttribute('aria-pressed', 'true');
-          
+
           const filter = btn.dataset.filter;
-          
+
           // Add filtering class for smooth transition
           cards.forEach(card => {
             card.classList.add('filtering');
             const shouldShow = (filter === 'all') || (card.dataset.category === filter);
-            
+
             if (shouldShow) {
               card.classList.remove('hidden');
               setTimeout(() => card.classList.remove('filtering'), 200);
@@ -809,7 +809,7 @@
               }, 200);
             }
           });
-          
+
           // Show cards after transition
           setTimeout(() => {
             cards.forEach(card => {
@@ -841,7 +841,7 @@
       setupMobileMenu();
       setYear();
       setupServiceTabs();
-      
+
       // Add passive scroll listener only if needed
       window.addEventListener('scroll', onScroll, { passive: true });
     });
@@ -852,17 +852,17 @@
         'https://images.unsplash.com/photo-1604881987412-4e7d94d5f8c0?q=80&w=400&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1544273677-bd4c0c9d7b8f?q=80&w=400&auto=format&fit=crop'
       ];
-   
+
       criticalImages.forEach(src => {
         const img = new Image();
         img.src = src;
       });
     }
-    
+
     if (document.readyState === 'loading') {
       preloadCriticalImages();
     }
   </script>
-  <script src="unified-pages.js?v=20260722footer2"></script>
+  <script src="unified-pages.js?v=20260722footer5"></script>
 </body>
 </html>

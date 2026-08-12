@@ -130,7 +130,7 @@
       <div class="mini-footer-grid">
         <a class="mini-footer-brand brand" href="home.html" aria-label="Nails By Sally home">
           <span class="mini-footer-logo brand-logo"><img src="sffsfs.png" alt="Nails By Sally logo"></span>
-          <span class="mini-footer-wordmark brand-text"><strong>Nails By Sally</strong><small>Nail Studio</small></span>
+          <span class="mini-footer-wordmark"><strong>Nails By Sally</strong><small>Nail Studio</small></span>
         </a>
         <div class="mini-footer-meta" aria-label="Studio essentials">
           <a href="tel:+15145460687">(514) 546-0687</a>
